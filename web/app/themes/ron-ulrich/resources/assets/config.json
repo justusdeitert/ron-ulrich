@@ -8,7 +8,7 @@
       "./scripts/customizer.js"
     ]
   },
-  "publicPath": "/app/themes/sage",
+  "publicPath": "/app/themes/ron-ulrich",
   "devUrl": "http://ron-ulrich.just",
   "proxyUrl": "http://localhost:3000",
   "cacheBusting": "[name]_[hash:8]",
