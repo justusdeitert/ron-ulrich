@@ -58,7 +58,13 @@ array_map(function ($file) use ($sage_error) {
     if (!locate_template($file, true, true)) {
         $sage_error(sprintf(__('Error locating <code>%s</code> for inclusion.', 'sage'), $file), 'File not found');
     }
-}, ['helpers', 'setup', 'filters', 'admin']);
+}, [
+    'helpers',
+    'setup',
+    'filters',
+    'admin',
+    'acf-options-page'
+]);
 
 /**
  * Here's what's happening with these hooks:
@@ -90,3 +96,83 @@ Container::getInstance()
             'view' => require dirname(__DIR__).'/config/view.php',
         ]);
     }, true);
+
+// add_action('admin_init', 'my_general_section');
+// function my_general_section() {
+//     add_settings_section(
+//         'my_settings_section', // Section ID
+//         'My Options Title', // Section Title
+//         'my_section_options_callback', // Callback
+//         'general' // What Page?  This makes the section show up on the General Settings Page
+//     );
+//
+//     add_settings_field( // Option 1
+//         'option_1', // Option ID
+//         'Option 1', // Label
+//         'my_textbox_callback', // !important - This is where the args go!
+//         'general', // Page it will be displayed (General Settings)
+//         'my_settings_section', // Name of our section
+//         array( // The $args
+//             'option_1' // Should match Option ID
+//         )
+//     );
+//
+//     add_settings_field( // Option 2
+//         'option_2', // Option ID
+//         'Option 2', // Label
+//         'my_textbox_callback', // !important - This is where the args go!
+//         'general', // Page it will be displayed
+//         'my_settings_section', // Name of our section (General Settings)
+//         array( // The $args
+//             'option_2' // Should match Option ID
+//         )
+//     );
+//
+//     register_setting('general','option_1', 'esc_attr');
+//     register_setting('general','option_2', 'esc_attr');
+// }
+//
+// function my_section_options_callback() { // Section Callback
+//     echo '<p>A little message on editing info</p>';
+// }
+//
+// function my_textbox_callback($args) {  // Textbox Callback
+//     $option = get_option($args[0]);
+//     echo '<input type="text" id="'. $args[0] .'" name="'. $args[0] .'" value="' . $option . '" />';
+// }
+
+// /**
+//  * Class for adding a new field to the options-general.php page
+//  */
+// class Add_Settings_Field {
+//
+//     /**
+//      * Class constructor
+//      */
+//     public function __construct() {
+//         add_action( 'admin_init' , array( $this , 'register_fields' ) );
+//     }
+//
+//     /**
+//      * Add new fields to wp-admin/options-general.php page
+//      */
+//     public function register_fields() {
+//         register_setting( 'general', 'extra_blog_description', 'esc_attr' );
+//         add_settings_field(
+//             'extra_blog_desc_id',
+//             '<label for="extra_blog_desc_id">' . __( 'Blog description' , 'extra_blog_description' ) . '</label>',
+//             array( $this, 'fields_html' ),
+//             'general'
+//         );
+//     }
+//
+//     /**
+//      * HTML for extra settings
+//      */
+//     public function fields_html() {
+//         $value = get_option( 'extra_blog_description', '' );
+//         echo '<textfield type="text" id="extra_blog_desc_id" name="extra_blog_description" value="' . esc_attr( $value ) . '" />';
+//     }
+//
+// }
+// new Add_Settings_Field();

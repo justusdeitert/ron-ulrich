@@ -5,6 +5,6 @@
 
     <link href="@asset('images/favicon.ico')" rel="shortcut icon">
     <link href="@asset('images/touch-icon.png')" rel="apple-touch-icon-precomposed">
-    
+
     @php wp_head() @endphp
 </head>

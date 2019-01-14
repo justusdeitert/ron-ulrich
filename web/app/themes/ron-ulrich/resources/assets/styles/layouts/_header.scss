@@ -5,3 +5,26 @@
 .banner .nav a {
     @extend .nav-link;
 }
+
+header {
+    margin-top: 40px;
+    margin-bottom: 70px;
+
+    .container {
+        display: flex;
+
+        nav {
+            margin-left: auto;
+
+            ul {
+                padding: 0;
+                list-style: none;
+
+                li {
+                    float: left;
+                    margin-left: 40px;
+                }
+            }
+        }
+    }
+}
