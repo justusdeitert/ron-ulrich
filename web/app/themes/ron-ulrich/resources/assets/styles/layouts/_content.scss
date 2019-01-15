@@ -6,9 +6,87 @@ main {
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
+
+        //@media (max-width: 576px) {
+        @include media-breakpoint-down(xs) {
+
+            height: 250px;
+            margin-bottom: 30px;
+        }
+    }
+
+    .more-info {
+        margin: 10px 0;
+
+        i {
+            float: left;
+        }
+    }
+
+    .pagination {
+        margin: 30px 0;
+
+        .prev, .next {
+            border: none !important;
+
+            i {
+                font-size: 28px;
+                line-height: 32px;
+            }
+        }
+
+        span, .page-numbers {
+            width: 32px;
+            height: 32px;
+            line-height: 32px;
+            text-align: center;
+            border: 2px solid #000;
+            margin-right: 15px;
+
+            &.current, &:hover {
+                background-color: #DBDBDB;
+            }
+        }
+
+        a {
+            color: #000;
+        }
     }
 
     article {
-        margin-bottom: 70px;
+        margin: 60px 0;
+
+        p {
+            color: #3E3E3E;
+        }
+
+        .tag-column {
+            margin-bottom: 20px;
+
+            .tag {
+                border: 2px solid #000;
+                padding: 2px 5px;
+                margin-right: 10px;
+            }
+        }
+
+        .continue-reading {
+            i {
+                font-size: 28px;
+            }
+            i, span {
+                line-height: 32px;
+                float: left;
+            }
+        }
+
+        .full-column {
+
+            @include media-breakpoint-up(sm) {
+                h2 {
+                    width: 70%;
+                }
+            }
+        }
     }
 }

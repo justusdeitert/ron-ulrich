@@ -82,6 +82,7 @@
     },
     "dependencies": {
         "bootstrap": "v4.2.1",
+        "clampify": "^1.2.1",
         "jquery": "^3.3.1",
         "popper.js": "^1.14.6"
     }

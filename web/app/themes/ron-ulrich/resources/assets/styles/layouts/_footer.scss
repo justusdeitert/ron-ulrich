@@ -1,16 +1,25 @@
 footer {
-    margin-bottom: 40px;
+    margin: 70px 0 40px 0;
 
-    .container {
+    hr {
+        margin-bottom: 20px;
+    }
+
+    .wrapper {
+        width: 100%;
         display: flex;
 
         ul.footer-nav {
 
-            margin-left: auto;
+            margin: 0 0 0 auto;
             padding: 0;
             list-style: none;
 
             li {
+                &:first-child {
+                    margin-left: 0;
+                }
+
                 float: left;
                 margin-left: 40px;
             }

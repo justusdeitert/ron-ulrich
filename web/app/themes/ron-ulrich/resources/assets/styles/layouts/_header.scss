@@ -16,11 +16,28 @@ header {
         nav {
             margin-left: auto;
 
-            ul {
+            .nav-list {
                 padding: 0;
                 list-style: none;
 
+                @include media-breakpoint-down(md) {
+                    min-width: 100px;
+                    margin: 0;
+                    display: flex;
+                    flex-direction: column;
+
+                    li {
+                        margin-left: 0 !important;
+                        text-align: right;
+                        margin-bottom: 10px;
+                    }
+                }
+
                 li {
+                    &:first-child {
+                        margin-left: 0;
+                    }
+
                     float: left;
                     margin-left: 40px;
                 }

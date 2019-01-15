@@ -8,6 +8,8 @@ html {
         margin-top: 0 !important;
         padding-top: 32px !important;
 
+        // Breakpoint when wordpress changes the #wpadminbar breakpoint
+        // ------------------>
         @media (max-width: 782px) {
             padding-top: 46px !important;
         }
@@ -18,5 +20,29 @@ body {
     font-family: Helvetica, Arial, sans-serif;
     display: flex;
     flex-direction: column;
+
+    a {
+        color: #000;
+
+        &:hover {
+            color: #000;
+            text-decoration: none;
+        }
+    }
 }
 
+hr {
+    //margin: 0 0 70px 0;
+    margin: 0;
+    border: 1px solid rgba(204, 204, 204, 0.6);
+}
+
+h3 {
+    font-size: 22px;
+    line-height: 30px;
+    font-weight: 300;
+}
+
+.page-header {
+    margin-bottom: 60px;
+}

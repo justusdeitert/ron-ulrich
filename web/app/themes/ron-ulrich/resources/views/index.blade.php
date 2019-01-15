@@ -10,9 +10,28 @@
         {!! get_search_form(false) !!}
     @endif
 
-    @while (have_posts()) @php the_post() @endphp
-    @include('partials.content-'.get_post_type())
+    {{--@php var_dump(get_the_tags()) @endphp--}}
+    <hr>
+    <div class="more-info">
+        <i class="material-icons">arrow_drop_down</i>
+        <span>{{ __('More Info', 'sage') }}</span>
+    </div>
+    <hr>
+
+    @while (have_posts())
+        @php the_post() @endphp
+        @include('partials.content-'.get_post_type())
     @endwhile
 
-    {!! get_the_posts_navigation() !!}
+    @if(paginate_links())
+        <div class="pagination">
+            {!!
+                paginate_links(array(
+                    'prev_text' => '<i class="material-icons">arrow_left</i>',
+                    'next_text' => '<i class="material-icons">arrow_right</i>'
+                ));
+            !!}
+        </div>
+    @endif
+
 @endsection

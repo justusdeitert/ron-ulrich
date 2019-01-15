@@ -12,16 +12,15 @@ require 'deploy/sync-uploads.php';
 // --------------------------------->
 // require 'vendor/deployer/recipes/recipe/slack.php';
 
-
-set('repository', 'git@gitlab.justusdeitert.de:JD/talentX.git');
+set('repository', 'git@gitlab.justusdeitert.de:JD/ron-ulrich.git');
 
 // Number of releases to keep. -1 for unlimited releases. Default to 5.
 set('keep_releases', 3);
 
 // Configure Theme Path
-set( 'theme_name', 'talent-x');
+set( 'theme_name', 'ron-ulrich');
 set( 'themes_path', 'web/app/themes' );
-set( 'theme_path', 'web/app/themes/talent-x' );
+set( 'theme_path', 'web/app/themes/ron-ulrich' );
 
 // List of shared files
 set('shared_files', [
@@ -43,7 +42,7 @@ set( 'default_stage', 'staging' );
 host('justusdeitert.de')
     ->user('justusdeitert')
     ->stage('staging')
-    ->set('deploy_path', '/var/www/vhosts/justusdeitert.de/talent-x');
+    ->set('deploy_path', '/var/www/vhosts/justusdeitert.de/ron-ulrich');
 
 // Set Deployer Slack Messages
 // ------------------------>

@@ -66,17 +66,15 @@ add_action('after_setup_theme', function () {
      */
     add_theme_support('customize-selective-refresh-widgets');
 
-    /**
-     * Use main stylesheet for visual editor
-     * @see resources/assets/styles/layouts/_tinymce.scss
-     */
-    add_editor_style(asset_path('styles/main.css'));
+    // Add support for editor styles.
+    add_theme_support( 'editor-styles' );
 
     /**
-     * Use main stylesheet for visual editor
-     * @see resources/assets/styles/layouts/_tinymce.scss
-     */
+    //  * Use main stylesheet for visual editor
+    //  * @see resources/assets/styles/layouts/_tinymce.scss
+    //  */
     add_editor_style(asset_path('styles/main.css'));
+
 }, 20);
 
 /**
@@ -136,4 +134,5 @@ add_action('after_setup_theme', function () {
     sage('blade')->compiler()->directive('asset', function ($asset) {
         return "<?= " . __NAMESPACE__ . "\\asset_path({$asset}); ?>";
     });
+
 });

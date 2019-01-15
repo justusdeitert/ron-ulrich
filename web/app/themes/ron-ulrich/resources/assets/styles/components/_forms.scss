@@ -17,3 +17,20 @@
     @extend .btn;
     @extend .btn-secondary;
 }
+
+.wpcf7-response-output {
+    border: none;
+}
+
+.wpcf7-not-valid-tip {
+    color: rgba(255, 0, 0, 0.60) !important;
+    margin-top: 5px;
+}
+
+.form-group {
+    padding: 10px 0;
+}
+
+input, textarea {
+    border-width: 2px !important;
+}

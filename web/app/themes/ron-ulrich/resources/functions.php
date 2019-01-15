@@ -176,3 +176,13 @@ Container::getInstance()
 //
 // }
 // new Add_Settings_Field();
+
+// Adjust the Excerpt
+// ------------------------------------>
+add_filter( 'the_excerpt', function($excerpt) {
+    return str_replace('<p', '<p class="clampify"', $excerpt);
+});
+
+add_filter( 'excerpt_more', function() {
+    return '';
+});
