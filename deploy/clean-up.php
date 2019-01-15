@@ -2,24 +2,24 @@
 
 namespace Deployer;
 
-set('bin/npm', function () {
-    return run('which npm');
-});
+// set('bin/npm', function () {
+//     return run('which npm');
+// });
 
-desc('Install npm packages');
-task('npm:install', function () {
+desc('Clean Up Files & Folders');
+task('clean_up:node_modules', function () {
 
     // ----------------------------------->
     // Installing Themes Node Modules
     // ----------------------------------->
-    writeln('Installing node_modules in Themes: {{release_path}}/{{themes_path}}/{{theme_name}}');
-    run("cd {{release_path}}/{{themes_path}}/{{theme_name}} && {{bin/npm}} install");
+    writeln('Deleting /node_modules ...');
+    run("cd {{release_path}}/{{themes_path}}/{{theme_name}} && rm -R node_modules");
 
     // ----------------------------------->
     // Theme - Lichtfee
     // ----------------------------------->
-    writeln('run npm build production in {{release_path}}/{{themes_path}}/{{theme_name}}');
-    run("cd {{release_path}}/{{themes_path}}/{{theme_name}} && {{bin/npm}} run build:production");
+    // writeln('run npm build production in {{release_path}}/{{themes_path}}/{{theme_name}}');
+    // run("cd {{release_path}}/{{themes_path}}/{{theme_name}} && {{bin/npm}} run build:production");
 
     // ----------------------------------->
     // Theme - KP-Business-Solutions

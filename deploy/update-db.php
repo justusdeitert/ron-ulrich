@@ -21,7 +21,7 @@ set( 'local_path', dirname(__FILE__, 2) );
 // writeln('local_path: {local_path}');
 // writeln('remote_root: {remote_root}');
 set( 'sites', [
-    'talent-x.just' => 'talent-x.justusdeitert.de'
+    'ron-ulrich.just' => 'ron-ulrich.justusdeitert.de'
 ]);
 
 // /**

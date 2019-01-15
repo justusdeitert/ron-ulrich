@@ -68,11 +68,24 @@ task('deploy', [
     'deploy:writable',
     'deploy:symlink',
     'deploy:unlock',
+    'clean_up:node_modules',
     'cleanup', // Cleaning up old releases
     'success'
 ]);
 
-before('deploy', 'slack:notify');
-after('success', 'slack:notify:success');
+// before('deploy', 'slack:notify');
+// after('success', 'slack:notify:success');
 after('deploy:failed', 'deploy:unlock' );
-after('deploy:failed', 'slack:notify:failure');
+// after('deploy:failed', 'slack:notify:failure');
+
+desc('Push Project DB & Uploads Folder');
+task('push', [
+    'push:db',
+    'push:files'
+]);
+
+desc('Pull Project DB & Uploads Folder');
+task('pull', [
+    'pull:db',
+    'pull:files'
+]);
