@@ -3,7 +3,7 @@
         <a class="brand" href="{{ home_url('/') }}">
             @if(get_field('brand_image', 'option'))
                 {{--@php var_dump(get_field('person_image', 'option')['sizes']['medium_large']) @endphp--}}
-                <div class="brand-image d-none d-sm-block " style="background-image: url({{ get_field('person_image', 'option')['sizes']['medium_large'] }})"></div>
+                <div class="brand-image d-none d-sm-block " style="background-image: url({{ get_field('brand_image', 'option')['sizes']['medium_large'] }})"></div>
             @endif
             <div class="brand-right">
                 <h1>{{ get_bloginfo('name') }}</h1>
