@@ -1,132 +1,234 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-16 15:52+0100\n"
-"PO-Revision-Date: 2019-01-16 15:54+0100\n"
+"Project-Id-Version: Lichtfee\n"
+"POT-Creation-Date: 2019-01-16 20:05+0100\n"
+"PO-Revision-Date: 2019-01-16 20:05+0100\n"
+"Last-Translator: \n"
 "Language-Team: \n"
+"Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.2\n"
-"Last-Translator: \n"
+"X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: de_DE\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: style.css\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
+"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: resources/functions.php:17
+#: views/404.blade.php:8
+msgid "Sorry, but the page you were trying to view does not exist."
+msgstr "Es tut uns leid, aber die von Dir gesuchte Seite existiert nicht."
+
+#: views/index.blade.php:8 views/search.blade.php:8
+msgid "Sorry, no results were found."
+msgstr "Sorry, keine Ergebnisse gefunden."
+
+#: views/index.blade.php:18
+msgid "More Info"
+msgstr "Mehr Info"
+
+#: views/index.blade.php:19
+msgid "Less Info"
+msgstr "Weniger Info"
+
+#: views/partials/comments.blade.php:10
+msgctxt "comments title"
+msgid "One response to &ldquo;%2$s&rdquo;"
+msgid_plural "%1$s responses to &ldquo;%2$s&rdquo;"
+msgstr[0] "Eine Antwort auf &ldquo;%2$s&rdquo;"
+msgstr[1] ""
+
+#: views/partials/comments.blade.php:21
+msgid "&larr; Older comments"
+msgstr "&larr; Ältere Kommentare"
+
+#: views/partials/comments.blade.php:24
+msgid "Newer comments &rarr;"
+msgstr "Neuere Kommentare &rarr;"
+
+#: views/partials/comments.blade.php:33
+msgid "Comments are closed."
+msgstr "Kommentare sind geschlossen."
+
+#: views/partials/content-page.blade.php:2
+#: views/partials/content-single.blade.php:66
+msgid "Pages:"
+msgstr "Seiten:"
+
+#: views/partials/content-single.blade.php:4
+msgid "Share on:"
+msgstr "Teilen auf:"
+
+#: views/partials/content-single.blade.php:25
+msgid "Go to Article at"
+msgstr "Zum Artikel unter"
+
+#: views/partials/content-single.blade.php:27
+#: views/partials/content-single.blade.php:75
+msgid "Go to Article"
+msgstr "Zum Artikel"
+
+#: views/partials/content-single.blade.php:50
+#: views/partials/content.blade.php:36
+msgid "published in:"
+msgstr "Erschienen in:"
+
+#: views/partials/content-single.blade.php:81
+msgid "back"
+msgstr "zurück"
+
+#: views/partials/entry-meta.blade.php:3
+msgid "By"
+msgstr "Von"
+
+#: functions.php:17
 msgid "Sage &rsaquo; Error"
 msgstr "Sage &rsaquo; Fehler"
 
-#: resources/functions.php:27
+#: functions.php:27
 msgid "You must be using PHP 7.1 or greater."
 msgstr "Du musst PHP 7.1 oder höher verwenden."
 
-#: resources/functions.php:27
+#: functions.php:27
 msgid "Invalid PHP version"
 msgstr "Ungültige PHP-Version"
 
-#: resources/functions.php:34
+#: functions.php:34
 msgid "You must be using WordPress 4.7.0 or greater."
 msgstr "Du musst WordPress 4.7.0 oder größer verwenden."
 
-#: resources/functions.php:34
+#: functions.php:34
 msgid "Invalid WordPress version"
 msgstr "Ungültige WordPress-Version"
 
-#: resources/functions.php:43
+#: functions.php:43
 msgid "You must run <code>composer install</code> from the Sage directory."
-msgstr "Du musst <code>composer install</code> aus dem Sage-Verzeichnis laufen lassen."
+msgstr ""
+"Du musst <code>composer install</code> aus dem Sage-Verzeichnis laufen "
+"lassen."
 
-#: resources/functions.php:44
+#: functions.php:44
 msgid "Autoloader not found."
 msgstr "Autoloader nicht gefunden."
 
-#: resources/functions.php:59
+#: functions.php:59
 #, php-format
 msgid "Error locating <code>%s</code> for inclusion."
 msgstr "Fehler bei der Lokalisierung von <code>%s</code> für die Einbindung."
 
-#: app/filters.php:33
-msgid "Continued"
-msgstr "Fortsetzung"
+#. Theme Name of the plugin/theme
+msgid "Ron Ulrich"
+msgstr "Ron Ulrich"
 
-#: app/acf-options-page.php:15 app/acf-options-page.php:18
-msgid "Info"
-msgstr "Info"
+#. Theme URI of the plugin/theme
+msgid "https://roots.io/sage/"
+msgstr "https://roots.io/sage/"
 
-#: app/setup.php:47
-msgid "Header Navigation"
-msgstr "Header Navigation"
+#. Description of the plugin/theme
+msgid "This is the Wordpress Theme of Ron Ulrich"
+msgstr "Dies ist das Wordpress Theme von Ron Ulrich"
 
-#: app/setup.php:48
-msgid "Footer Navigation"
-msgstr "Footer Navigation"
+#. Author of the plugin/theme
+msgid "Justus Deitert"
+msgstr "Justus Deitert"
 
-#: app/Controllers/App.php:20
-msgid "Latest Posts"
-msgstr "Letzte Artikel"
+#. Author URI of the plugin/theme
+msgid "https://justusdeitert.de"
+msgstr "https://www.justusdeitert.de"
 
-#: app/Controllers/App.php:26
-#, php-format
-msgid "Search Results for %s"
-msgstr "Suchergebnisse für %s"
+#~ msgid "Go to Overview"
+#~ msgstr "Zur Übersicht"
 
-#: app/Controllers/App.php:29
-msgid "Not Found"
-msgstr "Nichts gefunden"
+#~ msgid "No Content"
+#~ msgstr "Kein Inhalt"
 
-#: resources/views/index.blade.php:8 resources/views/search.blade.php:8
-msgid "Sorry, no results were found."
-msgstr "Sorry, keine Ergebnisse gefunden."
+#~ msgid "Sorry, but the page you are looking for has no Content yet."
+#~ msgstr ""
+#~ "Es tut uns leid, aber die Seite, die Sie suchen, hat noch keinen Inhalt."
 
-#: resources/views/index.blade.php:18
-msgid "More Info"
-msgstr "Mehr Info"
+#~ msgid "Not Found"
+#~ msgstr "Nichts gefunden"
 
-#: resources/views/index.blade.php:19
-msgid "Less Info"
-msgstr "Weniger Info"
+#~ msgctxt "label"
+#~ msgid "Search for:"
+#~ msgstr "Suche nach:"
 
-#: resources/views/404.blade.php:8
-msgid "Sorry, but the page you were trying to view does not exist."
-msgstr "Es tut uns leid, aber die von Dir gesuchte Seite existiert nicht."
+#~ msgid "Latest Posts"
+#~ msgstr "Letzte Artikel"
 
-#: resources/views/partials/comments.blade.php:21
-msgid "&larr; Older comments"
-msgstr "&larr; Ältere Kommentare"
+#~ msgid "Search Results for %s"
+#~ msgstr "Suchergebnisse für %s"
 
-#: resources/views/partials/comments.blade.php:24
-msgid "Newer comments &rarr;"
-msgstr "Neuere Kommentare &rarr;"
+#~ msgid "Error"
+#~ msgstr "Fehler"
 
-#: resources/views/partials/comments.blade.php:33
-msgid "Comments are closed."
-msgstr "Kommentare sind geschlossen."
+#~ msgid "Continued"
+#~ msgstr "Fortsetzung"
 
-#: resources/views/partials/content-page.blade.php:2
-#: resources/views/partials/content-single.blade.php:62
-msgid "Pages:"
-msgstr "Seiten:"
+#~ msgid "Job"
+#~ msgstr "Job"
 
-#: resources/views/partials/content.blade.php:36
-#: resources/views/partials/content-single.blade.php:46
-msgid "published in:"
-msgstr "Erschienen in:"
+#~ msgid "Jobs"
+#~ msgstr "Jobs"
 
-#: resources/views/partials/content-single.blade.php:4
-msgid "Share on:"
-msgstr "Teilen auf:"
+#~ msgid "Add New Job"
+#~ msgstr "Neuen Job erstellen"
 
-#: resources/views/partials/content-single.blade.php:23
-#: resources/views/partials/content-single.blade.php:70
-msgid "Go to Article"
-msgstr "Zum Artikel"
+#~ msgid "Seminar"
+#~ msgstr "Seminar"
 
-#: resources/views/partials/entry-meta.blade.php:3
-msgid "By"
-msgstr "Von"
+#~ msgid "Seminars"
+#~ msgstr "Seminare"
+
+#~ msgid "Add New Seminar"
+#~ msgstr "Neues Seminar hinzufügen"
+
+#~ msgid "Main Navigation"
+#~ msgstr "Hauptnavigation"
+
+#~ msgid "Footer Navigation"
+#~ msgstr "Footer Navigation"
+
+#~ msgid "Primary"
+#~ msgstr "Primär"
+
+#~ msgid "Footer"
+#~ msgstr "Footer"
+
+#~ msgid "Talent X"
+#~ msgstr "Talent X"
+
+#~ msgid "https://www.talent-x.de/"
+#~ msgstr "https://www.talent-x.de/"
+
+#~ msgid "Page not found."
+#~ msgstr "Seite nicht gefunden."
+
+#~ msgid "Event"
+#~ msgstr "Termin"
+
+#~ msgid "Events"
+#~ msgstr "Termine"
+
+#~ msgid "Side Navigation"
+#~ msgstr "Seitennavigation"
+
+#~ msgid "KP Business Solutions"
+#~ msgstr "KP Business Solutions"
+
+#~ msgid "https://www.lichtfee.eu/"
+#~ msgstr "https://www.lichtfee.eu/"
+
+#~ msgid "Lichtfee"
+#~ msgstr "Lichtfee"
+
+#, fuzzy
+#~| msgid "Footer Navigation"
+#~ msgid "TEst Navigation"
+#~ msgstr "Footer Navigation"

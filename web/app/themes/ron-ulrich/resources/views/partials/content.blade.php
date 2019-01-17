@@ -1,5 +1,5 @@
 <article @php post_class('article-overview') @endphp>
-    <div class="row">
+    <div class="row article-row">
         {{--@php--}}
             {{--echo '<pre>';--}}
             {{--print_r(get_the_tags());--}}
@@ -24,6 +24,7 @@
                         <div class="col tag-column">
                             @foreach(get_the_tags() as $tag)
                                 <span class="tag">{{  $tag->name }}</span>
+                                {{--@php echo get_term_link( $tag->term_id ); @endphp--}}
                             @endforeach
                         </div>
                     </div>
@@ -59,5 +60,5 @@
             </a>
         </div>
     </div>
+    <hr>
 </article>
-<hr>

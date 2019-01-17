@@ -14,7 +14,7 @@
 }
 
 .wp-block-image {
-    margin-bottom: 50px;
+    margin-bottom: 30px;
 
     &.is-resized {
         width: 100%;
@@ -37,6 +37,8 @@
 
 figcaption {
     text-align: left !important;
+    font-size: 14px !important;
+    margin: 5px 0 0 0 !important;
 
     @include media-breakpoint-up(lg) {
         max-width: 70%;
@@ -79,15 +81,34 @@ figcaption {
             margin-left: 15px;
         }
     }
-
-    .go-to-article {
-        margin-left: auto;
-    }
 }
 
 .article-detail {
     margin-top: 70px;
 }
+
+.article-detail-header {
+    margin-bottom: 30px;
+}
+
+.go-to-article {
+    margin-left: auto;
+    float: left;
+
+    i {
+        margin-right: 5px;
+    }
+
+    i, span {
+        line-height: 24px;
+        float: left;
+    }
+}
+
+//.bottom-links {
+//    display: flex;
+//    flex-direction: column;
+//}
 
 .go-to-article-bottom-link {
     margin-top: 10px;

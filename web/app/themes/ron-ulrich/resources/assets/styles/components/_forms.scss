@@ -34,3 +34,14 @@
 input, textarea {
     border-width: 2px !important;
 }
+
+.more-info {
+    select {
+        cursor: pointer;
+        border: none !important;
+        line-height: 26px;
+        height: 26px;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+    }
+}

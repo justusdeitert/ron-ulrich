@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4de22d8fbe2975cc107ab8e03bf045b9",
+    "content-hash": "571d0498df495179b8612a71e90262ba",
     "packages": [
         {
             "name": "composer/installers",
@@ -535,6 +535,26 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/database-collation-fix/"
+        },
+        {
+            "name": "wpackagist-plugin/modernizr",
+            "version": "3.5.0",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/modernizr/",
+                "reference": "tags/3.5.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/modernizr.3.5.0.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/modernizr/"
         },
         {
             "name": "wpackagist-plugin/svg-support",

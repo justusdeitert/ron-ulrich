@@ -39,9 +39,23 @@ jQuery(window).load(function () {
     // $('.more-info').toggle(function() {
     //
     // });
-
-    $('.more-info').click(function() {
+    let toggleMoreInfo = function() {
         $('.more-info').toggleClass( "active" );
         $('.article-overview .post-info').toggleClass( "active" );
+
+        if($('.more-info').hasClass('active')) {
+            window.location.hash = '#more-info';
+        } else {
+            window.location.hash = '';
+        }
+    };
+
+    if(window.location.hash === '#more-info') {
+        // console.log('lol');
+        toggleMoreInfo()
+    }
+
+    $('.more-info .info-left').click(function() {
+        toggleMoreInfo()
     });
 });

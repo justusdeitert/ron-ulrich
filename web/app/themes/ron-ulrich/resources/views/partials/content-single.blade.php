@@ -1,10 +1,9 @@
 <hr>
 
 <div class="share-container">
-    <span>{{ __('Share on:', 'sage') }}</span>
-    {{--<i class="material-icons">arrow_drop_down</i>--}}
     @if(have_rows('share_icons', 'option'))
-        {{--<h1>tes</h1>--}}
+        <span>{{ __('Share on:', 'sage') }}</span>
+
         <ul>
             @while(have_rows('share_icons', 'option'))
                 @php the_row() @endphp
@@ -19,15 +18,20 @@
         </ul>
     @endif
 
+
     @if(get_field('published_in')['activate'])
-        <a class="go-to-article" href="{{ get_field('published_in')['url'] }}">{{ __('Go to Article', 'sage') }}</a>
+        <a class="go-to-article" href="{{ get_field('published_in')['url'] }}">
+            <i class="material-icons">link</i>
+            <span>{{ get_field('published_in')['name'] }}</span>
+        </a>
+        {{--<a class="go-to-article" href="{{ get_field('published_in')['url'] }}">{{ __('Go to Article', 'sage') }}</a>--}}
     @endif
 </div>
 
 <hr>
 
 <article @php post_class('article-detail') @endphp>
-    <header>
+    <div class="article-detail-header">
         @if(get_the_tags())
             <div class="row">
                 <div class="col tag-column">
@@ -55,7 +59,7 @@
         @endif
 
         {{--@include('partials/entry-meta')--}}
-    </header>
+    </div>
 
     @php the_content() @endphp
     {{--<footer>--}}
@@ -64,10 +68,16 @@
     {{--@php comments_template('/partials/comments.blade.php') @endphp--}}
 </article>
 
-@if(get_field('published_in')['activate'])
-    <a class="go-to-article-bottom-link" href="{{ get_field('published_in')['url'] }}">
-        <i class="material-icons">arrow_right</i>
-        <span>{{ __('Go to Article', 'sage') }}</span>
-    </a>
-@endif
+<div class="bottom-links">
+    {{--@if(get_field('published_in')['activate'])--}}
+        {{--<a class="go-to-article-bottom-link" href="{{ get_field('published_in')['url'] }}">--}}
+            {{--<i class="material-icons">arrow_right</i>--}}
+            {{--<span>{{ __('Go to Article', 'sage') }}</span>--}}
+        {{--</a>--}}
+    {{--@endif--}}
 
+    <a class="go-to-article-bottom-link" href="javascript:history.go(-1)">
+        <i class="material-icons">arrow_left</i>
+        <span>{{ __('back', 'sage') }}</span>
+    </a>
+</div>
