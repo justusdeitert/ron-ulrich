@@ -1,13 +1,32 @@
 <hr>
 
-<div class="more-info">
-    <span>{{ __('Share on', 'sage') }}</span>
-    <i class="material-icons">arrow_drop_down</i>
+<div class="share-container">
+    <span>{{ __('Share on:', 'sage') }}</span>
+    {{--<i class="material-icons">arrow_drop_down</i>--}}
+    @if(have_rows('share_icons', 'option'))
+        {{--<h1>tes</h1>--}}
+        <ul>
+            @while(have_rows('share_icons', 'option'))
+                @php the_row() @endphp
+                @if(get_sub_field('show'))
+                    <li>
+                        <a class="share-clicker" href="@php global $wp; echo get_sub_field('url') . home_url($wp->request) . '/?job=' . get_post()->post_name; @endphp" target="_blank">
+                            <img src="{{ get_sub_field('icon')['url'] }}" alt="{{ get_sub_field('icon')['name'] }}" >
+                        </a>
+                    </li>
+                @endif
+            @endwhile
+        </ul>
+    @endif
+
+    @if(get_field('published_in')['activate'])
+        <a class="go-to-article" href="{{ get_field('published_in')['url'] }}">{{ __('Go to Article', 'sage') }}</a>
+    @endif
 </div>
 
 <hr>
 
-<article @php post_class() @endphp>
+<article @php post_class('article-detail') @endphp>
     <header>
         @if(get_the_tags())
             <div class="row">
@@ -44,3 +63,11 @@
     {{--</footer>--}}
     {{--@php comments_template('/partials/comments.blade.php') @endphp--}}
 </article>
+
+@if(get_field('published_in')['activate'])
+    <a class="go-to-article-bottom-link" href="{{ get_field('published_in')['url'] }}">
+        <i class="material-icons">arrow_right</i>
+        <span>{{ __('Go to Article', 'sage') }}</span>
+    </a>
+@endif
+

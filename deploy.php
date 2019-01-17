@@ -7,6 +7,7 @@ require 'deploy/npm-install.php';
 require 'deploy/composer-install.php';
 require 'deploy/update-db.php';
 require 'deploy/sync-uploads.php';
+require 'deploy/clean-up.php';
 // Require Slack Recipes for Posting Slack Messages
 
 // --------------------------------->

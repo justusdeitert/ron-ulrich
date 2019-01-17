@@ -48,7 +48,9 @@
     "roots/soil": "^3.7",
     "wpackagist-plugin/contact-form-7": "5.1.1",
     "wpackagist-plugin/bootstrap-for-contact-form-7": "1.4.8",
-    "wpackagist-plugin/database-collation-fix": "1.2"
+    "wpackagist-plugin/database-collation-fix": "1.2",
+    "wpackagist-plugin/svg-support":"2.3.15",
+    "wpackagist-plugin/cookie-notice":"1.2.45"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^3.0.2",
@@ -59,7 +61,9 @@
   "extra": {
     "installer-paths": {
       "web/app/mu-plugins/{$name}/": ["type:wordpress-muplugin",
-        "wpackagist-plugin/database-collation-fix"
+        "wpackagist-plugin/database-collation-fix",
+        "wpackagist-plugin/svg-support",
+        "wpackagist-plugin/cookie-notice"
       ],
       "web/app/plugins/{$name}/": [
         "type:wordpress-plugin"

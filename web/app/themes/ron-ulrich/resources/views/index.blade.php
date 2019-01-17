@@ -13,8 +13,10 @@
     {{--@php var_dump(get_the_tags()) @endphp--}}
     <hr>
     <div class="more-info">
-        <i class="material-icons">arrow_drop_down</i>
-        <span>{{ __('More Info', 'sage') }}</span>
+        <i class="more material-icons">arrow_drop_down</i>
+        <i class="less material-icons">arrow_drop_up</i>
+        <span class="more">{{ __('More Info', 'sage') }}</span>
+        <span class="less">{{ __('Less Info', 'sage') }}</span>
     </div>
     <hr>
 

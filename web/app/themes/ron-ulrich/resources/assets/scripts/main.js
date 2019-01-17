@@ -24,3 +24,24 @@ const routes = new Router({
 jQuery(document).ready(
     () => routes.loadEvents()
 );
+
+jQuery(document).ready(function() {
+    // console.log($('.brand-image').height());
+    // let brandImageWidth = $('.brand-image').innerWidth();
+    // $('.brand-image').innerHeight(brandImageWidth);
+    // console.log($('.brand-image').innerWidth());
+});
+
+jQuery(window).load(function () {
+    let brandImageHeight = $('.brand-image').height();
+    $('.brand-image').width(brandImageHeight);
+
+    // $('.more-info').toggle(function() {
+    //
+    // });
+
+    $('.more-info').click(function() {
+        $('.more-info').toggleClass( "active" );
+        $('.article-overview .post-info').toggleClass( "active" );
+    });
+});

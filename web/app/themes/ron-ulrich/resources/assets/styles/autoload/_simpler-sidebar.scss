@@ -1,0 +1,30 @@
+.sidebar-toggle {
+    margin-left: auto;
+
+    i {
+        font-size: 52px;
+        cursor: pointer;
+    }
+}
+
+#sidebar {
+    z-index: 999999 !important;
+
+    .sidebar-wrapper {
+        position: relative;
+        height: 100%;
+        overflow: auto;
+        background: #FFF;
+
+        ul {
+            list-style: none;
+            padding: 30px;
+
+            li {
+                font-size: 2rem;
+                margin-bottom: 20px;
+            }
+        }
+    }
+}
+
