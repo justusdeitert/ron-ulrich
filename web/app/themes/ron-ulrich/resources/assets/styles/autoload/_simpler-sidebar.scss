@@ -9,12 +9,12 @@
 
 #sidebar {
     z-index: 999999 !important;
+    background: #FFF;
 
     .sidebar-wrapper {
         position: relative;
         height: 100%;
         overflow: auto;
-        background: #FFF;
 
         ul {
             list-style: none;
