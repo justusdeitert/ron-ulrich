@@ -8,5 +8,40 @@
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+    @if(!is_single())
+        {{--@php var_dump(get_post()) @endphp--}}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="{{ get_bloginfo('name') . ' - ' . get_bloginfo('description') }}" />
+        <meta property="og:description" content="{{ get_field('blog_description', 'option') }}" />
+        <meta property="og:url" content="{{ get_home_url() }}" />
+        <meta name="twitter:title" content="{{ get_bloginfo('name') . ' - ' . get_bloginfo('description') }}" />
+        <meta name="twitter:description" content="{{ get_field('blog_description', 'option') }}" />
+        <meta name="twitter:card" content="summary_large_image" />
+
+        @if(get_field('blog_share_image', 'option'))
+            <meta property="og:image" content="{{ get_field('blog_share_image', 'option')['url'] }}" />
+            <meta property="og:image:width" content="{{ get_field('blog_share_image', 'option')['width'] }}" />
+            <meta property="og:image:height" content="{{ get_field('blog_share_image', 'option')['height'] }}" />
+            <meta name="twitter:image" content="{{ get_field('blog_share_image', 'option')['url'] }}" />
+        @endif
+    @else
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="{{ get_post()->post_title }}" />
+        <meta property="og:description" content="{{ get_field('description', get_post()->ID) }}" />
+        <meta property="og:url" content="{{ get_permalink() . '?job=' . get_post()->post_name }}" />
+        <meta name="twitter:title" content="{{ get_post()->post_title }}" />
+        <meta name="twitter:description" content="{{ get_field('description', get_post()->ID) }}" />
+        <meta name="twitter:card" content="summary_large_image" />
+
+        @if(has_post_thumbnail())
+            @php $feature_image_url = wp_get_attachment_image_src(get_post_thumbnail_id(), 'large', true)[0]; @endphp
+            <meta property="og:image" content="{{ $feature_image_url }}" />
+            {{--<meta property="og:image:width" content="{{ $feature_image_url['width'] }}" />--}}
+            {{--<meta property="og:image:height" content="{{ $feature_image_url['height'] }}" />--}}
+            <meta name="twitter:image" content="{{ $feature_image_url }}" />
+        @endif
+    @endif
+
     @php wp_head() @endphp
+
 </head>

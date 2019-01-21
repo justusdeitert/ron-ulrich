@@ -22,6 +22,30 @@
             "new_lines": ""
         },
         {
+            "key": "field_5c407bc82fb45",
+            "label": "Blog Share Image",
+            "name": "blog_share_image",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": ""
+        },
+        {
             "key": "field_5c3c6c57e0b36",
             "label": "Copyright",
             "name": "copyright",
@@ -181,5 +205,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1547625857
+    "modified": 1547729885
 }
