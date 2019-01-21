@@ -21,7 +21,7 @@ set( 'local_path', dirname(__FILE__, 2) );
 // writeln('local_path: {local_path}');
 // writeln('remote_root: {remote_root}');
 set( 'sites', [
-    'ron-ulrich.just' => 'ron-ulrich.justusdeitert.de'
+    'ron-ulrich.just' => 'www.ron-ulrich.de'
 ]);
 
 // /**
@@ -197,7 +197,7 @@ task( 'push:db', function () {
     // In a multisite environment, the DOMAIN_CURRENT_SITE in the .env file uses the new remote domain.
     // In the DB however, this new remote domain doesn't exist yet before search-replace. So we have
     // to specify the old (local) domain as --url parameter.
-    writeln( "<comment>Updating the URLs in the DB</comment>" );
+    writeln( "<comment>Updating URLs in the DB</comment>" );
 
     // var_dump('localurl: ' . $localUrl);
     // var_dump('remoteurl: ' . $remoteUrl);
