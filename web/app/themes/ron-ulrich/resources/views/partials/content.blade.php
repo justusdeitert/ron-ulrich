@@ -23,7 +23,11 @@
                     <div class="row">
                         <div class="col tag-column">
                             @foreach(get_the_tags() as $tag)
-                                <span class="tag">{{  $tag->name }}</span>
+                                {{--@php var_dump($tag) @endphp--}}
+                                @php $tag_link = get_tag_link( $tag->term_id ); @endphp
+                                <a href="{{ $tag_link }}">
+                                    <span class="tag">{{  $tag->name }}</span>
+                                </a>
                                 {{--@php echo get_term_link( $tag->term_id ); @endphp--}}
                             @endforeach
                         </div>
