@@ -11,10 +11,10 @@
     @if(!is_single())
         {{--@php var_dump(get_post()) @endphp--}}
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="{{ get_bloginfo('name') . ' - ' . get_bloginfo('description') }}" />
+        <meta property="og:title" content="{{ bloginfo('name') }} - {{ bloginfo('description') }} " />
         <meta property="og:description" content="{{ get_field('blog_description', 'option') }}" />
         <meta property="og:url" content="{{ get_home_url() }}" />
-        <meta name="twitter:title" content="{{ get_bloginfo('name') . ' - ' . get_bloginfo('description') }}" />
+        <meta name="twitter:title" content="{{ bloginfo('name') }} - {{ bloginfo('description') }}" />
         <meta name="twitter:description" content="{{ get_field('blog_description', 'option') }}" />
         <meta name="twitter:card" content="summary_large_image" />
 
@@ -34,14 +34,20 @@
         <meta name="twitter:card" content="summary_large_image" />
 
         @if(has_post_thumbnail())
-            @php $feature_image_url = wp_get_attachment_image_src(get_post_thumbnail_id(), 'large', true)[0]; @endphp
+            @php
+                $feature_image_url = wp_get_attachment_image_src(get_post_thumbnail_id(), 'large', true)[0];
+                $feature_image_width = wp_get_attachment_image_src(get_post_thumbnail_id(), 'large', true)[1];
+                $feature_image_height = wp_get_attachment_image_src(get_post_thumbnail_id(), 'large', true)[2];
+            @endphp
             <meta property="og:image" content="{{ $feature_image_url }}" />
-            {{--<meta property="og:image:width" content="{{ $feature_image_url['width'] }}" />--}}
-            {{--<meta property="og:image:height" content="{{ $feature_image_url['height'] }}" />--}}
             <meta name="twitter:image" content="{{ $feature_image_url }}" />
+            <meta property="og:image:width" content="{{ $feature_image_width }}" />
+            <meta property="og:image:height" content="{{ $feature_image_height }}" />
         @endif
     @endif
 
     @php wp_head() @endphp
 
 </head>
+
+
