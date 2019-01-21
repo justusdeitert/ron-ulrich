@@ -39,8 +39,8 @@
                 $feature_image_width = wp_get_attachment_image_src(get_post_thumbnail_id(), 'large', true)[1];
                 $feature_image_height = wp_get_attachment_image_src(get_post_thumbnail_id(), 'large', true)[2];
             @endphp
-            <meta property="og:image" content="{{ $feature_image_url }}" />
-            <meta name="twitter:image" content="{{ $feature_image_url }}" />
+            <meta property="og:image" content="{{ get_home_url() }}{{ $feature_image_url }}" />
+            <meta name="twitter:image" content="{{ get_home_url() }}{{ $feature_image_url }}" />
             <meta property="og:image:width" content="{{ $feature_image_width }}" />
             <meta property="og:image:height" content="{{ $feature_image_height }}" />
         @endif
