@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Lichtfee\n"
-"POT-Creation-Date: 2019-01-16 20:05+0100\n"
-"PO-Revision-Date: 2019-01-16 20:05+0100\n"
+"POT-Creation-Date: 2019-01-17 10:27+0100\n"
+"PO-Revision-Date: 2019-01-17 10:27+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -29,13 +29,21 @@ msgstr "Es tut uns leid, aber die von Dir gesuchte Seite existiert nicht."
 msgid "Sorry, no results were found."
 msgstr "Sorry, keine Ergebnisse gefunden."
 
-#: views/index.blade.php:18
+#: views/index.blade.php:19
 msgid "More Info"
 msgstr "Mehr Info"
 
-#: views/index.blade.php:19
+#: views/index.blade.php:20
 msgid "Less Info"
 msgstr "Weniger Info"
+
+#: views/index.blade.php:25
+msgid "Select Month"
+msgstr "Monat auswählen"
+
+#: views/index.blade.php:37
+msgid "Select Tag"
+msgstr "Tag auswählen"
 
 #: views/partials/comments.blade.php:10
 msgctxt "comments title"
@@ -61,13 +69,9 @@ msgstr "Kommentare sind geschlossen."
 msgid "Pages:"
 msgstr "Seiten:"
 
-#: views/partials/content-single.blade.php:4
+#: views/partials/content-single.blade.php:5
 msgid "Share on:"
 msgstr "Teilen auf:"
-
-#: views/partials/content-single.blade.php:25
-msgid "Go to Article at"
-msgstr "Zum Artikel unter"
 
 #: views/partials/content-single.blade.php:27
 #: views/partials/content-single.blade.php:75
@@ -75,7 +79,7 @@ msgid "Go to Article"
 msgstr "Zum Artikel"
 
 #: views/partials/content-single.blade.php:50
-#: views/partials/content.blade.php:36
+#: views/partials/content.blade.php:37
 msgid "published in:"
 msgstr "Erschienen in:"
 
@@ -141,6 +145,9 @@ msgstr "Justus Deitert"
 #. Author URI of the plugin/theme
 msgid "https://justusdeitert.de"
 msgstr "https://www.justusdeitert.de"
+
+#~ msgid "Go to Article at"
+#~ msgstr "Zum Artikel unter"
 
 #~ msgid "Go to Overview"
 #~ msgstr "Zur Übersicht"

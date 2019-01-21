@@ -28,6 +28,10 @@ main {
         .info-right {
             margin-left: auto;
             display: flex;
+
+            @include media-breakpoint-down(xs) {
+                flex-direction: column;
+            }
         }
 
         i {
@@ -38,7 +42,7 @@ main {
             display: none;
         }
 
-        &.active {
+        body.more-info & {
             .more {
                 display: none;
             }
@@ -101,16 +105,9 @@ main {
 
             .post-info {
                 display: none;
-                //height: 0;
-                //visibility: hidden;
-                //opacity: 0;
-                //transition: all 0.2s ease;
 
-                &.active {
+                body.more-info & {
                     display: block;
-                    //height: auto;
-                    //visibility: visible;
-                    //opacity: 1;
                 }
             }
 

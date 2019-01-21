@@ -32,30 +32,79 @@ jQuery(document).ready(function() {
     // console.log($('.brand-image').innerWidth());
 });
 
+const moreInfo = () => {
+    if(getCookie('more-info')) {
+        $('body').addClass('more-info');
+    }
+
+    $('.more-info .info-left').click(() => {
+        toggleMoreInfo();
+    });
+
+    let toggleMoreInfo = function() {
+        if($('body').hasClass('more-info')) {
+            $('body').removeClass('more-info');
+            deleteCookie('more-info');
+        } else {
+            $('body').addClass('more-info');
+            setCookie('more-info', true);
+        }
+    };
+};
+
+const setSelectfields = () => {
+    $('.more-info select').each(function() {
+        let options = $(this).children();
+
+        $(options).each(function() {
+            // console.log(this.value);
+            if(window.location.pathname == this.value) {
+                $(this).parent().val(this.value);
+            }
+        });
+    });
+};
+
 jQuery(window).load(function () {
     let brandImageHeight = $('.brand-image').height();
     $('.brand-image').width(brandImageHeight);
 
-    // $('.more-info').toggle(function() {
-    //
-    // });
-    let toggleMoreInfo = function() {
-        $('.more-info').toggleClass( "active" );
-        $('.article-overview .post-info').toggleClass( "active" );
-
-        if($('.more-info').hasClass('active')) {
-            window.location.hash = '#more-info';
-        } else {
-            window.location.hash = '';
-        }
-    };
-
-    if(window.location.hash === '#more-info') {
-        // console.log('lol');
-        toggleMoreInfo()
-    }
-
-    $('.more-info .info-left').click(function() {
-        toggleMoreInfo()
-    });
+    moreInfo();
+    setSelectfields()
 });
+
+// ------------------------->
+// Base Functions Set Cookies
+// https://www.w3schools.com/js/js_cookies.asp
+
+function deleteCookie(name) {
+    document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+}
+
+function setCookie(name, value, exdays) {
+    if (exdays === undefined) {
+        exdays = 12;
+    }
+    let d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    let expires = 'expires='+ d.toUTCString();
+    document.cookie = name + '=' + value + ';' + expires + ';path=/';
+}
+
+function getCookie(name) {
+    name = name + '=';
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for(let i = 0; i <ca.length; i++) {
+        let c = ca[i];
+
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return '';
+}

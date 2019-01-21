@@ -84,6 +84,9 @@ module.exports = {
         'keyword-spacing': 'warn',
         // require or disallow a space immediately following the // or /* in a comment
         'spaced-comment': ['warn', 'always'],
-        'padded-blocks': ['warn', 'never']
+        'padded-blocks': ['warn', 'never'],
+        // Disallow Unused Variables (no-unused-vars)
+        // https://eslint.org/docs/rules/no-unused-vars
+        'no-unused-vars': ['warn', { 'vars': 'all' }]
     }
 };

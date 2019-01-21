@@ -40,8 +40,18 @@ input, textarea {
         cursor: pointer;
         border: none !important;
         line-height: 26px;
-        height: 26px;
+        height: 28px;
         padding-top: 0 !important;
         padding-bottom: 0 !important;
+        //max-width: 100px;
+
+        // Make Border
+        //border: 2px solid black !important;
+        //margin: 5px;
+        //border-radius: 0 !important;
+
+        &.custom-select {
+            width: initial !important;
+        }
     }
 }
