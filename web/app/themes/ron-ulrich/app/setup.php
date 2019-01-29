@@ -140,3 +140,25 @@ add_action('after_setup_theme', function () {
 add_action('after_setup_theme', function () {
     load_theme_textdomain('sage', get_template_directory() . '/lang');
 });
+
+if (!is_admin()) {
+    // Remove from ACF Menu -> Custom Fields
+    add_filter('acf/settings/show_admin', '__return_false');
+
+    add_action('admin_menu', function () {
+        // remove_menu_page( 'etc....' );
+        // remove_menu_page('index.php'); // Dashboard
+        remove_menu_page('jetpack'); // Jetpack*
+        // remove_menu_page('edit.php'); // Posts
+        // remove_menu_page( 'upload.php' ); // Media
+        // remove_menu_page( 'edit.php?post_type=page' ); // Pages
+        remove_menu_page('edit-comments.php'); // Comments
+        // remove_menu_page( 'themes.php' ); // Appearance
+        remove_menu_page('tools.php'); // Tools
+        // remove_menu_page( 'options-general.php' ); // Settings
+        # remove_menu_page('wpcf7'); // Another plugin
+        remove_menu_page('users.php');  // Users
+        remove_menu_page('plugins.php'); // Plugins
+
+    });
+}

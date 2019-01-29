@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "571d0498df495179b8612a71e90262ba",
+    "content-hash": "71b220ff8cfdbd2e61dd9e2f9792b3af",
     "packages": [
         {
             "name": "composer/installers",
@@ -497,6 +497,26 @@
             "homepage": "https://wordpress.org/plugins/contact-form-7/"
         },
         {
+            "name": "wpackagist-plugin/contact-form-cfdb7",
+            "version": "1.2.4.5",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/contact-form-cfdb7/",
+                "reference": "trunk"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/contact-form-cfdb7.zip?timestamp=1544805785",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/contact-form-cfdb7/"
+        },
+        {
             "name": "wpackagist-plugin/cookie-notice",
             "version": "1.2.45",
             "source": {
@@ -537,16 +557,16 @@
             "homepage": "https://wordpress.org/plugins/database-collation-fix/"
         },
         {
-            "name": "wpackagist-plugin/modernizr",
-            "version": "3.5.0",
+            "name": "wpackagist-plugin/disable-comments",
+            "version": "1.8.0",
             "source": {
                 "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/modernizr/",
-                "reference": "tags/3.5.0"
+                "url": "https://plugins.svn.wordpress.org/disable-comments/",
+                "reference": "tags/1.8.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/modernizr.3.5.0.zip",
+                "url": "https://downloads.wordpress.org/plugin/disable-comments.1.8.0.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -554,7 +574,7 @@
                 "composer/installers": "~1.0"
             },
             "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/modernizr/"
+            "homepage": "https://wordpress.org/plugins/disable-comments/"
         },
         {
             "name": "wpackagist-plugin/svg-support",
@@ -575,21 +595,41 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/svg-support/"
+        },
+        {
+            "name": "wpackagist-plugin/user-switching",
+            "version": "1.4.0",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/user-switching/",
+                "reference": "tags/1.4.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/user-switching.1.4.0.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/user-switching/"
         }
     ],
     "packages-dev": [
         {
             "name": "deployer/deployer",
-            "version": "v6.4.2",
+            "version": "v6.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/deployphp/deployer.git",
-                "reference": "a1c7ac66a0788e7b9cbc71a2bdbbd3eab992c940"
+                "reference": "a7d03f8febc547344c4f205dd2291a6d40a2af44"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/deployphp/deployer/zipball/a1c7ac66a0788e7b9cbc71a2bdbbd3eab992c940",
-                "reference": "a1c7ac66a0788e7b9cbc71a2bdbbd3eab992c940",
+                "url": "https://api.github.com/repos/deployphp/deployer/zipball/a7d03f8febc547344c4f205dd2291a6d40a2af44",
+                "reference": "a7d03f8febc547344c4f205dd2291a6d40a2af44",
                 "shasum": ""
             },
             "require": {
@@ -628,7 +668,7 @@
             ],
             "description": "Deployment Tool",
             "homepage": "https://deployer.org",
-            "time": "2019-01-15T05:58:34+00:00"
+            "time": "2019-01-17T13:53:14+00:00"
         },
         {
             "name": "deployer/phar-update",
@@ -688,16 +728,16 @@
         },
         {
             "name": "deployer/recipes",
-            "version": "6.2.0",
+            "version": "6.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/deployphp/recipes.git",
-                "reference": "f330fd503b4a277d69f678cd786404ce74b583dd"
+                "reference": "4c2470771249fbff55eb56429c29d74590768fa0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/deployphp/recipes/zipball/f330fd503b4a277d69f678cd786404ce74b583dd",
-                "reference": "f330fd503b4a277d69f678cd786404ce74b583dd",
+                "url": "https://api.github.com/repos/deployphp/recipes/zipball/4c2470771249fbff55eb56429c29d74590768fa0",
+                "reference": "4c2470771249fbff55eb56429c29d74590768fa0",
                 "shasum": ""
             },
             "replace": {
@@ -738,7 +778,7 @@
                 "slack",
                 "yarn"
             ],
-            "time": "2019-01-08T11:40:56+00:00"
+            "time": "2019-01-17T06:03:27+00:00"
         },
         {
             "name": "pimple/pimple",
