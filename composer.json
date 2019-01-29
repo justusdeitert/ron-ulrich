@@ -54,7 +54,7 @@
     "wpackagist-plugin/user-switching":"1.4.0",
     "wpackagist-plugin/contact-form-cfdb7":"1.2.4.5",
     "wpackagist-plugin/disable-comments":"1.8.0",
-    "wpackagist-plugin/google-analytics-dashboard-for-wp":"5.3.7"
+    "wpackagist-plugin/ga-germanized":"1.4.0"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^3.0.2",
@@ -67,10 +67,8 @@
       "web/app/mu-plugins/{$name}/": ["type:wordpress-muplugin",
         "wpackagist-plugin/database-collation-fix",
         "wpackagist-plugin/svg-support",
-        "wpackagist-plugin/cookie-notice",
         "wpackagist-plugin/user-switching",
-        "wpackagist-plugin/disable-comments",
-        "wpackagist-plugin/google-analytics-dashboard-for-wp"
+        "wpackagist-plugin/disable-comments"
       ],
       "web/app/plugins/{$name}/": [
         "type:wordpress-plugin"
