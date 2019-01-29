@@ -54,6 +54,7 @@
     "wpackagist-plugin/user-switching":"1.4.0",
     "wpackagist-plugin/contact-form-cfdb7":"1.2.4.5",
     "wpackagist-plugin/disable-comments":"1.8.0",
+    "wpackagist-plugin/google-analytics-dashboard-for-wp":"5.3.7",
     "wpackagist-plugin/ga-germanized":"1.4.0"
   },
   "require-dev": {
