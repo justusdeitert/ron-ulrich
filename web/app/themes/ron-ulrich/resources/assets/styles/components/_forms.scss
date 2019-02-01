@@ -1,4 +1,9 @@
 /** Search form */
+
+.wpcf7-recaptcha {
+    margin-bottom: 25px;
+}
+
 .search-form {
     @extend .form-inline;
 }

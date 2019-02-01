@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c5c794968f7a9d0fe6632a39d526f9f8",
+    "content-hash": "e86ab257a8384a45cebee5f551c305ca",
     "packages": [
         {
             "name": "composer/installers",
@@ -455,26 +455,6 @@
                 "environment"
             ],
             "time": "2018-10-30T17:29:25+00:00"
-        },
-        {
-            "name": "wpackagist-plugin/bootstrap-for-contact-form-7",
-            "version": "1.4.8",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/bootstrap-for-contact-form-7/",
-                "reference": "tags/1.4.8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/bootstrap-for-contact-form-7.1.4.8.zip",
-                "reference": null,
-                "shasum": null
-            },
-            "require": {
-                "composer/installers": "~1.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/bootstrap-for-contact-form-7/"
         },
         {
             "name": "wpackagist-plugin/contact-form-7",
