@@ -159,6 +159,5 @@ if (!is_admin()) {
         # remove_menu_page('wpcf7'); // Another plugin
         remove_menu_page('users.php');  // Users
         remove_menu_page('plugins.php'); // Plugins
-
     });
 }

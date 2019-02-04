@@ -8,7 +8,6 @@ if( function_exists('acf_add_options_page') ) {
     // https://www.advancedcustomfields.com/resources/acf_add_options_page/
     // https://www.advancedcustomfields.com/resources/get-values-from-an-options-page/
     // ----------------------------------------->
-
     $args = array(
 
         /* (string) The title displayed on the options page. Required. */

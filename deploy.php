@@ -1,60 +1,69 @@
 <?php
-
 namespace Deployer;
 
 require 'recipe/common.php';
-require 'deploy/npm-install.php';
-require 'deploy/composer-install.php';
-require 'deploy/update-db.php';
-require 'deploy/sync-uploads.php';
-require 'deploy/clean-up.php';
-// Require Slack Recipes for Posting Slack Messages
 
-// --------------------------------->
-// require 'vendor/deployer/recipes/recipe/slack.php';
+// Require all files in deployer folder
+// ------------------------------------------->
+foreach (new \DirectoryIterator(dirname(__FILE__) . '/deployer') as $fileinfo) {
+    if (!$fileinfo->isDot()) {
+        require $fileinfo->getPathname();
+    }
+}
 
-set('repository', 'git@gitlab.justusdeitert.de:JD/ron-ulrich.git');
 
-// Number of releases to keep. -1 for unlimited releases. Default to 5.
-set('keep_releases', 3);
+// Set DNS Hosts for Database update
+// More Hosts For Multisite
+// deployer/sync-database.php
+// ----------------->
+set( 'sites', [
+    'ron-ulrich.just' => 'www.ron-ulrich.de'
+    // 'example.main' => 'kids.chimosa.justusdeitert.de',
+]);
+
+
+// Uploads all files (and directories) from local machine to remote server.
+// Overwrites existing files on server with updated local files and uploads new files.
+// Locally deleted files are not deleted on server.
+// deployer/sync-dirs.php
+// ----------------->
+set('sync_dirs', [
+    dirname(__FILE__) . '/web/app/uploads/' => '{{deploy_path}}/shared/web/app/uploads/',
+]);
 
 // Configure Theme Path
-set( 'theme_name', 'ron-ulrich');
-set( 'themes_path', 'web/app/themes' );
 set( 'theme_path', 'web/app/themes/ron-ulrich' );
 
-// List of shared files
+// Project name
+set('application', 'ron-ulrich');
+
+// Project repository
+set('repository', 'git@gitlab.justusdeitert.de:JD/ron-ulrich.git');
+
+// [Optional] Allocate tty for git clone. Default value is false.
+set('git_tty', true);
+
+// Shared files/dirs between deploys
 set('shared_files', [
-    '.env',
-    'web/.htaccess'
+    'bedrock/.env',
+    'bedrock/web/.htaccess'
 ]);
 
-// List of shared dirs
 set('shared_dirs', [
-    'web/app/uploads'
+    'bedrock/web/app/uploads'
 ]);
 
-//set('writable_dirs', [
-//    'web/app/uploads'
-//]);
+// Writable dirs by web server
+set('writable_dirs', []);
+set('allow_anonymous_stats', false);
 
-set( 'default_stage', 'staging' );
+// Hosts
+host('justusdeitert.root')
+    ->set('deploy_path', '/var/www/vhosts/ron-ulrich.de')
+    ->set('branch', 'development');
 
-host('justusdeitert.de')
-    ->user('justusdeitert')
-    ->stage('staging')
-    ->set('deploy_path', '/var/www/vhosts/justusdeitert.de/ron-ulrich');
-
-// Set Deployer Slack Messages
-// ------------------------>
-// set('user', 'JD'); // TODO: set username from git: https://deployer.org/docs/configuration
-// set('slack_webhook', 'https://hooks.slack.com/services/REDACTED');
-// set('slack_title', ''); // Dont need to show title in this channel
-// set('slack_text', '_{{user}}_ deploying `{{branch}}` to *{{target}}*');
-// set('slack_success_text', 'Deploy to *{{target}}* successful');
-// set('slack_failure_text', 'Deploy to *{{target}}* failed');
-// ------------------------>
-
+// Tasks
+// https://deployer.org/docs/advanced/deploy-strategies.html
 desc('Deploy your project');
 task('deploy', [
     'deploy:info',
@@ -65,19 +74,14 @@ task('deploy', [
     'deploy:shared',
     'composer:install',
     'npm:install',
-    'change:owner',
     'deploy:writable',
+    'deploy:vendors',
+    'deploy:clear_paths',
     'deploy:symlink',
     'deploy:unlock',
-    'clean_up:node_modules',
-    'cleanup', // Cleaning up old releases
+    'cleanup',
     'success'
 ]);
-
-// before('deploy', 'slack:notify');
-// after('success', 'slack:notify:success');
-after('deploy:failed', 'deploy:unlock' );
-// after('deploy:failed', 'slack:notify:failure');
 
 desc('Push Project DB & Uploads Folder');
 task('push', [
@@ -90,3 +94,22 @@ task('pull', [
     'pull:db',
     'pull:files'
 ]);
+
+// [Optional] If deploy fails automatically unlock.
+after('deploy:failed', 'deploy:unlock');
+
+// Set Deployer Recipe Slack Messages
+// ------------------------>
+// https://deployer.org/recipes/slack.html
+// set('user', 'JD'); // TODO: set username from git: https://deployer.org/doc/*s/configuration
+// set('slack_webhook', 'https://hooks.slackdep.com/services/T6MCX1UKU/BFLSA8NFM/BYq4fE0XDcTYjrrMrMFgc6S0');
+// set('slack_title', ''); // We don't need to show title in this channel
+// set('slack_text', '_{{user}}_ deploying `{{branch}}` to *{{target}}*');
+// set('slack_success_text', 'Deploy to *{{target}}* successful');
+// set('slack_failure_text', 'Deploy to *{{target}}* failed');
+
+// Fire Slack Notifications on
+// ------------->
+// before('deploy', 'slack:notify');
+// after('success', 'slack:notify:success');
+// after('deploy:failed', 'slack:notify:failure');
