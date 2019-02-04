@@ -5,12 +5,14 @@ require 'recipe/common.php';
 
 // Require all files in deployer folder
 // ------------------------------------------->
-foreach (new \DirectoryIterator(dirname(__FILE__) . '/deployer') as $fileinfo) {
+
+
+$iterator = new \DirectoryIterator(dirname(__FILE__) . '/deployer');
+foreach ($iterator as $fileinfo) {
     if (!$fileinfo->isDot()) {
         require $fileinfo->getPathname();
     }
 }
-
 
 // Set DNS Hosts for Database update
 // More Hosts For Multisite
@@ -45,12 +47,12 @@ set('git_tty', true);
 
 // Shared files/dirs between deploys
 set('shared_files', [
-    'bedrock/.env',
-    'bedrock/web/.htaccess'
+    '.env',
+    'web/.htaccess'
 ]);
 
 set('shared_dirs', [
-    'bedrock/web/app/uploads'
+    'web/app/uploads'
 ]);
 
 // Writable dirs by web server
@@ -58,8 +60,9 @@ set('writable_dirs', []);
 set('allow_anonymous_stats', false);
 
 // Hosts
-host('justusdeitert.root')
-    ->set('deploy_path', '/var/www/vhosts/ron-ulrich.de')
+host('ron-ulrich.de')
+    // ->user('ron-admin')
+    ->set('deploy_path', '~')
     ->set('branch', 'development');
 
 // Tasks
