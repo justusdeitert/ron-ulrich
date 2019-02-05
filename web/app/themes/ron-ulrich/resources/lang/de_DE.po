@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Lichtfee\n"
-"POT-Creation-Date: 2019-01-17 10:27+0100\n"
-"PO-Revision-Date: 2019-01-17 10:27+0100\n"
+"POT-Creation-Date: 2019-04-08 18:19+0200\n"
+"PO-Revision-Date: 2019-04-08 18:19+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2\n"
+"X-Generator: Poedit 2.2.1\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
@@ -42,8 +42,8 @@ msgid "Select Month"
 msgstr "Monat auswählen"
 
 #: views/index.blade.php:37
-msgid "Select Tag"
-msgstr "Tag auswählen"
+msgid "Select Category"
+msgstr "Kategorie auswählen"
 
 #: views/partials/comments.blade.php:10
 msgctxt "comments title"
@@ -64,7 +64,7 @@ msgstr "Neuere Kommentare &rarr;"
 msgid "Comments are closed."
 msgstr "Kommentare sind geschlossen."
 
-#: views/partials/content-page.blade.php:2
+#: views/partials/content-page.blade.php:4
 #: views/partials/content-single.blade.php:66
 msgid "Pages:"
 msgstr "Seiten:"
@@ -79,7 +79,7 @@ msgid "Go to Article"
 msgstr "Zum Artikel"
 
 #: views/partials/content-single.blade.php:50
-#: views/partials/content.blade.php:37
+#: views/partials/content.blade.php:41
 msgid "published in:"
 msgstr "Erschienen in:"
 

@@ -34,7 +34,7 @@
             </div>
             <div class="input-group">
                 <select name="archive-dropdown" class="custom-select" onchange="document.location.href=this.options[this.selectedIndex].value;">
-                    <option value="/">{{ __('Select Tag', 'sage') }}</option>
+                    <option value="/">{{ __('Select Category', 'sage') }}</option>
                     @foreach(get_tags() as $tag)
                         @php $tag_link = get_tag_link( $tag->term_id ); @endphp
                         <option value="{{ $tag_link }}">{{ $tag->name }}</option>

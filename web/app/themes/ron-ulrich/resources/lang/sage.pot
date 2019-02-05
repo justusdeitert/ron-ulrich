@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-16 15:52+0100\n"
+"POT-Creation-Date: 2019-04-08 18:19+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -54,7 +54,7 @@ msgstr ""
 msgid "Continued"
 msgstr ""
 
-#: app/acf-options-page.php:15 app/acf-options-page.php:18
+#: app/acf-options-page.php:14 app/acf-options-page.php:17
 msgid "Info"
 msgstr ""
 
@@ -83,12 +83,20 @@ msgstr ""
 msgid "Sorry, no results were found."
 msgstr ""
 
-#: resources/views/index.blade.php:18
+#: resources/views/index.blade.php:19
 msgid "More Info"
 msgstr ""
 
-#: resources/views/index.blade.php:19
+#: resources/views/index.blade.php:20
 msgid "Less Info"
+msgstr ""
+
+#: resources/views/index.blade.php:25
+msgid "Select Month"
+msgstr ""
+
+#: resources/views/index.blade.php:37
+msgid "Select Category"
 msgstr ""
 
 #: resources/views/404.blade.php:8
@@ -107,23 +115,27 @@ msgstr ""
 msgid "Comments are closed."
 msgstr ""
 
-#: resources/views/partials/content-page.blade.php:2
-#: resources/views/partials/content-single.blade.php:62
+#: resources/views/partials/content-page.blade.php:4
+#: resources/views/partials/content-single.blade.php:66
 msgid "Pages:"
 msgstr ""
 
-#: resources/views/partials/content.blade.php:36
-#: resources/views/partials/content-single.blade.php:46
+#: resources/views/partials/content.blade.php:41
+#: resources/views/partials/content-single.blade.php:50
 msgid "published in:"
 msgstr ""
 
-#: resources/views/partials/content-single.blade.php:4
+#: resources/views/partials/content-single.blade.php:5
 msgid "Share on:"
 msgstr ""
 
-#: resources/views/partials/content-single.blade.php:23
-#: resources/views/partials/content-single.blade.php:70
+#: resources/views/partials/content-single.blade.php:27
+#: resources/views/partials/content-single.blade.php:75
 msgid "Go to Article"
+msgstr ""
+
+#: resources/views/partials/content-single.blade.php:81
+msgid "back"
 msgstr ""
 
 #: resources/views/partials/entry-meta.blade.php:3
