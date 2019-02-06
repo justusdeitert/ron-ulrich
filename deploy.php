@@ -40,7 +40,7 @@ set( 'theme_path', 'web/app/themes/ron-ulrich' );
 set('application', 'ron-ulrich');
 
 // Project repository
-set('repository', 'git@gitlab.justusdeitert.de:JD/ron-ulrich.git');
+set('repository', 'git@lab.justusdeitert.de:JD/ron-ulrich.git');
 
 // [Optional] Allocate tty for git clone. Default value is false.
 set('git_tty', true);
