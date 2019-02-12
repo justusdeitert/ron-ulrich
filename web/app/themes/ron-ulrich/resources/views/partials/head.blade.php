@@ -26,8 +26,8 @@
 
         @if(get_field('blog_share_image', 'option'))
             <meta property="og:image" content="{{ get_field('blog_share_image', 'option')['url'] }}" />
-            <meta property="og:image:width" content="{{ get_field('blog_share_image', 'option')['width'] }}" />
-            <meta property="og:image:height" content="{{ get_field('blog_share_image', 'option')['height'] }}" />
+            {{--<meta property="og:image:width" content="{{ get_field('blog_share_image', 'option')['width'] }}" />--}}
+            {{--<meta property="og:image:height" content="{{ get_field('blog_share_image', 'option')['height'] }}" />--}}
             <meta name="twitter:image" content="{{ get_field('blog_share_image', 'option')['url'] }}" />
         @endif
     @else
@@ -47,8 +47,8 @@
             @endphp
             <meta property="og:image" content="{{ get_home_url() }}{{ $feature_image_url }}" />
             <meta name="twitter:image" content="{{ get_home_url() }}{{ $feature_image_url }}" />
-            <meta property="og:image:width" content="{{ $feature_image_width }}" />
-            <meta property="og:image:height" content="{{ $feature_image_height }}" />
+            {{--<meta property="og:image:width" content="{{ $feature_image_width }}" />--}}
+            {{--<meta property="og:image:height" content="{{ $feature_image_height }}" />--}}
         @endif
     @endif
 
