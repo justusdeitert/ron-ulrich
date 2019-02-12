@@ -8,6 +8,8 @@
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+    <meta name="google-site-verification" content="EBS4XKei4WioxC3QXiRKkBuV8cAOzt0TgetW2twkO4w" />
+
     @if(!is_single())
         {{--@php var_dump(get_post()) @endphp--}}
         <meta property="og:type" content="website" />
