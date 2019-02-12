@@ -75,16 +75,19 @@ task('deploy', [
     'deploy:release',
     'deploy:update_code',
     'deploy:shared',
-    'composer:install',
-    'npm:install',
+    // 'composer:install',
+    // 'npm:install',
     'deploy:writable',
     'deploy:vendors',
-    'deploy:clear_paths',
+    // 'deploy:clear_paths',
     'deploy:symlink',
     'deploy:unlock',
     'cleanup',
     'success'
 ]);
+
+after('deploy:update_code', 'composer:install');
+after('deploy:update_code', 'npm:install');
 
 desc('Push Project DB & Uploads Folder');
 task('push', [
