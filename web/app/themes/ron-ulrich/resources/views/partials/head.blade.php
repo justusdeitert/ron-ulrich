@@ -10,6 +10,10 @@
 
     <meta name="google-site-verification" content="EBS4XKei4WioxC3QXiRKkBuV8cAOzt0TgetW2twkO4w" />
 
+    <meta property="og:locale" content="de_DE"/>
+    <meta name="application-name" content="ron-ulrich" />
+    <meta name="twitter:card" content="summary_large_image" />
+
     @if(get_field('blog_description', 'option'))
         <meta name="description" content="{{ get_field('blog_description', 'option') }}" />
     @endif
