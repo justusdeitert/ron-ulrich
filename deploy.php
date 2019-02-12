@@ -6,7 +6,6 @@ require 'recipe/common.php';
 // Require all files in deployer folder
 // ------------------------------------------->
 
-
 $iterator = new \DirectoryIterator(dirname(__FILE__) . '/deployer');
 foreach ($iterator as $fileinfo) {
     if (!$fileinfo->isDot()) {
