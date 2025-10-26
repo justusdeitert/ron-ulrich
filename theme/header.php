@@ -5,8 +5,9 @@
  * @package ron-ulrich
  */
 
-$blog_description = get_field('blog_description', 'option');
-$blog_share_image = get_field('blog_share_image', 'option');
+$scf_available   = function_exists('get_field');
+$blog_description = $scf_available ? get_field('blog_description', 'option') : null;
+$blog_share_image = $scf_available ? get_field('blog_share_image', 'option') : null;
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?> class="<?php echo is_user_logged_in() ? 'logged-in' : ''; ?>">
@@ -40,8 +41,11 @@ $blog_share_image = get_field('blog_share_image', 'option');
         <meta name="twitter:card" content="summary_large_image" />
 
         <?php if ($blog_share_image) : ?>
-            <meta property="og:image" content="<?php echo esc_url($blog_share_image['url']); ?>" />
-            <meta name="twitter:image" content="<?php echo esc_url($blog_share_image['url']); ?>" />
+            <?php $share_image_url = is_array($blog_share_image) ? ($blog_share_image['url'] ?? null) : $blog_share_image; ?>
+            <?php if ($share_image_url) : ?>
+                <meta property="og:image" content="<?php echo esc_url($share_image_url); ?>" />
+                <meta name="twitter:image" content="<?php echo esc_url($share_image_url); ?>" />
+            <?php endif; ?>
         <?php endif; ?>
     <?php else : ?>
         <meta property="og:type" content="website" />
@@ -69,8 +73,9 @@ $blog_share_image = get_field('blog_share_image', 'option');
     <div class="container">
         <a class="brand" href="<?php echo esc_url(home_url('/')); ?>">
             <?php $brand_image = get_field('brand_image', 'option'); ?>
-            <?php if ($brand_image) : ?>
-                <div class="brand-image d-none d-sm-block" style="background-image: url(<?php echo esc_url($brand_image['sizes']['medium_large']); ?>)"></div>
+            <?php $brand_image_url = is_array($brand_image) ? ($brand_image['sizes']['medium_large'] ?? $brand_image['url'] ?? null) : $brand_image; ?>
+            <?php if ($brand_image_url) : ?>
+                <div class="brand-image d-none d-sm-block" style="background-image: url(<?php echo esc_url($brand_image_url); ?>)"></div>
             <?php endif; ?>
             <div class="brand-right">
                 <h1><?php bloginfo('name'); ?></h1>

@@ -19,9 +19,12 @@ $published_in = get_field('published_in');
                 the_row();
                 ?>
                 <?php if (get_sub_field('show')) : ?>
+                    <?php $share_icon = get_sub_field('icon'); ?>
+                    <?php $share_icon_url = is_array($share_icon) ? ($share_icon['url'] ?? null) : $share_icon; ?>
+                    <?php $share_icon_name = is_array($share_icon) ? ($share_icon['name'] ?? '') : ''; ?>
                     <li>
                         <a class="share-clicker" href="<?php global $wp; echo esc_url(get_sub_field('url') . home_url($wp->request) . '/?job=' . get_post()->post_name); ?>" target="_blank" rel="noopener">
-                            <img src="<?php echo esc_url(get_sub_field('icon')['url']); ?>" alt="<?php echo esc_attr(get_sub_field('icon')['name']); ?>">
+                            <img src="<?php echo esc_url($share_icon_url); ?>" alt="<?php echo esc_attr($share_icon_name); ?>">
                         </a>
                     </li>
                 <?php endif; ?>
