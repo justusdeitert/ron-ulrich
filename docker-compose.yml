@@ -1,0 +1,29 @@
+services:
+  db:
+    image: mariadb:10.5
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: ron-ulrich
+    volumes:
+      - db_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+  web:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "8090:80"
+    depends_on:
+      - db
+    volumes:
+      # Live-mount for local development
+      - ./.env:/var/www/html/.env
+      - ./config:/var/www/html/config
+      - ./web/app/mu-plugins:/var/www/html/web/app/mu-plugins
+      - ./web/app/themes:/var/www/html/web/app/themes
+      - ./web/app/uploads:/var/www/html/web/app/uploads
+
+volumes:
+  db_data:
