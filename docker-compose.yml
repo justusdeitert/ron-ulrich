@@ -1,29 +1,79 @@
 services:
-  db:
-    image: mariadb:10.5
-    restart: unless-stopped
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: ron-ulrich
-    volumes:
-      - db_data:/var/lib/mysql
-    ports:
-      - "3306:3306"
+    nginx:
+        image: nginx:1.27-alpine
+        restart: unless-stopped
+        ports:
+            - "8090:80"
+        volumes:
+            - ./devops/nginx/conf.d:/etc/nginx/conf.d:ro
+            - ./wordpress:/var/www/html
+            - ./theme:/var/www/html/wp-content/themes/ron-ulrich-theme
+            - ./uploads:/var/www/html/wp-content/uploads
+        depends_on:
+            php:
+                condition: service_healthy
 
-  web:
-    build: .
-    restart: unless-stopped
-    ports:
-      - "8090:80"
-    depends_on:
-      - db
-    volumes:
-      # Live-mount for local development
-      - ./.env:/var/www/html/.env
-      - ./config:/var/www/html/config
-      - ./web/app/mu-plugins:/var/www/html/web/app/mu-plugins
-      - ./web/app/themes:/var/www/html/web/app/themes
-      - ./web/app/uploads:/var/www/html/web/app/uploads
+    php:
+        build:
+            context: .
+            dockerfile: devops/php/Dockerfile
+        restart: unless-stopped
+        volumes:
+            - ./wordpress:/var/www/html
+            - ./devops/php/php.ini:/usr/local/etc/php/php.ini:ro
+            - ./theme:/var/www/html/wp-content/themes/ron-ulrich-theme
+            - ./uploads:/var/www/html/wp-content/uploads
+        env_file:
+            - .env
+        depends_on:
+            mysql:
+                condition: service_healthy
+        healthcheck:
+            test: ["CMD-SHELL", "kill -0 1 && php-fpm -t"]
+            interval: 10s
+            timeout: 5s
+            retries: 3
+            start_period: 120s
+
+    mysql:
+        image: mariadb:10.11
+        restart: unless-stopped
+        env_file:
+            - .env
+        environment:
+            MARIADB_USER: ${MYSQL_USER}
+            MARIADB_DATABASE: ${MYSQL_DATABASE}
+            MARIADB_PASSWORD: ${MYSQL_PASSWORD}
+            MARIADB_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+        volumes:
+            - mysql-data:/var/lib/mysql
+        healthcheck:
+            test: ["CMD", "mariadb-admin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
+            interval: 10s
+            timeout: 5s
+            retries: 5
+            start_period: 15s
+
+    phpmyadmin:
+        image: phpmyadmin:5
+        ports:
+            - "8091:80"
+        env_file:
+            - .env
+        depends_on:
+            mysql:
+                condition: service_healthy
+
+    node:
+        build:
+            context: .
+            dockerfile: devops/node/Dockerfile
+        volumes:
+            - ./theme:/usr/src/theme
+        ports:
+            - "5174:5173"
+        depends_on:
+            - php
 
 volumes:
-  db_data:
+    mysql-data:

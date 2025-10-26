@@ -1,0 +1,64 @@
+<?php
+/**
+ * Post teaser used in the blog overview.
+ *
+ * @package ron-ulrich
+ */
+
+$published_in = get_field('published_in');
+?>
+<article <?php post_class('article-overview'); ?>>
+    <div class="row article-row">
+        <?php if (has_post_thumbnail()) : ?>
+            <?php $feature_image_url = wp_get_attachment_image_src(get_post_thumbnail_id(), 'large', true)[0]; ?>
+            <div class="col-12 col-sm-4">
+                <a href="<?php the_permalink(); ?>">
+                    <div class="feature-image" style="background-image: url(<?php echo esc_url($feature_image_url); ?>)"></div>
+                </a>
+            </div>
+        <?php endif; ?>
+
+        <div class="col <?php echo has_post_thumbnail() ? '' : 'full-column'; ?>">
+            <div class="post-info">
+                <?php if (get_the_tags()) : ?>
+                    <div class="row">
+                        <div class="col tag-column">
+                            <?php foreach (get_the_tags() as $tag) : ?>
+                                <a href="<?php echo esc_url(get_tag_link($tag->term_id)); ?>">
+                                    <span class="tag"><?php echo esc_html($tag->name); ?></span>
+                                </a>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                <?php endif; ?>
+
+                <span class="post-date"><?php echo esc_html(get_the_date('j. F Y')); ?></span>
+                <?php if (! empty($published_in['activate'])) : ?>
+                    <?php echo ' / '; ?>
+                    <?php esc_html_e('published in:', 'ron-ulrich'); ?>
+                    <a href="<?php echo esc_url($published_in['url']); ?>"><?php echo esc_html($published_in['name']); ?></a>
+                <?php endif; ?>
+            </div>
+
+            <a href="<?php the_permalink(); ?>">
+                <h2><?php the_title(); ?></h2>
+            </a>
+
+            <a href="<?php the_permalink(); ?>">
+                <?php if (get_field('description')) : ?>
+                    <p><?php echo wp_kses_post(get_field('description')); ?></p>
+                <?php else : ?>
+                    <?php the_excerpt(); ?>
+                <?php endif; ?>
+            </a>
+
+            <a href="<?php the_permalink(); ?>">
+                <div class="continue-reading">
+                    <i class="material-icons">arrow_right</i>
+                    <span>weiterlesen</span>
+                </div>
+            </a>
+        </div>
+    </div>
+    <hr>
+</article>

@@ -1,0 +1,27 @@
+{
+    "name": "ron-ulrich-theme",
+    "version": "1.0.0",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "lint": "biome check",
+        "lint:fix": "biome check --fix",
+        "format": "biome format --write"
+    },
+    "license": "MIT",
+    "devDependencies": {
+        "@biomejs/biome": "^2.2.0",
+        "@types/jquery": "^3.5.32",
+        "@types/node": "^22.0.0",
+        "sass": "^1.93.0",
+        "typescript": "^5.8.3",
+        "vite": "^6.3.3"
+    },
+    "dependencies": {
+        "bootstrap": "^4.6.2",
+        "jquery": "^3.7.1",
+        "popper.js": "^1.16.1"
+    }
+}

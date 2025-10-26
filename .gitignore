@@ -6,34 +6,35 @@
 .DS_Store
 .DS_Store?
 Thumbs.db
-backups/
 
 # IDE
 .idea
 .phpintel
+.vscode
 
-# Application
-web/app/plugins/*
-!web/app/plugins/.gitkeep
-web/app/mu-plugins/*/
-web/app/upgrade
-web/app/uploads/*
-!web/app/uploads/.gitkeep
+# WordPress core (installed via make setup_wordpress / entrypoint)
+wordpress/
 
-# Keep Plugins
-!web/app/mu-plugins/advanced-custom-fields-pro
+# WordPress uploads (synced separately, see make sync_to_*)
+uploads/*
+!uploads/.gitkeep
 
-# WordPress
-web/wp
-web/.htaccess
+# Theme build output (built in CI / Docker)
+theme/assets/
+theme/node_modules/
+
+# Database dumps
+*.sql
+db-export.sql
+db-import.sql
 
 # Dotenv
 .env
 .env.*
-!.env.example
+!.env.dist
 
-# Composer
-/vendor
+# Node
+node_modules/
 
-# WP-CLI
-wp-cli.local.yml
+# PHP
+.php-cs-fixer.cache

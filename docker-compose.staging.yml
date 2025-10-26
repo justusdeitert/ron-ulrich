@@ -1,0 +1,84 @@
+services:
+    nginx:
+        build:
+            context: .
+            dockerfile: devops/Dockerfile.prod
+            target: nginx
+        restart: unless-stopped
+        expose:
+            - "80"
+        volumes:
+            - uploads:/var/www/html/wp-content/uploads
+        depends_on:
+            php:
+                condition: service_healthy
+
+    php:
+        build:
+            context: .
+            dockerfile: devops/Dockerfile.prod
+            target: php
+        restart: unless-stopped
+        environment:
+            MYSQL_HOST: mysql
+            MYSQL_DATABASE: ${MYSQL_DATABASE}
+            MYSQL_USER: ${MYSQL_USER}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+            WORDPRESS_URL: ${WORDPRESS_URL:-https://ron-ulrich.justusdeitert.de}
+            WORDPRESS_TITLE: ${WORDPRESS_TITLE:-Ron Ulrich}
+            WORDPRESS_ADMIN_USER: ${WORDPRESS_ADMIN_USER}
+            WORDPRESS_ADMIN_PASSWORD: ${WORDPRESS_ADMIN_PASSWORD}
+            WORDPRESS_ADMIN_EMAIL: ${WORDPRESS_ADMIN_EMAIL}
+            WORDPRESS_THEME: ${WORDPRESS_THEME:-ron-ulrich-theme}
+            WP_DEBUG: ${WP_DEBUG:-0}
+            WP_DISALLOW_FILE_MODS: ${WP_DISALLOW_FILE_MODS:-1}
+            AUTH_KEY: ${AUTH_KEY}
+            SECURE_AUTH_KEY: ${SECURE_AUTH_KEY}
+            LOGGED_IN_KEY: ${LOGGED_IN_KEY}
+            NONCE_KEY: ${NONCE_KEY}
+            AUTH_SALT: ${AUTH_SALT}
+            SECURE_AUTH_SALT: ${SECURE_AUTH_SALT}
+            LOGGED_IN_SALT: ${LOGGED_IN_SALT}
+            NONCE_SALT: ${NONCE_SALT}
+        volumes:
+            - uploads:/var/www/html/wp-content/uploads
+        depends_on:
+            mysql:
+                condition: service_healthy
+        healthcheck:
+            test: ["CMD-SHELL", "php-fpm -t"]
+            interval: 15s
+            timeout: 5s
+            retries: 5
+            start_period: 120s
+
+    mysql:
+        image: mariadb:10.11
+        restart: unless-stopped
+        environment:
+            MARIADB_DATABASE: ${MYSQL_DATABASE}
+            MARIADB_USER: ${MYSQL_USER}
+            MARIADB_PASSWORD: ${MYSQL_PASSWORD}
+            MARIADB_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+        volumes:
+            - mysql-data:/var/lib/mysql
+        healthcheck:
+            test:
+                [
+                    "CMD",
+                    "mariadb-admin",
+                    "ping",
+                    "-h",
+                    "localhost",
+                    "-u",
+                    "root",
+                    "-p${MYSQL_ROOT_PASSWORD}",
+                ]
+            interval: 10s
+            timeout: 5s
+            retries: 5
+            start_period: 30s
+
+volumes:
+    uploads:
+    mysql-data:

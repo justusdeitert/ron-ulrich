@@ -1,97 +1,69 @@
-# [Bedrock](https://roots.io/bedrock/)
-[![Packagist](https://img.shields.io/packagist/v/roots/bedrock.svg?style=flat-square)](https://packagist.org/packages/roots/bedrock)
-[![Build Status](https://img.shields.io/travis/roots/bedrock.svg?style=flat-square)](https://travis-ci.org/roots/bedrock)
+# Ron Ulrich
 
-Bedrock is a modern WordPress stack that helps you get started with the best development tools and project structure.
+Website for [ron-ulrich.de](https://www.ron-ulrich.de) — plain WordPress theme with a Docker dev environment.
 
-Much of the philosophy behind Bedrock is inspired by the [Twelve-Factor App](http://12factor.net/) methodology including the [WordPress specific version](https://roots.io/twelve-factor-wordpress/).
+## Tech Stack
 
-## Features
-
-* Better folder structure
-* Dependency management with [Composer](http://getcomposer.org)
-* Easy WordPress configuration with environment specific files
-* Environment variables with [Dotenv](https://github.com/vlucas/phpdotenv)
-* Autoloader for mu-plugins (use regular plugins as mu-plugins)
-* Enhanced security (separated web root and secure passwords with [wp-password-bcrypt](https://github.com/roots/wp-password-bcrypt))
-
-Use [Trellis](https://github.com/roots/trellis) for additional features:
-
-* Easy development environments with [Vagrant](http://www.vagrantup.com/)
-* Easy server provisioning with [Ansible](http://www.ansible.com/) (Ubuntu 16.04, PHP 7.1, MariaDB)
-* One-command deploys
-
-See a complete working example in the [roots-example-project.com repo](https://github.com/roots/roots-example-project.com).
+- **Backend:** WordPress, PHP 8.4, [ACF](https://wordpress.org/plugins/advanced-custom-fields/) (Advanced Custom Fields)
+- **Frontend:** TypeScript, SCSS, [Vite](https://vitejs.dev) with HMR
+- **Infrastructure:** Docker Compose (nginx, PHP-FPM, MariaDB, phpMyAdmin, Node)
+- **Tooling:** [Biome](https://biomejs.dev) for JS/TS
 
 ## Requirements
 
-* PHP >= 7.1
-* Composer - [Install](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx)
+- Docker (with Docker Compose)
+- GNU Make
 
-## Installation
+## Quick Start
 
-1. Create a new project in a new folder for your project:
+```bash
+cp .env.dist .env        # adjust values as needed
+make install             # build containers and start the stack
+make setup_wordpress     # install WordPress core, activate theme
+make dev                 # start Vite dev server with HMR
+```
 
-  `composer create-project roots/bedrock your-project-folder-name`
+Services:
 
-2. Update environment variables in `.env`  file:
-  * `DB_NAME` - Database name
-  * `DB_USER` - Database user
-  * `DB_PASSWORD` - Database password
-  * `DB_HOST` - Database host
-  * `WP_ENV` - Set to environment (`development`, `staging`, `production`)
-  * `WP_HOME` - Full URL to WordPress home (http://example.com)
-  * `WP_SITEURL` - Full URL to WordPress including subdirectory (http://example.com/wp)
-  * `AUTH_KEY`, `SECURE_AUTH_KEY`, `LOGGED_IN_KEY`, `NONCE_KEY`, `AUTH_SALT`, `SECURE_AUTH_SALT`, `LOGGED_IN_SALT`, `NONCE_SALT`
+- WordPress: http://localhost:8090
+- Vite HMR: http://localhost:5174
+- phpMyAdmin: http://localhost:8091
 
-  If you want to automatically generate the security keys (assuming you have wp-cli installed locally) you can use the very handy [wp-cli-dotenv-command][wp-cli-dotenv]:
+## Make Targets
 
-      wp package install aaemnnosttv/wp-cli-dotenv-command
+Run `make help` for the full list. Most used:
 
-      wp dotenv salts regenerate
+- `make install`: stop, build, and start all containers.
+- `make dev`: run Vite dev server inside the node container.
+- `make build`: production build of theme assets.
+- `make setup_wordpress`: install WordPress core and activate the theme.
+- `make import_db` / `make export_db`: DB import/export against the production domain.
+- `make sync_to_staging` / `make sync_to_production`: push local DB + uploads to a Coolify deployment.
+- `make enter_php` / `make enter_node`: shell into the given container.
 
-  Or, you can cut and paste from the [Roots WordPress Salt Generator][roots-wp-salt].
+## Project Structure
 
-3. Add theme(s) in `web/app/themes` as you would for a normal WordPress site.
+```
+theme/                 WordPress theme (ron-ulrich-theme)
+  functions.php        Theme bootstrap, enqueues, shared helpers
+  inc/                 Theme setup, ACF options page, template helpers
+  template-parts/      Reusable template partials
+  src/                 Frontend source (TypeScript, SCSS, images)
+  assets/              Vite build output (git-ignored)
+  vite.config.ts       Vite config
+devops/                Docker config (nginx, PHP, node Dockerfiles, scripts)
+  Dockerfile.prod      Self-contained production image for Coolify
+uploads/               WordPress uploads (mounted into the container)
+wordpress/             WordPress core (git-ignored, installed via make)
+```
 
-4. Set your site vhost document root to `/path/to/site/web/` (`/path/to/site/current/web/` if using deploys)
+## Deployment
 
-5. Access WP admin at `http://example.com/wp/wp-admin`
+Deployment is handled by [Coolify](https://coolify.io): it pulls this repo and
+builds `devops/Dockerfile.prod` (see `docker-compose.staging.yml`). No CI
+pipeline is needed — the image contains WordPress core, all plugins (pinned in
+`devops/plugins.txt`), the theme, and the compiled assets.
 
-## Deploys
+## License
 
-There are two methods to deploy Bedrock sites out of the box:
-
-* [Trellis](https://github.com/roots/trellis)
-* [bedrock-capistrano](https://github.com/roots/bedrock-capistrano)
-
-Any other deployment method can be used as well with one requirement:
-
-`composer install` must be run as part of the deploy process.
-
-## Documentation
-
-Bedrock documentation is available at [https://roots.io/bedrock/docs/](https://roots.io/bedrock/docs/).
-
-## Contributing
-
-Contributions are welcome from everyone. We have [contributing guidelines](https://github.com/roots/guidelines/blob/master/CONTRIBUTING.md) to help you get started.
-
-## Bedrock sponsors
-
-Help support our open-source development efforts by [becoming a patron](https://www.patreon.com/rootsdev).
-
-<a href="https://kinsta.com/?kaid=OFDHAJIXUDIV"><img src="https://cdn.roots.io/app/uploads/kinsta.svg" alt="Kinsta" width="200" height="150"></a> <a href="https://k-m.com/"><img src="https://cdn.roots.io/app/uploads/km-digital.svg" alt="KM Digital" width="200" height="150"></a>
-
-## Community
-
-Keep track of development and community news.
-
-* Participate on the [Roots Discourse](https://discourse.roots.io/)
-* Follow [@rootswp on Twitter](https://twitter.com/rootswp)
-* Read and subscribe to the [Roots Blog](https://roots.io/blog/)
-* Subscribe to the [Roots Newsletter](https://roots.io/subscribe/)
-* Listen to the [Roots Radio podcast](https://roots.io/podcast/)
-
-[roots-wp-salt]:https://roots.io/salts.html
-[wp-cli-dotenv]:https://github.com/aaemnnosttv/wp-cli-dotenv-command
+MIT, see [LICENSE.md](LICENSE.md).

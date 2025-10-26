@@ -1,0 +1,8 @@
+# Dependencies (installed inside the Docker node container)
+node_modules/
+
+# Vite build output (built in CI / Docker)
+assets/
+
+# PHP CS Fixer
+.php-cs-fixer.cache
