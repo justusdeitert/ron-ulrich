@@ -8,6 +8,25 @@
 $scf_available   = function_exists('get_field');
 $blog_description = $scf_available ? get_field('blog_description', 'option') : null;
 $blog_share_image = $scf_available ? get_field('blog_share_image', 'option') : null;
+
+/**
+ * Normalize an image-ish ACF value that may come back as an array (new),
+ * a plain URL string (old export), or a numeric attachment ID (old DB).
+ */
+function theme_image_url($value, string $size = 'large'): ?string
+{
+    if (! $value) {
+        return null;
+    }
+    if (is_array($value)) {
+        return $value['sizes'][$size] ?? $value['url'] ?? null;
+    }
+    if (is_numeric($value)) {
+        $src = wp_get_attachment_image_src((int) $value, $size);
+        return $src ? $src[0] : null;
+    }
+    return (string) $value;
+}
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?> class="<?php echo is_user_logged_in() ? 'logged-in' : ''; ?>">
@@ -41,7 +60,7 @@ $blog_share_image = $scf_available ? get_field('blog_share_image', 'option') : n
         <meta name="twitter:card" content="summary_large_image" />
 
         <?php if ($blog_share_image) : ?>
-            <?php $share_image_url = is_array($blog_share_image) ? ($blog_share_image['url'] ?? null) : $blog_share_image; ?>
+            <?php $share_image_url = theme_image_url($blog_share_image); ?>
             <?php if ($share_image_url) : ?>
                 <meta property="og:image" content="<?php echo esc_url($share_image_url); ?>" />
                 <meta name="twitter:image" content="<?php echo esc_url($share_image_url); ?>" />
@@ -73,7 +92,7 @@ $blog_share_image = $scf_available ? get_field('blog_share_image', 'option') : n
     <div class="container">
         <a class="brand" href="<?php echo esc_url(home_url('/')); ?>">
             <?php $brand_image = get_field('brand_image', 'option'); ?>
-            <?php $brand_image_url = is_array($brand_image) ? ($brand_image['sizes']['medium_large'] ?? $brand_image['url'] ?? null) : $brand_image; ?>
+            <?php $brand_image_url = theme_image_url($brand_image, 'medium_large'); ?>
             <?php if ($brand_image_url) : ?>
                 <div class="brand-image d-none d-sm-block" style="background-image: url(<?php echo esc_url($brand_image_url); ?>)"></div>
             <?php endif; ?>
