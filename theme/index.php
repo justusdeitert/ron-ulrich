@@ -9,13 +9,15 @@ get_header();
 ?>
 
 <?php if (is_home()) : ?>
-    <div class="page-header">
-        <h2><?php echo esc_html(theme_page_title()); ?></h2>
-        <hr>
-    </div>
-
-    <div class="archive-filters">
-        <div class="row">
+    <hr>
+    <div class="more-info">
+        <div class="info-left">
+            <i class="more material-icons">arrow_drop_down</i>
+            <i class="less material-icons">arrow_drop_up</i>
+            <span class="more"><?php esc_html_e('More Info', 'ron-ulrich'); ?></span>
+            <span class="less"><?php esc_html_e('Less Info', 'ron-ulrich'); ?></span>
+        </div>
+        <div class="info-right">
             <div class="input-group">
                 <select name="archive-dropdown" class="custom-select" onchange="document.location.href=this.options[this.selectedIndex].value;">
                     <option value="/"><?php esc_html_e('Select Month', 'ron-ulrich'); ?></option>
