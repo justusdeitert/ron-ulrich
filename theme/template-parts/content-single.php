@@ -76,6 +76,6 @@ $published_in = get_field('published_in');
 <div class="bottom-links">
     <a class="go-to-article-bottom-link" href="javascript:history.go(-1)">
         <i class="material-icons">arrow_left</i>
-        <span><?php esc_html_e('back', 'ron-ulrich'); ?></span>
+        <span><?php esc_html_e('zurück', 'ron-ulrich'); ?></span>
     </a>
 </div>

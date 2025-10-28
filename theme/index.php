@@ -14,13 +14,13 @@ get_header();
         <div class="info-left">
             <i class="more material-icons">arrow_drop_down</i>
             <i class="less material-icons">arrow_drop_up</i>
-            <span class="more"><?php esc_html_e('More Info', 'ron-ulrich'); ?></span>
-            <span class="less"><?php esc_html_e('Less Info', 'ron-ulrich'); ?></span>
+            <span class="more"><?php esc_html_e('Mehr Info', 'ron-ulrich'); ?></span>
+            <span class="less"><?php esc_html_e('Weniger Info', 'ron-ulrich'); ?></span>
         </div>
         <div class="info-right">
             <div class="input-group">
                 <select name="archive-dropdown" class="custom-select" onchange="document.location.href=this.options[this.selectedIndex].value;">
-                    <option value="/"><?php esc_html_e('Select Month', 'ron-ulrich'); ?></option>
+                    <option value="/"><?php esc_html_e('Monat auswählen', 'ron-ulrich'); ?></option>
                     <?php
                     wp_get_archives([
                         'type'            => 'monthly',
@@ -32,7 +32,7 @@ get_header();
             </div>
             <div class="input-group">
                 <select name="archive-dropdown" class="custom-select" onchange="document.location.href=this.options[this.selectedIndex].value;">
-                    <option value="/"><?php esc_html_e('Select Category', 'ron-ulrich'); ?></option>
+                    <option value="/"><?php esc_html_e('Kategorie auswählen', 'ron-ulrich'); ?></option>
                     <?php foreach (get_tags() as $tag) : ?>
                         <option value="<?php echo esc_url(get_tag_link($tag->term_id)); ?>"><?php echo esc_html($tag->name); ?></option>
                     <?php endforeach; ?>
