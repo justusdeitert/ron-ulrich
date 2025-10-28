@@ -37,6 +37,14 @@ chown -R www-data:www-data wp-content/uploads
 
     # Make sure the configured theme is active even on subsequent boots (after DB import etc.).
     wp theme activate "${WORDPRESS_THEME:-ron-ulrich-theme}" --allow-root >/dev/null 2>&1 || true
+
+    # The theme uses header_navigation / footer_navigation; map the existing
+    # "Header Menu" / "Footer Menu" onto them (idempotent, safe to re-run).
+    HEADER_MENU=$(wp menu list --format=csv --allow-root 2>/dev/null | awk -F'\t' 'NR>1 && $2=="Header Menu" {print $1}')
+    FOOTER_MENU=$(wp menu list --format=csv --allow-root 2>/dev/null | awk -F'\t' 'NR>1 && $2=="Footer Menu" {print $1}')
+    if [ -n "$HEADER_MENU" ] && [ -n "$FOOTER_MENU" ]; then
+        wp eval "set_theme_mod('nav_menu_locations', ['header_navigation' => (int) $HEADER_MENU, 'footer_navigation' => (int) $FOOTER_MENU]);" --allow-root >/dev/null 2>&1 || true
+    fi
 ) || echo "WARNING: WordPress setup failed (see above). php-fpm will start anyway."
 
 exec "$@"
