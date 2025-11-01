@@ -45,6 +45,11 @@ chown -R www-data:www-data wp-content/uploads
     if [ -n "$HEADER_MENU" ] && [ -n "$FOOTER_MENU" ]; then
         wp eval "set_theme_mod('nav_menu_locations', ['header_navigation' => (int) $HEADER_MENU, 'footer_navigation' => (int) $FOOTER_MENU]);" --allow-root >/dev/null 2>&1 || true
     fi
+
+    # One-time content migration: old Bedrock stored media URLs as
+    # /app/uploads/..., standard WordPress serves them from /wp-content/uploads/.
+    # Idempotent (0 replacements once done).
+    wp search-replace '/app/uploads/' '/wp-content/uploads/' --allow-root >/dev/null 2>&1 || true
 ) || echo "WARNING: WordPress setup failed (see above). php-fpm will start anyway."
 
 exec "$@"
