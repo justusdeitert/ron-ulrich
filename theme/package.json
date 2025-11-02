@@ -10,7 +10,6 @@
         "lint:fix": "biome check --fix",
         "format": "biome format --write"
     },
-    "license": "MIT",
     "devDependencies": {
         "@biomejs/biome": "^2.2.0",
         "@types/jquery": "^3.5.32",

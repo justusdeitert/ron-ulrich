@@ -63,7 +63,3 @@ Deployment is handled by [Coolify](https://coolify.io): it pulls this repo and
 builds `devops/Dockerfile.prod` (see `docker-compose.staging.yml`). No CI
 pipeline is needed — the image contains WordPress core, all plugins (pinned in
 `devops/plugins.txt`), the theme, and the compiled assets.
-
-## License
-
-MIT, see [LICENSE.md](LICENSE.md).

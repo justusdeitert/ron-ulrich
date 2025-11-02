@@ -36,7 +36,6 @@ if (! is_admin()) {
 }
 
 add_action('admin_menu', function (): void {
-    remove_menu_page('jetpack');
     remove_menu_page('edit-comments.php');
     remove_menu_page('tools.php');
     remove_menu_page('users.php');

@@ -35,6 +35,3 @@ db-import.sql
 
 # Node
 node_modules/
-
-# PHP
-.php-cs-fixer.cache
