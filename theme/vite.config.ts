@@ -19,6 +19,7 @@ export default defineConfig(async ({ mode }) => {
 
     return {
         root: 'src',
+        publicDir: path.resolve(__dirname, 'public'),
         base: isProduction ? '/wp-content/themes/ron-ulrich-theme/assets/' : '/',
         build: {
             outDir: path.resolve(__dirname, 'assets'),
