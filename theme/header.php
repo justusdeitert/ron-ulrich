@@ -5,31 +5,7 @@
  * @package ron-ulrich
  */
 
-$scf_available = function_exists('get_field');
-$blog_description = $scf_available ? get_field('blog_description', 'option') : null;
-$blog_share_image = $scf_available ? get_field('blog_share_image', 'option') : null;
-
-/**
- * Normalize an image-ish ACF value that may come back as an array (new),
- * a plain URL string (old export), or a numeric attachment ID (old DB).
- */
-function theme_image_url($value, string $size = 'large'): ?string {
-    if (! $value) {
-        return null;
-    }
-
-    if (is_array($value)) {
-        return $value['sizes'][$size] ?? $value['url'] ?? null;
-    }
-
-    if (is_numeric($value)) {
-        $src = wp_get_attachment_image_src((int) $value, $size);
-
-        return $src ? $src[0] : null;
-    }
-
-    return (string) $value;
-}
+$blog_description = function_exists('get_field') ? get_field('blog_description', 'option') : null;
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?> class="<?php echo is_user_logged_in() ? 'logged-in' : ''; ?>">
@@ -53,37 +29,7 @@ function theme_image_url($value, string $size = 'large'): ?string {
         <meta name="description" content="<?php echo esc_attr($blog_description); ?>" />
     <?php endif; ?>
 
-    <?php if (! is_single()) : ?>
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="<?php bloginfo('name'); ?> - <?php bloginfo('description'); ?>" />
-        <meta property="og:description" content="<?php echo esc_attr($blog_description); ?>" />
-        <meta property="og:url" content="<?php echo esc_url(home_url()); ?>" />
-        <meta name="twitter:title" content="<?php bloginfo('name'); ?> - <?php bloginfo('description'); ?>" />
-        <meta name="twitter:description" content="<?php echo esc_attr($blog_description); ?>" />
-        <meta name="twitter:card" content="summary_large_image" />
-
-        <?php if ($blog_share_image) : ?>
-            <?php $share_image_url = theme_image_url($blog_share_image); ?>
-            <?php if ($share_image_url) : ?>
-                <meta property="og:image" content="<?php echo esc_url($share_image_url); ?>" />
-                <meta name="twitter:image" content="<?php echo esc_url($share_image_url); ?>" />
-            <?php endif; ?>
-        <?php endif; ?>
-    <?php else : ?>
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="<?php echo esc_attr(get_post()->post_title); ?>" />
-        <meta property="og:description" content="<?php echo esc_attr(get_field('description', get_post()->ID)); ?>" />
-        <meta property="og:url" content="<?php echo esc_url(get_permalink() . '?job=' . get_post()->post_name); ?>" />
-        <meta name="twitter:title" content="<?php echo esc_attr(get_post()->post_title); ?>" />
-        <meta name="twitter:description" content="<?php echo esc_attr(get_field('description', get_post()->ID)); ?>" />
-        <meta name="twitter:card" content="summary_large_image" />
-
-        <?php if (has_post_thumbnail()) : ?>
-            <?php $feature_image_url = wp_get_attachment_image_src(get_post_thumbnail_id(), 'large', true)[0]; ?>
-            <meta property="og:image" content="<?php echo esc_url(home_url() . $feature_image_url); ?>" />
-            <meta name="twitter:image" content="<?php echo esc_url(home_url() . $feature_image_url); ?>" />
-        <?php endif; ?>
-    <?php endif; ?>
+    <?php theme_social_meta(); ?>
 
     <?php wp_head(); ?>
 </head>

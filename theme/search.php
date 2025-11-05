@@ -6,9 +6,14 @@
  */
 
 get_header();
+?>
 
-get_template_part('template-parts/page-header');
+<div class="page-header">
+    <h2><?php echo wp_kses_post(theme_page_title()); ?></h2>
+    <hr>
+</div>
 
+<?php
 if (! have_posts()) :
     ?>
     <div class="alert alert-warning">
