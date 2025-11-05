@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Theme bootstrap: enqueues, shared helpers.
  */
@@ -19,8 +20,7 @@ require_once get_template_directory() . '/inc/template-functions.php';
  * http://localhost:5173 is used. In production the hashed files from
  * theme/assets/ are loaded via the Vite manifest.
  */
-function theme_enqueue_assets(): void
-{
+function theme_enqueue_assets(): void {
     $assets_dir = get_template_directory() . '/assets';
 
     if (! file_exists($assets_dir . '/.vite/manifest.json')) {
@@ -32,7 +32,7 @@ function theme_enqueue_assets(): void
     }
 
     $manifest = json_decode(file_get_contents($assets_dir . '/.vite/manifest.json'), true);
-    $entry    = $manifest['ts/main.ts'] ?? null;
+    $entry = $manifest['ts/main.ts'] ?? null;
 
     if (! $entry) {
         return;

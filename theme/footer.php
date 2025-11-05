@@ -22,8 +22,8 @@
                 <?php
                 wp_nav_menu([
                     'theme_location' => 'footer_navigation',
-                    'menu_class'     => 'footer-nav',
-                    'container'      => '',
+                    'menu_class' => 'footer-nav',
+                    'container' => '',
                 ]);
                 ?>
             <?php endif; ?>

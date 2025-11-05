@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shared template helpers used across template parts.
  */
@@ -10,8 +11,7 @@ if (! defined('ABSPATH')) {
 /**
  * Context-aware page title (ported from the Sage App controller).
  */
-function theme_page_title(): string
-{
+function theme_page_title(): string {
     if (is_home()) {
         if ($home = get_option('page_for_posts', true)) {
             return get_the_title($home);

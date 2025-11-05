@@ -23,11 +23,11 @@ get_header();
                     <option value="/"><?php esc_html_e('Monat auswählen', 'ron-ulrich'); ?></option>
                     <?php
                     wp_get_archives([
-                        'type'            => 'monthly',
-                        'format'          => 'option',
+                        'type' => 'monthly',
+                        'format' => 'option',
                         'show_post_count' => 1,
                     ]);
-                    ?>
+    ?>
                 </select>
             </div>
             <div class="input-group">
@@ -58,7 +58,7 @@ endwhile;
             'prev_text' => '<i class="material-icons">arrow_left</i>',
             'next_text' => '<i class="material-icons">arrow_right</i>',
         ]);
-        ?>
+    ?>
     </div>
 <?php endif; ?>
 

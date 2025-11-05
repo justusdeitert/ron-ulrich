@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Theme setup: theme supports, menus, editor styles.
  */

@@ -4,7 +4,7 @@ ENSURE_UP = @if [ -z "$$($(DOCKER_COMPOSE) ps --services --filter status=running
 STAGING_SSH_HOST ?= hetzner
 PRODUCTION_SSH_HOST ?=
 
-.PHONY: help install start stop build_container clean_install enter_php enter_phpmyadmin enter_node dev build setup_wordpress export_db export_db_staging import_db import_db_staging sync_to_staging sync_to_production
+.PHONY: help install start stop build_container clean_install enter_php enter_phpmyadmin enter_node dev build setup_wordpress export_db export_db_staging import_db import_db_staging sync_to_staging sync_to_production lint_php fix_php
 
 .DEFAULT_GOAL := help
 
@@ -58,6 +58,12 @@ export_db_staging: ## Export DB with staging domain search-replace
 
 import_db: ## Import DB from production dump
 	@$(DOCKER_COMPOSE) exec -e TARGET=production php /usr/local/bin/search-replace-import-db.sh
+
+lint_php: ## Run php-cs-fixer (dry run)
+	@$(DOCKER_COMPOSE) exec -w /var/www/html/wp-content/themes/ron-ulrich-theme php php-cs-fixer fix --dry-run --diff
+
+fix_php: ## Run php-cs-fixer (apply fixes)
+	@$(DOCKER_COMPOSE) exec -w /var/www/html/wp-content/themes/ron-ulrich-theme php php-cs-fixer fix
 
 import_db_staging: ## Import DB from staging dump
 	@$(DOCKER_COMPOSE) exec -e TARGET=staging php /usr/local/bin/search-replace-import-db.sh

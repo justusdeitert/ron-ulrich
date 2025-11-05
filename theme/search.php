@@ -33,7 +33,7 @@ if (paginate_links()) :
             'prev_text' => '<i class="material-icons">arrow_left</i>',
             'next_text' => '<i class="material-icons">arrow_right</i>',
         ]);
-        ?>
+    ?>
     </div>
     <?php
 endif;
