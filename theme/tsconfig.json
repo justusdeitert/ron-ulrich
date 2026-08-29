@@ -9,10 +9,10 @@
         "isolatedModules": true,
         "esModuleInterop": true,
         "skipLibCheck": true,
-        "types": ["jquery", "node"],
+        "types": ["node"],
         "paths": {
             "@/*": ["./src/*"]
         }
     },
-    "include": ["src", "vite.config.ts"]
+    "include": ["src", "vite.config.ts", "uno.config.ts"]
 }

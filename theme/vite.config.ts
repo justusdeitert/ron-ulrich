@@ -1,6 +1,8 @@
 import path from 'node:path';
+import UnoCSS from 'unocss/vite';
 import type { UserConfig } from 'vite';
 import { defineConfig } from 'vite';
+import unoConfig from './uno.config';
 
 export default defineConfig(async ({ mode }) => {
     const isProduction = mode === 'production';
@@ -63,6 +65,7 @@ export default defineConfig(async ({ mode }) => {
                 },
             },
         },
+        plugins: [UnoCSS(unoConfig)],
         server: {
             host: '0.0.0.0',
             port: 5173,
@@ -77,7 +80,6 @@ export default defineConfig(async ({ mode }) => {
         resolve: {
             alias: {
                 '@': path.resolve(__dirname, 'src'),
-                '~bootstrap': path.resolve(__dirname, 'node_modules/bootstrap'),
             },
         },
     } satisfies UserConfig;

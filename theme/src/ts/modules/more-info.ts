@@ -2,8 +2,6 @@
  * "More info" toggle + archive <select> sync, ported from the old
  * jQuery snippets in resources/assets/scripts/main.js.
  */
-import $ from 'jquery';
-
 function deleteCookie(name: string): void {
     document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
 }
@@ -34,35 +32,31 @@ function getCookie(name: string): string {
 
 function initMoreInfo(): void {
     if (getCookie('more-info')) {
-        $('body').addClass('more-info');
+        document.body.classList.add('more-info');
     }
 
-    $('.more-info .info-left').on('click', () => {
-        if ($('body').hasClass('more-info')) {
-            $('body').removeClass('more-info');
+    document.querySelector('.more-info .info-left')?.addEventListener('click', () => {
+        if (document.body.classList.contains('more-info')) {
+            document.body.classList.remove('more-info');
             deleteCookie('more-info');
         } else {
-            $('body').addClass('more-info');
+            document.body.classList.add('more-info');
             setCookie('more-info', 'true');
         }
     });
 }
 
 function initSelectFields(): void {
-    $('.more-info select').each(function () {
-        $(this)
-            .children()
-            .each(function () {
-                if (window.location.pathname === (this as HTMLOptionElement).value) {
-                    $(this)
-                        .parent()
-                        .val((this as HTMLOptionElement).value);
-                }
-            });
-    });
+    for (const select of document.querySelectorAll<HTMLSelectElement>('.more-info select')) {
+        for (const option of Array.from(select.options)) {
+            if (window.location.pathname === option.value) {
+                select.value = option.value;
+            }
+        }
+    }
 }
 
-jQuery(window).on('load', () => {
+window.addEventListener('load', () => {
     initMoreInfo();
     initSelectFields();
 });

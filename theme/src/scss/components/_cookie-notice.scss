@@ -1,8 +1,6 @@
 .cc-window {
     display: flex;
     align-items: center;
-    //@include make-container();
-    //@include make-container-max-widths();
 
     .cc-message {
         text-align: left;
@@ -50,47 +48,3 @@
     }
 }
 
-//#cookie-notice {
-//    z-index: 1100 !important;
-//    background-color: rgba(0, 0, 255, 0.8) !important;
-//}
-//
-//.cookie-notice-container {
-//    display: flex;
-//    flex-direction: row;
-//    align-items: center;
-//    padding: 20px 30px;
-//
-//    .btn {
-//        margin-bottom: 0;
-//    }
-//
-//    #cn-notice-text {
-//        font-size: 16px;
-//        line-height: 22px;
-//        //width: 70%;
-//        display: inline-block;
-//        color: #FFF;
-//        text-align: left;
-//        flex: 1;
-//        margin-right: 15%;
-//
-//        a {
-//            color: #FFF;
-//            text-decoration: underline;
-//        }
-//
-//        @media (max-width: 480px) {
-//            //width: 85%;
-//            margin-right: 10%;
-//        }
-//    }
-//
-//    #cn-accept-cookie {
-//        flex: 0;
-//    }
-//
-//    #cn-more-info {
-//        flex: 0;
-//    }
-//}

@@ -43,14 +43,14 @@ $blog_description = function_exists('get_field') ? get_field('blog_description',
             <?php $brand_image = get_field('brand_image', 'option'); ?>
             <?php $brand_image_url = theme_image_url($brand_image, 'medium_large'); ?>
             <?php if ($brand_image_url) : ?>
-                <div class="brand-image d-none d-sm-block" style="background-image: url(<?php echo esc_url($brand_image_url); ?>)"></div>
+                <div class="brand-image hidden sm:block" style="background-image: url(<?php echo esc_url($brand_image_url); ?>)"></div>
             <?php endif; ?>
             <div class="brand-right">
                 <h1><?php bloginfo('name'); ?></h1>
                 <h2><?php bloginfo('description'); ?></h2>
             </div>
         </a>
-        <nav class="nav-primary d-none d-sm-block">
+        <nav class="nav-primary hidden sm:block">
             <?php
             wp_nav_menu([
                 'theme_location' => 'header_navigation',
@@ -58,7 +58,7 @@ $blog_description = function_exists('get_field') ? get_field('blog_description',
             ]);
 ?>
         </nav>
-        <span id="toggle-sidebar" class="sidebar-toggle d-block d-sm-none">
+        <span id="toggle-sidebar" class="sidebar-toggle sm:hidden">
             <i class="material-icons">menu</i>
         </span>
         <div id="sidebar">

@@ -1,14 +1,12 @@
-import 'jquery';
-import 'bootstrap';
+import 'virtual:uno.css';
 
 import '../scss/main.scss';
 
 import './modules/sidebar';
 import './modules/more-info';
 
-declare const jQuery: JQueryStatic;
-
-jQuery(window).on('load', () => {
-    const brandImageHeight = jQuery('.brand-image').height();
-    jQuery('.brand-image').width(brandImageHeight);
+window.addEventListener('load', () => {
+    for (const brandImage of document.querySelectorAll<HTMLElement>('.brand-image')) {
+        brandImage.style.width = `${brandImage.offsetHeight}px`;
+    }
 });

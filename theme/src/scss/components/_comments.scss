@@ -1,5 +1,6 @@
 .comment-list {
-    @extend .list-unstyled;
+    padding-left: 0;
+    list-style: none;
 }
 
 .comment-list ol {
@@ -7,17 +8,21 @@
 }
 
 .comment-form p {
-    @extend .form-group;
+    margin-bottom: 1rem;
+    padding: 10px 0;
 }
 
 .comment-form input[type="text"],
 .comment-form input[type="email"],
 .comment-form input[type="url"],
 .comment-form textarea {
-    @extend .form-control;
+    @include form-control;
+}
+
+.comment-form textarea {
+    height: auto;
 }
 
 .comment-form input[type="submit"] {
-    @extend .btn;
-    //@extend .btn-secondary;
+    @include btn;
 }

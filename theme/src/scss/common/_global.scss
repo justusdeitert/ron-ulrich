@@ -18,17 +18,113 @@ html {
 
 body {
     font-family: Helvetica, Arial, sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
     display: flex;
     flex-direction: column;
 
     a {
         color: #000;
+        text-decoration: none;
 
         &:hover {
             color: #000;
             text-decoration: none;
         }
     }
+}
+
+// Bootstrap reboot parity
+// What the UnoCSS preflight resets differently than Bootstrap's reboot did
+// -------------------------------------->
+.container {
+    @include make-container();
+    @include make-container-max-widths();
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+h4 {
+    font-size: 1.5rem;
+}
+
+h5 {
+    font-size: 1.25rem;
+}
+
+h6 {
+    font-size: 1rem;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+ul,
+ol,
+dl {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+ul,
+ol {
+    padding-left: 2rem;
+}
+
+ul {
+    list-style: disc;
+}
+
+ol {
+    list-style: decimal;
+}
+
+ol ol,
+ul ul,
+ol ul,
+ul ol {
+    margin-bottom: 0;
+}
+
+blockquote {
+    margin: 0 0 1rem;
+}
+
+// Replaces Bootstrap's .alert / .alert-warning (404 and empty search pages)
+.alert {
+    position: relative;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+}
+
+.alert-warning {
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
 }
 
 hr {

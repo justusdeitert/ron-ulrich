@@ -1,31 +1,32 @@
 /**
  * Mobile off-canvas sidebar, replicating the simpler-sidebar plugin
  * (unpublished from npm). Behaviour:
- *  - sidebar sits fixed on the right, off-canvas by default
+ *  - sidebar sits fixed on the left, off-canvas by default
  *  - #toggle-sidebar opens/closes it
  *  - clicking anywhere outside closes it
  *  - a dimmed overlay covers the page while open
  */
-import $ from 'jquery';
+document.addEventListener('DOMContentLoaded', () => {
+    const body = document.body;
 
-jQuery(document).ready(() => {
-    const $body = $('body');
-    const $sidebar = $('#sidebar');
+    const overlay = document.createElement('div');
+    overlay.id = 'sidebar-overlay';
+    overlay.addEventListener('click', () => {
+        body.classList.remove('sidebar-open');
+    });
+    body.appendChild(overlay);
 
-    $('<div id="sidebar-overlay" />')
-        .appendTo('body')
-        .on('click', () => {
-            $body.removeClass('sidebar-open');
-        });
-
-    $('#toggle-sidebar').on('click', (event) => {
+    document.getElementById('toggle-sidebar')?.addEventListener('click', (event) => {
         event.stopPropagation();
-        $body.toggleClass('sidebar-open');
+        body.classList.toggle('sidebar-open');
     });
 
-    $(document).on('click', (event) => {
-        if ($body.hasClass('sidebar-open') && !$(event.target).closest('#sidebar, #toggle-sidebar').length) {
-            $body.removeClass('sidebar-open');
+    document.addEventListener('click', (event) => {
+        if (
+            body.classList.contains('sidebar-open') &&
+            !(event.target as Element).closest('#sidebar, #toggle-sidebar')
+        ) {
+            body.classList.remove('sidebar-open');
         }
     });
 });
