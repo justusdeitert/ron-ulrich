@@ -11,7 +11,7 @@ $published_in = get_field('published_in');
 
 <div class="share-container">
     <?php if (have_rows('share_icons', 'option')) : ?>
-        <span><?php esc_html_e('Share on:', 'ron-ulrich'); ?></span>
+        <span><?php esc_html_e('Teilen auf:', 'ron-ulrich'); ?></span>
 
         <ul>
             <?php
