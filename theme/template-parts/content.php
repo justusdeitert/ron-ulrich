@@ -7,22 +7,22 @@
 
 $published_in = get_field('published_in');
 ?>
-<article <?php post_class('article-overview'); ?>>
-    <div class="row article-row">
+<article <?php post_class('mt-[60px]'); ?>>
+    <div class="row pb-[60px]">
         <?php if (has_post_thumbnail()) : ?>
             <?php $feature_image_url = wp_get_attachment_image_src(get_post_thumbnail_id(), 'large', true)[0]; ?>
             <div class="col-12 col-sm-4">
                 <a href="<?php the_permalink(); ?>">
-                    <div class="feature-image" style="background-image: url(<?php echo esc_url($feature_image_url); ?>)"></div>
+                    <div class="h-full bg-cover bg-center bg-no-repeat max-sm:mb-[30px] max-sm:h-[250px]" style="background-image: url(<?php echo esc_url($feature_image_url); ?>)"></div>
                 </a>
             </div>
         <?php endif; ?>
 
-        <div class="col <?php echo has_post_thumbnail() ? '' : 'full-column'; ?>">
-            <div class="post-info">
+        <div class="col">
+            <div class="hidden [body.more-info_&]:block">
                 <?php if (get_the_tags()) : ?>
                     <div class="row">
-                        <div class="col tag-column">
+                        <div class="col mb-5">
                             <?php foreach (get_the_tags() as $tag) : ?>
                                 <a href="<?php echo esc_url(get_tag_link($tag->term_id)); ?>">
                                     <span class="tag"><?php echo esc_html($tag->name); ?></span>
@@ -32,7 +32,7 @@ $published_in = get_field('published_in');
                     </div>
                 <?php endif; ?>
 
-                <span class="post-date"><?php echo esc_html(get_the_date('j. F Y')); ?></span>
+                <span><?php echo esc_html(get_the_date('j. F Y')); ?></span>
                 <?php if (! empty($published_in['activate'])) : ?>
                     <?php echo ' / '; ?>
                     <?php esc_html_e('published in:', 'ron-ulrich'); ?>
@@ -41,7 +41,7 @@ $published_in = get_field('published_in');
             </div>
 
             <a href="<?php the_permalink(); ?>">
-                <h2><?php the_title(); ?></h2>
+                <h2 class="mb-5<?php echo has_post_thumbnail() ? '' : ' md:w-[70%]'; ?>"><?php the_title(); ?></h2>
             </a>
 
             <a href="<?php the_permalink(); ?>">
@@ -53,12 +53,12 @@ $published_in = get_field('published_in');
             </a>
 
             <a href="<?php the_permalink(); ?>">
-                <div class="continue-reading">
-                    <i class="material-icons">arrow_right</i>
+                <div class="flex items-center">
+                    <i class="material-icons text-[28px]">arrow_right</i>
                     <span>weiterlesen</span>
                 </div>
             </a>
         </div>
     </div>
-    <hr>
+    <hr class="[article:last-of-type_&]:hidden">
 </article>

@@ -19,7 +19,7 @@ while (have_posts()) :
 
     if ($page_header) :
         ?>
-        <div class="page-header">
+        <div class="mb-[60px]">
             <h2><?php echo wp_kses_post(theme_page_title()); ?></h2>
             <hr>
         </div>

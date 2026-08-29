@@ -5,7 +5,7 @@ Website for [ron-ulrich.de](https://www.ron-ulrich.de) — plain WordPress theme
 ## Tech Stack
 
 - **Backend:** WordPress, PHP 8.4, [ACF](https://wordpress.org/plugins/advanced-custom-fields/) (Advanced Custom Fields)
-- **Frontend:** TypeScript, SCSS, [Vite](https://vitejs.dev) with HMR
+- **Frontend:** TypeScript, [UnoCSS](https://unocss.dev), [Vite](https://vitejs.dev) with HMR
 - **Infrastructure:** Docker Compose (nginx, PHP-FPM, MariaDB, phpMyAdmin, Node)
 - **Tooling:** [Biome](https://biomejs.dev) for JS/TS
 
@@ -48,7 +48,7 @@ theme/                 WordPress theme (ron-ulrich-theme)
   functions.php        Theme bootstrap, enqueues, shared helpers
   inc/                 Theme setup, ACF options page, template helpers
   template-parts/      Reusable template partials
-  src/                 Frontend source (TypeScript, SCSS, images)
+  src/                 Frontend source (TypeScript, plain CSS, images)
   assets/              Vite build output (git-ignored)
   vite.config.ts       Vite config
 devops/                Docker config (nginx, PHP, node Dockerfiles, scripts)

@@ -59,12 +59,6 @@ export default defineConfig(async ({ mode }) => {
         },
         css: {
             devSourcemap: true,
-            preprocessorOptions: {
-                scss: {
-                    silenceDeprecations: ['import', 'legacy-js-api'],
-                    quietDeps: true,
-                },
-            },
         },
         plugins: [UnoCSS(unoConfig)],
         server: {

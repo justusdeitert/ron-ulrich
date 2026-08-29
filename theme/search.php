@@ -8,7 +8,7 @@
 get_header();
 ?>
 
-<div class="page-header">
+<div class="mb-[60px]">
     <h2><?php echo wp_kses_post(theme_page_title()); ?></h2>
     <hr>
 </div>
@@ -16,12 +16,10 @@ get_header();
 <?php
 if (! have_posts()) :
     ?>
-    <div class="alert alert-warning">
+    <div class="alert-warning">
         <?php esc_html_e('Sorry, no results were found.', 'ron-ulrich'); ?>
     </div>
-    <div class="search-form-wrapper">
-        <?php get_search_form(); ?>
-    </div>
+    <?php get_search_form(); ?>
     <?php
 endif;
 
@@ -32,7 +30,7 @@ endwhile;
 
 if (paginate_links()) :
     ?>
-    <div class="pagination">
+    <div class="pagination my-[30px] flex">
         <?php
         echo paginate_links([
             'prev_text' => '<i class="material-icons">arrow_left</i>',

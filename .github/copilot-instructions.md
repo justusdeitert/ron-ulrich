@@ -18,8 +18,8 @@
 ## Tech Stack
 
 - **Backend:** PHP, WordPress, ACF
-- **Frontend:** TypeScript, SCSS, Vite
-- **Libraries:** Bootstrap 4, jQuery, Popper.js
+- **Frontend:** TypeScript, UnoCSS, Vite
+- **Libraries:** none (vanilla JS, utility-first CSS)
 - **Infrastructure:** Docker Compose (nginx, PHP-FPM, MariaDB, phpMyAdmin, Node)
 - **Package manager:** yarn (inside the Docker node container)
 - **Tooling:** Biome (JS/TS lint + format)
@@ -31,7 +31,7 @@
   - `inc/` - PHP modules (Vite loader, theme setup, ACF options page, template helpers)
   - `acf-json/` - ACF field group JSON sync
   - `template-parts/` - Template partials (content-*, page-header)
-  - `src/` - Frontend source (`ts/main.ts` + `ts/modules/`, `scss/`, images)
+  - `src/` - Frontend source (`ts/main.ts` + `ts/modules/`, `css/main.css`, images)
   - `public/` - Static files copied verbatim into the Vite build (`publicDir`)
   - `assets/` - Vite build output (production only, git-ignored)
 - `devops/` - Docker configuration
@@ -68,7 +68,8 @@
 - Images referenced as static paths in PHP templates (not part of the Vite module graph) live in `theme/public/` and are copied verbatim into the build output.
 - `node_modules` lives inside Docker volumes. Run installs inside the node container (`make enter_node`).
 - TypeScript entry is `theme/src/ts/main.ts`, feature modules live in `theme/src/ts/modules/`.
-- SCSS entry is `theme/src/scss/main.scss` with `common/`, `components/`, and `layouts/` partials.
+- Styling is UnoCSS (`presetWind3`) with utilities written directly in the PHP templates; `theme/uno.config.ts` holds Bootstrap-4-matching breakpoints and shortcuts (`row`, `col*`, `container`, `tag`, `alert-warning`).
+- `theme/src/css/main.css` is plain CSS reserved for markup templates cannot touch: base typography, WP-generated classes/blocks, `paginate_links()` output, Contact Form 7, wp-admin bar offset.
 - Plugin slugs, versions, and activation flags are defined once in `devops/plugins.txt` (`slug:version[:activate]`). The dev setup script, prod Dockerfile, and prod entrypoint all read from this file.
 - Legacy ACF quirk: the migrated database stores some image fields as plain URL strings instead of arrays. Templates must handle both (see `theme/header.php`).
 

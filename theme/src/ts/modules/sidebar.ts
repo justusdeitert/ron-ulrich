@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const body = document.body;
 
     const overlay = document.createElement('div');
-    overlay.id = 'sidebar-overlay';
+    overlay.className = 'fixed inset-0 z-[2990] hidden bg-black/30 [.sidebar-open_&]:block';
     overlay.addEventListener('click', () => {
         body.classList.remove('sidebar-open');
     });

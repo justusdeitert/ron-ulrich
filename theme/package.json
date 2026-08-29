@@ -13,7 +13,6 @@
     "devDependencies": {
         "@biomejs/biome": "^2.5.13",
         "@types/node": "^26.5.1",
-        "sass": "^1.104.1",
         "typescript": "^7.0.2",
         "unocss": "^66.10.2",
         "vite": "^8.3.0"

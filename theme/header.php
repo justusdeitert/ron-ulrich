@@ -8,7 +8,7 @@
 $blog_description = function_exists('get_field') ? get_field('blog_description', 'option') : null;
 ?>
 <!doctype html>
-<html <?php language_attributes(); ?> class="<?php echo is_user_logged_in() ? 'logged-in' : ''; ?>">
+<html <?php language_attributes(); ?> class="h-full<?php echo is_user_logged_in() ? ' logged-in' : ''; ?>">
 <head>
     <meta charset="<?php bloginfo('charset'); ?>">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -34,39 +34,39 @@ $blog_description = function_exists('get_field') ? get_field('blog_description',
     <?php wp_head(); ?>
 </head>
 
-<body <?php body_class(); ?>>
+<body <?php body_class('flex h-full flex-col font-sans text-base leading-normal text-[#212529]'); ?>>
 <?php wp_body_open(); ?>
 
-<header>
-    <div class="container">
-        <a class="brand" href="<?php echo esc_url(home_url('/')); ?>">
+<header class="mt-10 mb-[70px]">
+    <div class="container flex">
+        <a class="flex" href="<?php echo esc_url(home_url('/')); ?>">
             <?php $brand_image = get_field('brand_image', 'option'); ?>
             <?php $brand_image_url = theme_image_url($brand_image, 'medium_large'); ?>
             <?php if ($brand_image_url) : ?>
-                <div class="brand-image hidden sm:block" style="background-image: url(<?php echo esc_url($brand_image_url); ?>)"></div>
+                <div class="brand-image mr-5 hidden h-full bg-cover bg-center sm:block" style="background-image: url(<?php echo esc_url($brand_image_url); ?>)"></div>
             <?php endif; ?>
-            <div class="brand-right">
+            <div>
                 <h1><?php bloginfo('name'); ?></h1>
                 <h2><?php bloginfo('description'); ?></h2>
             </div>
         </a>
-        <nav class="nav-primary hidden sm:block">
+        <nav class="ml-auto hidden sm:block">
             <?php
             wp_nav_menu([
                 'theme_location' => 'header_navigation',
-                'menu_class' => 'nav-list',
+                'menu_class' => 'm-0 flex min-w-[100px] list-none flex-col items-end gap-2.5 p-0 lg:min-w-0 lg:flex-row lg:items-start lg:gap-10',
             ]);
 ?>
         </nav>
-        <span id="toggle-sidebar" class="sidebar-toggle sm:hidden">
-            <i class="material-icons">menu</i>
+        <span id="toggle-sidebar" class="ml-auto cursor-pointer sm:hidden">
+            <i class="material-icons text-[52px]">menu</i>
         </span>
-        <div id="sidebar">
-            <div id="sidebar-wrapper" class="sidebar-wrapper">
+        <div id="sidebar" class="fixed top-0 -left-[300px] z-[3000] h-full w-[300px] overflow-y-auto bg-white transition-[left] duration-300 [.sidebar-open_&]:left-0 [.sidebar-open_&]:shadow-[2px_0_8px_rgba(0,0,0,0.15)]">
+            <div id="sidebar-wrapper" class="flex h-full items-center justify-center text-center">
                 <?php
     wp_nav_menu([
         'theme_location' => 'header_navigation',
-        'menu_class' => 'nav-list',
+        'menu_class' => 'm-0 flex list-none flex-col items-center gap-6 p-0 [&_a]:text-2xl',
     ]);
 ?>
             </div>
@@ -74,5 +74,5 @@ $blog_description = function_exists('get_field') ? get_field('blog_description',
     </div>
 </header>
 
-<main class="container" role="document">
+<main class="container flex-[1_0_auto]" role="document">
     <div class="content">
