@@ -2,11 +2,11 @@ import path from 'node:path';
 import UnoCSS from 'unocss/vite';
 import type { UserConfig } from 'vite';
 import { defineConfig } from 'vite';
-import unoConfig from './uno.config';
+import unoConfig from './uno.config.ts';
 
 export default defineConfig(async ({ mode }) => {
     const isProduction = mode === 'production';
-    const assetsPath = path.resolve(__dirname, 'assets');
+    const assetsPath = path.resolve(import.meta.dirname, 'assets');
 
     if (!isProduction) {
         const fs = await import('node:fs');
@@ -21,13 +21,14 @@ export default defineConfig(async ({ mode }) => {
 
     return {
         root: 'src',
-        publicDir: path.resolve(__dirname, 'public'),
+        publicDir: path.resolve(import.meta.dirname, 'public'),
         base: isProduction ? '/wp-content/themes/ron-ulrich-theme/assets/' : '/',
         build: {
-            outDir: path.resolve(__dirname, 'assets'),
+            outDir: path.resolve(import.meta.dirname, 'assets'),
             emptyOutDir: true,
             sourcemap: false,
-            minify: 'esbuild',
+            // Vite 8 (rolldown) default minifier is oxc; 'esbuild' requires esbuild as a separate dependency
+            minify: true,
             manifest: true,
             rollupOptions: {
                 input: {
@@ -79,7 +80,7 @@ export default defineConfig(async ({ mode }) => {
         },
         resolve: {
             alias: {
-                '@': path.resolve(__dirname, 'src'),
+                '@': path.resolve(import.meta.dirname, 'src'),
             },
         },
     } satisfies UserConfig;
