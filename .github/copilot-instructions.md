@@ -68,7 +68,7 @@
 - Images referenced as static paths in PHP templates (not part of the Vite module graph) live in `theme/public/` and are copied verbatim into the build output.
 - `node_modules` lives inside Docker volumes. Run installs inside the node container (`make enter_node`).
 - TypeScript entry is `theme/src/ts/main.ts`, feature modules live in `theme/src/ts/modules/`.
-- Styling is UnoCSS (`presetWind3`) with utilities written directly in the PHP templates; `theme/uno.config.ts` holds Bootstrap-4-matching breakpoints and shortcuts (`row`, `col*`, `container`, `tag`, `alert-warning`).
+- Styling is UnoCSS (`presetWind3`) with utilities written directly in the PHP templates; `theme/uno.config.ts` holds Bootstrap-4-matching breakpoints and shortcuts (`container`, `tag`, `alert-warning`). Layouts use plain flex/grid utilities.
 - `theme/src/css/main.css` is plain CSS reserved for markup templates cannot touch: base typography, WP-generated classes/blocks, `paginate_links()` output, Contact Form 7, wp-admin bar offset.
 - Plugin slugs, versions, and activation flags are defined once in `devops/plugins.txt` (`slug:version[:activate]`). The dev setup script, prod Dockerfile, and prod entrypoint all read from this file.
 - Legacy ACF quirk: the migrated database stores some image fields as plain URL strings instead of arrays. Templates must handle both (see `theme/header.php`).

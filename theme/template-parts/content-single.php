@@ -46,12 +46,10 @@ $published_in = get_field('published_in');
 <article <?php post_class('mt-[70px]'); ?>>
     <div class="mb-[30px]">
         <?php if (get_the_tags()) : ?>
-            <div class="row">
-                <div class="col mb-5">
-                    <?php foreach (get_the_tags() as $tag) : ?>
-                        <span class="tag"><?php echo esc_html($tag->name); ?></span>
-                    <?php endforeach; ?>
-                </div>
+            <div class="mb-5 flex flex-wrap">
+                <?php foreach (get_the_tags() as $tag) : ?>
+                    <span class="tag"><?php echo esc_html($tag->name); ?></span>
+                <?php endforeach; ?>
             </div>
         <?php endif; ?>
 

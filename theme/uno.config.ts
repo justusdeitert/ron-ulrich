@@ -15,11 +15,6 @@ export default defineConfig({
         },
     },
     shortcuts: {
-        // Replacements for the Bootstrap 4 grid classes used in templates
-        row: 'flex flex-wrap -mx-[15px]',
-        col: 'relative w-full px-[15px] grow basis-0 max-w-full',
-        'col-12': 'relative w-full px-[15px] grow-0 shrink-0 basis-full max-w-full',
-        'col-sm-4': 'sm:(grow-0 shrink-0 basis-1/3 max-w-1/3)',
         // Bootstrap's .container with the site's max-widths (md 720px, lg 960px)
         container: 'w-full px-[15px] mx-auto md:max-w-[720px] lg:max-w-[960px]',
         // Tag pill on posts

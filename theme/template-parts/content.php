@@ -8,27 +8,25 @@
 $published_in = get_field('published_in');
 ?>
 <article <?php post_class('mt-[60px]'); ?>>
-    <div class="row pb-[60px]">
+    <div class="grid gap-[30px] pb-[60px] sm:grid-cols-3">
         <?php if (has_post_thumbnail()) : ?>
             <?php $feature_image_url = wp_get_attachment_image_src(get_post_thumbnail_id(), 'large', true)[0]; ?>
-            <div class="col-12 col-sm-4">
+            <div>
                 <a href="<?php the_permalink(); ?>">
-                    <div class="h-full bg-cover bg-center bg-no-repeat max-sm:mb-[30px] max-sm:h-[250px]" style="background-image: url(<?php echo esc_url($feature_image_url); ?>)"></div>
+                    <div class="h-full bg-cover bg-center bg-no-repeat max-sm:h-[250px]" style="background-image: url(<?php echo esc_url($feature_image_url); ?>)"></div>
                 </a>
             </div>
         <?php endif; ?>
 
-        <div class="col">
+        <div class="sm:col-span-2">
             <div class="mb-5 hidden text-[22px] font-light leading-8 [body.more-info_&]:block">
                 <?php if (get_the_tags()) : ?>
-                    <div class="row">
-                        <div class="col mb-5">
-                            <?php foreach (get_the_tags() as $tag) : ?>
-                                <a href="<?php echo esc_url(get_tag_link($tag->term_id)); ?>">
-                                    <span class="tag"><?php echo esc_html($tag->name); ?></span>
-                                </a>
-                            <?php endforeach; ?>
-                        </div>
+                    <div class="mb-5 flex flex-wrap">
+                        <?php foreach (get_the_tags() as $tag) : ?>
+                            <a href="<?php echo esc_url(get_tag_link($tag->term_id)); ?>">
+                                <span class="tag"><?php echo esc_html($tag->name); ?></span>
+                            </a>
+                        <?php endforeach; ?>
                     </div>
                 <?php endif; ?>
 
