@@ -23,7 +23,6 @@ $blog_description = function_exists('get_field') ? get_field('blog_description',
 
     <meta property="og:locale" content="de_DE"/>
     <meta name="application-name" content="ron-ulrich" />
-    <meta name="twitter:card" content="summary_large_image" />
 
     <?php if ($blog_description) : ?>
         <meta name="description" content="<?php echo esc_attr($blog_description); ?>" />
@@ -43,7 +42,7 @@ $blog_description = function_exists('get_field') ? get_field('blog_description',
             <?php $brand_image = get_field('brand_image', 'option'); ?>
             <?php $brand_image_url = theme_image_url($brand_image, 'medium_large'); ?>
             <?php if ($brand_image_url) : ?>
-                <div class="brand-image mr-5 hidden h-full bg-cover bg-center sm:block" style="background-image: url(<?php echo esc_url($brand_image_url); ?>)"></div>
+                <div class="brand-image mr-5 hidden aspect-square h-full bg-cover bg-center sm:block" style="background-image: url(<?php echo esc_url($brand_image_url); ?>)"></div>
             <?php endif; ?>
             <div>
                 <h1><?php bloginfo('name'); ?></h1>

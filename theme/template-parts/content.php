@@ -10,10 +10,10 @@ $published_in = get_field('published_in');
 <article <?php post_class('mt-[60px]'); ?>>
     <div class="grid gap-[30px] pb-[60px] sm:grid-cols-3">
         <?php if (has_post_thumbnail()) : ?>
-            <?php $feature_image_url = wp_get_attachment_image_src(get_post_thumbnail_id(), 'large', true)[0]; ?>
+            <?php $feature_image_url = theme_image_url(get_post_thumbnail_id(), 'large'); ?>
             <div>
                 <a href="<?php the_permalink(); ?>">
-                    <div class="h-full bg-cover bg-center bg-no-repeat max-sm:h-[250px]" style="background-image: url(<?php echo esc_url($feature_image_url); ?>)"></div>
+                    <div class="h-full bg-cover bg-center bg-no-repeat max-sm:h-[250px]" style="background-image: url(<?php echo esc_url($feature_image_url ?? ''); ?>)"></div>
                 </a>
             </div>
         <?php endif; ?>

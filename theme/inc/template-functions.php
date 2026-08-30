@@ -31,6 +31,15 @@ function theme_image_url($value, string $size = 'large'): ?string {
 }
 
 /**
+ * Canonical post URL with the ?job= tracking parameter.
+ */
+function theme_share_url(): string {
+    global $wp;
+
+    return add_query_arg('job', get_post()->post_name, home_url($wp->request . '/'));
+}
+
+/**
  * Render Open Graph / Twitter Card meta tags for the current request.
  * Called from header.php inside <head>.
  */
@@ -48,13 +57,8 @@ function theme_social_meta(): void {
         $post = get_post();
         $title = $post->post_title;
         $description = get_field('description', $post->ID);
-        $url = get_permalink() . '?job=' . $post->post_name;
-        $image_url = null;
-
-        if (has_post_thumbnail()) {
-            $src = wp_get_attachment_image_src(get_post_thumbnail_id(), 'large', true);
-            $image_url = $src ? home_url() . $src[0] : null;
-        }
+        $url = theme_share_url();
+        $image_url = theme_image_url(get_post_thumbnail_id(), 'large');
     }
     ?>
     <meta property="og:type" content="website" />
@@ -76,7 +80,7 @@ function theme_social_meta(): void {
  */
 function theme_page_title(): string {
     if (is_home()) {
-        if ($home = get_option('page_for_posts', true)) {
+        if ($home = get_option('page_for_posts')) {
             return get_the_title($home);
         }
 
