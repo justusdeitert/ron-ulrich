@@ -6,12 +6,9 @@
  */
 
 get_header();
-?>
 
-<div class="mb-[60px]">
-    <h2><?php echo wp_kses_post(theme_page_title()); ?></h2>
-    <hr>
-</div>
+get_template_part('template-parts/page-header');
+?>
 
 <div class="alert-warning">
     <?php esc_html_e('Sorry, but the page you were trying to view does not exist.', 'ron-ulrich'); ?>

@@ -27,15 +27,6 @@ add_action('after_setup_theme', function (): void {
     load_theme_textdomain('ron-ulrich', get_template_directory() . '/lang');
 }, 20);
 
-/**
- * Slim down wp-admin for editors (front-end only check preserved
- * from the original theme).
- */
-if (! is_admin()) {
-    // Hide ACF menu on the front-end
-    add_filter('acf/settings/show_admin', '__return_false');
-}
-
 add_action('admin_menu', function (): void {
     remove_menu_page('edit-comments.php');
     remove_menu_page('tools.php');

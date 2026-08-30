@@ -6,14 +6,9 @@
  */
 
 get_header();
-?>
 
-<div class="mb-[60px]">
-    <h2><?php echo wp_kses_post(theme_page_title()); ?></h2>
-    <hr>
-</div>
+get_template_part('template-parts/page-header');
 
-<?php
 if (! have_posts()) :
     ?>
     <div class="alert-warning">
@@ -28,17 +23,6 @@ while (have_posts()) :
     get_template_part('template-parts/content', 'search');
 endwhile;
 
-if (paginate_links()) :
-    ?>
-    <div class="pagination my-[30px] flex">
-        <?php
-            echo paginate_links([
-                'prev_text' => '<i class="material-icons">arrow_left</i>',
-                'next_text' => '<i class="material-icons">arrow_right</i>',
-            ]);
-        ?>
-    </div>
-    <?php
-endif;
+get_template_part('template-parts/pagination');
 
 get_footer();

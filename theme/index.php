@@ -18,7 +18,7 @@ get_header();
             <span class="hidden [body.more-info_&]:inline"><?php esc_html_e('Weniger Info', 'ron-ulrich'); ?></span>
         </div>
         <div class="ml-auto flex flex-col gap-2.5 sm:flex-row sm:gap-5">
-            <select name="archive-dropdown" class="archive-select" onchange="document.location.href=this.options[this.selectedIndex].value;">
+            <select name="archive-month" class="archive-select" onchange="document.location.href=this.value;">
                 <option value="/"><?php esc_html_e('Monat auswählen', 'ron-ulrich'); ?></option>
                 <?php
                     wp_get_archives([
@@ -28,7 +28,7 @@ get_header();
                     ]);
                 ?>
             </select>
-            <select name="archive-dropdown" class="archive-select" onchange="document.location.href=this.options[this.selectedIndex].value;">
+            <select name="archive-tag" class="archive-select" onchange="document.location.href=this.value;">
                 <option value="/"><?php esc_html_e('Kategorie auswählen', 'ron-ulrich'); ?></option>
                 <?php foreach (get_tags() as $tag) : ?>
                     <option value="<?php echo esc_url(get_tag_link($tag->term_id)); ?>"><?php echo esc_html($tag->name); ?></option>
@@ -44,19 +44,7 @@ while (have_posts()) :
     the_post();
     get_template_part('template-parts/content', get_post_type());
 endwhile;
-?>
 
-<?php if (paginate_links()) : ?>
-    <hr>
-    <div class="pagination my-[30px] flex">
-        <?php
-            echo paginate_links([
-                'prev_text' => '<i class="material-icons">arrow_left</i>',
-                'next_text' => '<i class="material-icons">arrow_right</i>',
-            ]);
-        ?>
-    </div>
-<?php endif; ?>
+get_template_part('template-parts/pagination');
 
-<?php
 get_footer();

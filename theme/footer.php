@@ -23,7 +23,7 @@
                     wp_nav_menu([
                         'theme_location' => 'footer_navigation',
                         'menu_class' => 'my-0 ml-auto flex list-none gap-10 p-0',
-                        'container' => '',
+                        'container' => false,
                     ]);
                 ?>
             <?php endif; ?>

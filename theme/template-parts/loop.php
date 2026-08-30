@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shared loop: renders the page header (optional) and the content
  * part for each post.
@@ -17,14 +18,9 @@ $page_header = $args['page_header'] ?? false;
 while (have_posts()) :
     the_post();
 
-    if ($page_header) :
-        ?>
-        <div class="mb-[60px]">
-            <h2><?php echo wp_kses_post(theme_page_title()); ?></h2>
-            <hr>
-        </div>
-        <?php
-    endif;
+    if ($page_header) {
+        get_template_part('template-parts/page-header');
+    }
 
     get_template_part('template-parts/content', $content_part);
 endwhile;

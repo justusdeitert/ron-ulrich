@@ -1,47 +1,18 @@
 /**
  * "More info" toggle + archive <select> sync, ported from the old
  * jQuery snippets in resources/assets/scripts/main.js.
+ * The open state is kept in localStorage.
  */
-function deleteCookie(name: string): void {
-    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-}
-
-function setCookie(name: string, value: string, exdays = 12): void {
-    const d = new Date();
-    d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
-    document.cookie = `${name}=${value};expires=${d.toUTCString()};path=/`;
-}
-
-function getCookie(name: string): string {
-    const key = `${name}=`;
-    const decodedCookie = decodeURIComponent(document.cookie);
-    const parts = decodedCookie.split(';');
-
-    for (let part of parts) {
-        while (part.charAt(0) === ' ') {
-            part = part.substring(1);
-        }
-
-        if (part.indexOf(key) === 0) {
-            return part.substring(key.length);
-        }
-    }
-
-    return '';
-}
-
 function initMoreInfo(): void {
-    if (getCookie('more-info')) {
+    if (localStorage.getItem('more-info')) {
         document.body.classList.add('more-info');
     }
 
     document.querySelector('.more-info .info-left')?.addEventListener('click', () => {
-        if (document.body.classList.contains('more-info')) {
-            document.body.classList.remove('more-info');
-            deleteCookie('more-info');
+        if (document.body.classList.toggle('more-info')) {
+            localStorage.setItem('more-info', 'true');
         } else {
-            document.body.classList.add('more-info');
-            setCookie('more-info', 'true');
+            localStorage.removeItem('more-info');
         }
     });
 }
