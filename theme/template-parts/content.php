@@ -19,7 +19,7 @@ $published_in = get_field('published_in');
         <?php endif; ?>
 
         <div class="col">
-            <div class="hidden [body.more-info_&]:block">
+            <div class="mb-5 hidden text-[22px] font-light leading-8 [body.more-info_&]:block">
                 <?php if (get_the_tags()) : ?>
                     <div class="row">
                         <div class="col mb-5">
