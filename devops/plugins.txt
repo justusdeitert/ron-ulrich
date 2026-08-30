@@ -1,8 +1,8 @@
-contact-form-7:6.1.1:activate
-contact-form-7-honeypot:3.1.1:activate
-contact-form-cfdb7:1.3.2:activate
-disable-comments:2.4.7:activate
-google-sitemap-generator:4.1.21:activate
-advanced-custom-fields:6.6.0:activate
-svg-support:2.5.8:activate
-user-switching:1.10.0:activate
+contact-form-7:6.1.7:activate
+contact-form-7-honeypot:3.7.2:activate
+contact-form-cfdb7:1.4.0:activate
+disable-comments:2.9.0:activate
+google-sitemap-generator:4.1.24:activate
+secure-custom-fields:6.9.5:activate
+svg-support:2.6.1:activate
+user-switching:1.12.2:activate
