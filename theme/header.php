@@ -52,11 +52,11 @@ $blog_description = function_exists('get_field') ? get_field('blog_description',
         </a>
         <nav class="ml-auto hidden sm:block">
             <?php
-            wp_nav_menu([
-                'theme_location' => 'header_navigation',
-                'menu_class' => 'm-0 flex min-w-[100px] list-none flex-col items-end gap-2.5 p-0 lg:min-w-0 lg:flex-row lg:items-start lg:gap-10',
-            ]);
-?>
+                wp_nav_menu([
+                    'theme_location' => 'header_navigation',
+                    'menu_class' => 'm-0 flex min-w-[100px] list-none flex-col items-end gap-2.5 p-0 lg:min-w-0 lg:flex-row lg:items-start lg:gap-10',
+                ]);
+            ?>
         </nav>
         <span id="toggle-sidebar" class="ml-auto cursor-pointer sm:hidden">
             <i class="material-icons text-[52px]">menu</i>
@@ -64,11 +64,11 @@ $blog_description = function_exists('get_field') ? get_field('blog_description',
         <div id="sidebar" class="fixed top-0 -left-[300px] z-[3000] h-full w-[300px] overflow-y-auto bg-white transition-[left] duration-300 [.sidebar-open_&]:left-0 [.sidebar-open_&]:shadow-[2px_0_8px_rgba(0,0,0,0.15)]">
             <div id="sidebar-wrapper" class="flex h-full items-center justify-center text-center">
                 <?php
-    wp_nav_menu([
-        'theme_location' => 'header_navigation',
-        'menu_class' => 'm-0 flex list-none flex-col items-center gap-6 p-0 [&_a]:text-2xl',
-    ]);
-?>
+                    wp_nav_menu([
+                        'theme_location' => 'header_navigation',
+                        'menu_class' => 'm-0 flex list-none flex-col items-center gap-6 p-0 [&_a]:text-2xl',
+                    ]);
+                ?>
             </div>
         </div>
     </div>

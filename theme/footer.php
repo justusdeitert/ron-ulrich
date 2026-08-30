@@ -20,11 +20,11 @@
             </div>
             <?php if (has_nav_menu('footer_navigation')) : ?>
                 <?php
-                wp_nav_menu([
-                    'theme_location' => 'footer_navigation',
-                    'menu_class' => 'my-0 ml-auto flex list-none gap-10 p-0',
-                    'container' => '',
-                ]);
+                    wp_nav_menu([
+                        'theme_location' => 'footer_navigation',
+                        'menu_class' => 'my-0 ml-auto flex list-none gap-10 p-0',
+                        'container' => '',
+                    ]);
                 ?>
             <?php endif; ?>
         </div>

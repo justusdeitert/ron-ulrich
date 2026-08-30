@@ -30,6 +30,9 @@ return (new PhpCsFixer\Config())
         ],
         'no_whitespace_before_comma_in_array' => true,
         'trim_array_spaces' => true,
+        // Anchors indentation to the first line of the file instead of the
+        // (indented) `<?php` tag, which breaks aligned PHP blocks in templates.
+        'statement_indentation' => false,
     ])
     ->setFinder($finder)
     ->setCacheFile(__DIR__ . '/.php-cs-fixer.cache');

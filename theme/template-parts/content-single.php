@@ -15,16 +15,16 @@ $published_in = get_field('published_in');
 
         <ul class="m-0 flex list-none gap-[15px] p-0">
             <?php
-            while (have_rows('share_icons', 'option')) :
-                the_row();
-                ?>
+                while (have_rows('share_icons', 'option')) :
+                    the_row();
+                    ?>
                 <?php if (get_sub_field('show')) : ?>
                     <?php $share_icon_url = theme_image_url(get_sub_field('icon'), 'full'); ?>
                     <?php $share_icon = get_sub_field('icon'); ?>
                     <?php $share_icon_name = is_array($share_icon) ? ($share_icon['name'] ?? '') : ''; ?>
                     <li>
                         <a href="<?php global $wp;
-                    echo esc_url(get_sub_field('url') . home_url($wp->request) . '/?job=' . get_post()->post_name); ?>" target="_blank" rel="noopener">
+                        echo esc_url(get_sub_field('url') . home_url($wp->request) . '/?job=' . get_post()->post_name); ?>" target="_blank" rel="noopener">
                             <img src="<?php echo esc_url($share_icon_url); ?>" alt="<?php echo esc_attr($share_icon_name); ?>">
                         </a>
                     </li>

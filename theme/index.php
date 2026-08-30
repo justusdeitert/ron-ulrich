@@ -21,12 +21,12 @@ get_header();
             <select name="archive-dropdown" class="archive-select" onchange="document.location.href=this.options[this.selectedIndex].value;">
                 <option value="/"><?php esc_html_e('Monat auswählen', 'ron-ulrich'); ?></option>
                 <?php
-                wp_get_archives([
-                    'type' => 'monthly',
-                    'format' => 'option',
-                    'show_post_count' => 1,
-                ]);
-    ?>
+                    wp_get_archives([
+                        'type' => 'monthly',
+                        'format' => 'option',
+                        'show_post_count' => 1,
+                    ]);
+                ?>
             </select>
             <select name="archive-dropdown" class="archive-select" onchange="document.location.href=this.options[this.selectedIndex].value;">
                 <option value="/"><?php esc_html_e('Kategorie auswählen', 'ron-ulrich'); ?></option>
@@ -50,11 +50,11 @@ endwhile;
     <hr>
     <div class="pagination my-[30px] flex">
         <?php
-        echo paginate_links([
-            'prev_text' => '<i class="material-icons">arrow_left</i>',
-            'next_text' => '<i class="material-icons">arrow_right</i>',
-        ]);
-    ?>
+            echo paginate_links([
+                'prev_text' => '<i class="material-icons">arrow_left</i>',
+                'next_text' => '<i class="material-icons">arrow_right</i>',
+            ]);
+        ?>
     </div>
 <?php endif; ?>
 
