@@ -1,6 +1,6 @@
 import 'virtual:uno.css';
 
-import '../css/main.css';
+import '../css/main.scss';
 
 import './modules/sidebar';
 import './modules/more-info';

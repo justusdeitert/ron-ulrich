@@ -31,7 +31,7 @@
   - `inc/` - PHP modules (Vite loader, theme setup, ACF options page, template helpers)
   - `acf-json/` - ACF field group JSON sync
   - `template-parts/` - Template partials (content-*, page-header)
-  - `src/` - Frontend source (`ts/main.ts` + `ts/modules/`, `css/main.css`, images)
+  - `src/` - Frontend source (`ts/main.ts` + `ts/modules/`, `css/main.scss`, images)
   - `public/` - Static files copied verbatim into the Vite build (`publicDir`)
   - `assets/` - Vite build output (production only, git-ignored)
 - `devops/` - Docker configuration
@@ -69,7 +69,7 @@
 - `node_modules` lives inside Docker volumes. Run installs inside the node container (`make enter_node`).
 - TypeScript entry is `theme/src/ts/main.ts`, feature modules live in `theme/src/ts/modules/`.
 - Styling is UnoCSS (`presetWind3`) with utilities written directly in the PHP templates; `theme/uno.config.ts` holds Bootstrap-4-matching breakpoints and shortcuts (`container`, `tag`, `alert-warning`). Layouts use plain flex/grid utilities.
-- `theme/src/css/main.css` is plain CSS reserved for markup templates cannot touch: base typography, WP-generated classes/blocks, `paginate_links()` output, Contact Form 7, wp-admin bar offset.
+- `theme/src/css/main.scss` is SCSS reserved for markup templates cannot touch: base typography, WP-generated classes/blocks, `paginate_links()` output, Contact Form 7. The wp-admin bar offset is utilities on `<html>` in `header.php`.
 - Plugin slugs, versions, and activation flags are defined once in `devops/plugins.txt` (`slug:version[:activate]`). The dev setup script, prod Dockerfile, and prod entrypoint all read from this file.
 - Legacy ACF quirk: the migrated database stores some image fields as plain URL strings instead of arrays. Templates must handle both (see `theme/header.php`).
 
