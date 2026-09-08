@@ -39,9 +39,12 @@ function theme_enqueue_assets(): void {
     }
 
     wp_enqueue_script('theme-main', $base . $entry['file'], [], null, true);
+}
+
+add_action('wp_enqueue_scripts', function (): void {
+    theme_enqueue_assets();
 
     if (is_single() && comments_open() && get_option('thread_comments')) {
         wp_enqueue_script('comment-reply');
     }
-}
-add_action('wp_enqueue_scripts', 'theme_enqueue_assets', 100);
+}, 100);

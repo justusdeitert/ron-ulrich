@@ -5,16 +5,17 @@
  * @package ron-ulrich
  */
 
-if (! paginate_links()) {
+$links = paginate_links([
+    'echo' => false,
+    'prev_text' => '<i class="material-icons">arrow_left</i>',
+    'next_text' => '<i class="material-icons">arrow_right</i>',
+]);
+
+if (! $links) {
     return;
 }
 ?>
 <hr>
 <div class="pagination my-[30px] flex">
-    <?php
-        echo paginate_links([
-            'prev_text' => '<i class="material-icons">arrow_left</i>',
-            'next_text' => '<i class="material-icons">arrow_right</i>',
-        ]);
-    ?>
+    <?php echo $links; // phpcs:ignore WordPress.Security.EscapeOutput?>
 </div>

@@ -8,7 +8,7 @@
 $blog_description = function_exists('get_field') ? get_field('blog_description', 'option') : null;
 ?>
 <!doctype html>
-<html <?php language_attributes(); ?> class="h-full<?php echo is_user_logged_in() ? ' logged-in' : ''; ?>">
+<html <?php language_attributes(); ?> class="h-full<?php echo is_admin_bar_showing() ? ' logged-in' : ''; ?>">
 <head>
     <meta charset="<?php bloginfo('charset'); ?>">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
