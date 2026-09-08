@@ -5,11 +5,12 @@
  * @package ron-ulrich
  *
  * @param array $args {
- *     @type bool $link_tags Link tags to their archives (teaser) or render as spans (single).
+ *     @type bool  $link_tags    Link tags to their archives (teaser) or render as spans (single).
+ *     @type mixed $published_in Optional pre-fetched ACF field, avoids a duplicate lookup.
  * }
  */
 
-$published_in = get_field('published_in');
+$published_in = $args['published_in'] ?? get_field('published_in');
 $link_tags = $args['link_tags'] ?? false;
 $tags = get_the_tags();
 ?>

@@ -8,8 +8,9 @@
 
 get_header();
 
-get_template_part('template-parts/loop', null, [
-    'content_part' => 'single',
-]);
+while (have_posts()) :
+    the_post();
+    get_template_part('template-parts/content', 'single');
+endwhile;
 
 get_footer();

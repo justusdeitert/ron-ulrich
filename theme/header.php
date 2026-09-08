@@ -13,8 +13,8 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link href="<?php echo esc_url(get_template_directory_uri() . '/assets/images/favicon.ico'); ?>" rel="shortcut icon">
-    <link href="<?php echo esc_url(get_template_directory_uri() . '/assets/images/touch-icon.png'); ?>" rel="apple-touch-icon-precomposed">
+    <link href="<?php echo esc_url(theme_public_url('images/favicon.ico')); ?>" rel="shortcut icon">
+    <link href="<?php echo esc_url(theme_public_url('images/touch-icon.png')); ?>" rel="apple-touch-icon-precomposed">
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 

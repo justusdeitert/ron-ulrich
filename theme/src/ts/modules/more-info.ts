@@ -20,7 +20,7 @@ function initMoreInfo(): void {
 function initSelectFields(): void {
     for (const select of document.querySelectorAll<HTMLSelectElement>('.more-info select')) {
         select.addEventListener('change', () => {
-            document.location.href = select.value;
+            window.location.href = select.value;
         });
 
         // Pre-select the option matching the current archive URL

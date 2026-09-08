@@ -42,9 +42,8 @@ function theme_share_url(): string {
  * Called from header.php inside <head>.
  */
 function theme_social_meta(): void {
-    $scf_available = function_exists('get_field');
-    $blog_description = $scf_available ? get_field('blog_description', 'option') : null;
-    $blog_share_image = $scf_available ? get_field('blog_share_image', 'option') : null;
+    $blog_description = get_field('blog_description', 'option');
+    $blog_share_image = get_field('blog_share_image', 'option');
 
     if (! is_single()) {
         $title = get_bloginfo('name') . ' - ' . get_bloginfo('description');
@@ -58,16 +57,18 @@ function theme_social_meta(): void {
         $url = theme_share_url();
         $image_url = theme_image_url(get_post_thumbnail_id(), 'large');
     }
+
+    $description = (string) ($description ?? '');
     ?>
     <?php if ($description) : ?>
         <meta name="description" content="<?php echo esc_attr($description); ?>" />
     <?php endif; ?>
     <meta property="og:type" content="website" />
     <meta property="og:title" content="<?php echo esc_attr($title); ?>" />
-    <meta property="og:description" content="<?php echo esc_attr($description ?? ''); ?>" />
+    <meta property="og:description" content="<?php echo esc_attr($description); ?>" />
     <meta property="og:url" content="<?php echo esc_url($url); ?>" />
     <meta name="twitter:title" content="<?php echo esc_attr($title); ?>" />
-    <meta name="twitter:description" content="<?php echo esc_attr($description ?? ''); ?>" />
+    <meta name="twitter:description" content="<?php echo esc_attr($description); ?>" />
     <meta name="twitter:card" content="summary_large_image" />
     <?php if ($image_url) : ?>
         <meta property="og:image" content="<?php echo esc_url($image_url); ?>" />
@@ -104,10 +105,11 @@ function theme_page_title(): string {
 }
 
 /**
- * "… Continued" link appended to excerpts.
+ * "…" appended to excerpts. The teaser wraps the whole excerpt in a
+ * permalink anchor, so a separate "Continued" link would nest anchors.
  */
 add_filter('excerpt_more', function (): string {
-    return ' &hellip; <a href="' . get_permalink() . '">' . __('Continued', 'ron-ulrich') . '</a>';
+    return ' &hellip;';
 });
 
 /**

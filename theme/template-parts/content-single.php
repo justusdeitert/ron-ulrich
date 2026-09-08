@@ -47,7 +47,7 @@ $back_url = $posts_page_id ? get_permalink($posts_page_id) : home_url('/');
 <article <?php post_class('mt-[70px]'); ?>>
     <div class="mb-[30px]">
         <div class="mb-5 text-[22px] font-light leading-8">
-            <?php get_template_part('template-parts/post-meta'); ?>
+            <?php get_template_part('template-parts/post-meta', null, ['published_in' => $published_in]); ?>
         </div>
 
         <h2 class="mb-5 lg:w-[70%]"><?php the_title(); ?></h2>

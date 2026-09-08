@@ -12,6 +12,18 @@ if (! defined('ABSPATH')) {
     exit;
 }
 
+/**
+ * URL for a static file in theme/public/ (copied verbatim into the
+ * build output). Served by the Vite dev server in development.
+ */
+function theme_public_url(string $path): string {
+    if (! file_exists(get_template_directory() . '/assets/.vite/manifest.json')) {
+        return 'http://localhost:5174/' . ltrim($path, '/');
+    }
+
+    return get_template_directory_uri() . '/assets/' . ltrim($path, '/');
+}
+
 function theme_enqueue_assets(): void {
     $assets_dir = get_template_directory() . '/assets';
 

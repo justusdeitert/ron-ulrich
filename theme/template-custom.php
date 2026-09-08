@@ -8,9 +8,11 @@
 
 get_header();
 
-get_template_part('template-parts/loop', null, [
-    'content_part' => 'page',
-    'page_header' => true,
-]);
+get_template_part('template-parts/page-header');
+
+while (have_posts()) :
+    the_post();
+    get_template_part('template-parts/content', 'page');
+endwhile;
 
 get_footer();
