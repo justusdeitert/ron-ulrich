@@ -6,27 +6,22 @@
  *  - clicking anywhere outside closes it
  *  - a dimmed overlay covers the page while open
  */
-document.addEventListener('DOMContentLoaded', () => {
-    const body = document.body;
+const body = document.body;
 
-    const overlay = document.createElement('div');
-    overlay.className = 'fixed inset-0 z-[2990] hidden bg-black/30 [.sidebar-open_&]:block';
-    overlay.addEventListener('click', () => {
+const overlay = document.createElement('div');
+overlay.className = 'fixed inset-0 z-[2990] hidden bg-black/30 [.sidebar-open_&]:block';
+overlay.addEventListener('click', () => {
+    body.classList.remove('sidebar-open');
+});
+body.appendChild(overlay);
+
+document.getElementById('toggle-sidebar')?.addEventListener('click', (event) => {
+    event.stopPropagation();
+    body.classList.toggle('sidebar-open');
+});
+
+document.addEventListener('click', (event) => {
+    if (body.classList.contains('sidebar-open') && !(event.target as Element).closest('#sidebar, #toggle-sidebar')) {
         body.classList.remove('sidebar-open');
-    });
-    body.appendChild(overlay);
-
-    document.getElementById('toggle-sidebar')?.addEventListener('click', (event) => {
-        event.stopPropagation();
-        body.classList.toggle('sidebar-open');
-    });
-
-    document.addEventListener('click', (event) => {
-        if (
-            body.classList.contains('sidebar-open') &&
-            !(event.target as Element).closest('#sidebar, #toggle-sidebar')
-        ) {
-            body.classList.remove('sidebar-open');
-        }
-    });
+    }
 });

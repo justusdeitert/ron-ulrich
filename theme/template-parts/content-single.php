@@ -6,6 +6,8 @@
  */
 
 $published_in = get_field('published_in');
+$posts_page_id = (int) get_option('page_for_posts');
+$back_url = $posts_page_id ? get_permalink($posts_page_id) : home_url('/');
 ?>
 <hr>
 
@@ -58,7 +60,7 @@ $published_in = get_field('published_in');
     <?php the_content(); ?>
 </article>
 
-<a class="mt-2.5 flex items-center" href="javascript:history.go(-1)">
+<a class="back-link mt-2.5 flex items-center" href="<?php echo esc_url($back_url); ?>">
     <i class="material-icons text-[28px]">arrow_left</i>
     <span class="text-xl"><?php esc_html_e('zurück', 'ron-ulrich'); ?></span>
 </a>

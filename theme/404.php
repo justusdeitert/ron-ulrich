@@ -1,4 +1,5 @@
 <?php
+
 /**
  * 404 template.
  *
@@ -8,13 +9,9 @@
 get_header();
 
 get_template_part('template-parts/page-header');
-?>
 
-<div class="alert-warning">
-    <?php esc_html_e('Sorry, but the page you were trying to view does not exist.', 'ron-ulrich'); ?>
-</div>
+get_template_part('template-parts/content', 'none', [
+    'message' => __('Sorry, but the page you were trying to view does not exist.', 'ron-ulrich'),
+]);
 
-<?php get_search_form(); ?>
-
-<?php
 get_footer();

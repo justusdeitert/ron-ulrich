@@ -11,10 +11,11 @@
 
 $published_in = get_field('published_in');
 $link_tags = $args['link_tags'] ?? false;
+$tags = get_the_tags();
 ?>
-<?php if (get_the_tags()) : ?>
+<?php if ($tags) : ?>
     <div class="mb-5 flex flex-wrap">
-        <?php foreach (get_the_tags() as $tag) : ?>
+        <?php foreach ($tags as $tag) : ?>
             <?php if ($link_tags) : ?>
                 <a href="<?php echo esc_url(get_tag_link($tag->term_id)); ?>">
                     <span class="tag"><?php echo esc_html($tag->name); ?></span>

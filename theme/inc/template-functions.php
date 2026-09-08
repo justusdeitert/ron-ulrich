@@ -59,6 +59,9 @@ function theme_social_meta(): void {
         $image_url = theme_image_url(get_post_thumbnail_id(), 'large');
     }
     ?>
+    <?php if ($description) : ?>
+        <meta name="description" content="<?php echo esc_attr($description); ?>" />
+    <?php endif; ?>
     <meta property="og:type" content="website" />
     <meta property="og:title" content="<?php echo esc_attr($title); ?>" />
     <meta property="og:description" content="<?php echo esc_attr($description ?? ''); ?>" />
@@ -112,8 +115,10 @@ add_filter('excerpt_more', function (): string {
  */
 add_filter('body_class', function (array $classes): array {
     if (is_single() || (is_page() && ! is_front_page())) {
-        if (! in_array(basename(get_permalink()), $classes)) {
-            $classes[] = basename(get_permalink());
+        $slug = get_post_field('post_name', get_post());
+
+        if ($slug && ! in_array($slug, $classes, true)) {
+            $classes[] = $slug;
         }
     }
 

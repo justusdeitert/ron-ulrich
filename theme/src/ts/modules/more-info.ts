@@ -23,15 +23,12 @@ function initSelectFields(): void {
             document.location.href = select.value;
         });
 
-        for (const option of select.options) {
-            if (window.location.pathname === option.value) {
-                select.value = option.value;
-            }
+        // Pre-select the option matching the current archive URL
+        if ([...select.options].some((option) => option.value === window.location.pathname)) {
+            select.value = window.location.pathname;
         }
     }
 }
 
-window.addEventListener('load', () => {
-    initMoreInfo();
-    initSelectFields();
-});
+initMoreInfo();
+initSelectFields();

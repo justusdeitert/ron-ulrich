@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Search results template.
  *
@@ -9,14 +10,9 @@ get_header();
 
 get_template_part('template-parts/page-header');
 
-if (! have_posts()) :
-    ?>
-    <div class="alert-warning">
-        <?php esc_html_e('Sorry, no results were found.', 'ron-ulrich'); ?>
-    </div>
-    <?php get_search_form(); ?>
-    <?php
-endif;
+if (! have_posts()) {
+    get_template_part('template-parts/content', 'none');
+}
 
 while (have_posts()) :
     the_post();

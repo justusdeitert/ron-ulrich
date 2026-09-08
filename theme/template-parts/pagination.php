@@ -17,5 +17,8 @@ if (! $links) {
 ?>
 <hr>
 <div class="pagination my-[30px] flex">
-    <?php echo $links; // phpcs:ignore WordPress.Security.EscapeOutput?>
+    <?php
+        // paginate_links() returns safe HTML
+        echo $links;
+    ?>
 </div>

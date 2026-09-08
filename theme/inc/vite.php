@@ -38,7 +38,7 @@ function theme_enqueue_assets(): void {
         }
     }
 
-    wp_enqueue_script('theme-main', $base . $entry['file'], [], null, true);
+    wp_enqueue_script_module('theme-main', $base . $entry['file'], [], null);
 }
 
 add_action('wp_enqueue_scripts', function (): void {

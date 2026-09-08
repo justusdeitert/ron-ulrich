@@ -5,7 +5,6 @@
  * @package ron-ulrich
  */
 
-$blog_description = function_exists('get_field') ? get_field('blog_description', 'option') : null;
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?> class="h-full<?php echo is_admin_bar_showing() ? ' logged-in' : ''; ?>">
@@ -23,10 +22,6 @@ $blog_description = function_exists('get_field') ? get_field('blog_description',
 
     <meta property="og:locale" content="de_DE"/>
     <meta name="application-name" content="ron-ulrich" />
-
-    <?php if ($blog_description) : ?>
-        <meta name="description" content="<?php echo esc_attr($blog_description); ?>" />
-    <?php endif; ?>
 
     <?php theme_social_meta(); ?>
 

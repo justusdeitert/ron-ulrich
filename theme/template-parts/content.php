@@ -5,10 +5,11 @@
  * @package ron-ulrich
  */
 
+$has_thumbnail = has_post_thumbnail();
 ?>
 <article <?php post_class('mt-[60px]'); ?>>
     <div class="grid gap-[30px] pb-[60px] sm:grid-cols-3">
-        <?php if (has_post_thumbnail()) : ?>
+        <?php if ($has_thumbnail) : ?>
             <?php $feature_image_url = theme_image_url(get_post_thumbnail_id(), 'large'); ?>
             <div>
                 <a href="<?php the_permalink(); ?>">
@@ -23,7 +24,7 @@
             </div>
 
             <a href="<?php the_permalink(); ?>">
-                <h2 class="mb-5<?php echo has_post_thumbnail() ? '' : ' md:w-[70%]'; ?>"><?php the_title(); ?></h2>
+                <h2 class="mb-5<?php echo $has_thumbnail ? '' : ' md:w-[70%]'; ?>"><?php the_title(); ?></h2>
             </a>
 
             <?php get_template_part('template-parts/content-description'); ?>
