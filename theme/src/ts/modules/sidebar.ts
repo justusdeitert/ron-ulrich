@@ -3,8 +3,8 @@
  * (unpublished from npm). Behaviour:
  *  - sidebar sits fixed on the left, off-canvas by default
  *  - #toggle-sidebar opens/closes it
- *  - clicking anywhere outside closes it
- *  - a dimmed overlay covers the page while open
+ *  - a dimmed overlay covers the page while open; clicking it (or
+ *    anything outside the sidebar, which it covers) closes it
  */
 const toggle = document.getElementById('toggle-sidebar');
 
@@ -18,17 +18,7 @@ if (toggle) {
     });
     body.appendChild(overlay);
 
-    toggle.addEventListener('click', (event) => {
-        event.stopPropagation();
+    toggle.addEventListener('click', () => {
         body.classList.toggle('sidebar-open');
-    });
-
-    document.addEventListener('click', (event) => {
-        if (
-            body.classList.contains('sidebar-open') &&
-            !(event.target as Element).closest('#sidebar, #toggle-sidebar')
-        ) {
-            body.classList.remove('sidebar-open');
-        }
     });
 }

@@ -13,11 +13,21 @@ if (! defined('ABSPATH')) {
 }
 
 /**
+ * Whether the theme runs in development mode: no build manifest, so
+ * assets are served by the Vite dev server instead of theme/assets/.
+ */
+function theme_is_dev(): bool {
+    static $is_dev = null;
+
+    return $is_dev ??= ! file_exists(get_template_directory() . '/assets/.vite/manifest.json');
+}
+
+/**
  * URL for a static file in theme/public/ (copied verbatim into the
  * build output). Served by the Vite dev server in development.
  */
 function theme_public_url(string $path): string {
-    if (! file_exists(get_template_directory() . '/assets/.vite/manifest.json')) {
+    if (theme_is_dev()) {
         return 'http://localhost:5174/' . ltrim($path, '/');
     }
 
@@ -25,9 +35,7 @@ function theme_public_url(string $path): string {
 }
 
 function theme_enqueue_assets(): void {
-    $assets_dir = get_template_directory() . '/assets';
-
-    if (! file_exists($assets_dir . '/.vite/manifest.json')) {
+    if (theme_is_dev()) {
         // Dev mode: load from Vite dev server
         wp_enqueue_script_module('vite-client', 'http://localhost:5174/@vite/client', [], null);
         wp_enqueue_script_module('theme-main', 'http://localhost:5174/ts/main.ts', [], null);
@@ -35,7 +43,7 @@ function theme_enqueue_assets(): void {
         return;
     }
 
-    $manifest = json_decode(file_get_contents($assets_dir . '/.vite/manifest.json'), true);
+    $manifest = json_decode(file_get_contents(get_template_directory() . '/assets/.vite/manifest.json'), true);
     $entry = $manifest['ts/main.ts'] ?? null;
 
     if (! $entry) {
