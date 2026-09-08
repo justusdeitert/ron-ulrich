@@ -25,6 +25,7 @@ return (new PhpCsFixer\Config())
         'concat_space' => ['spacing' => 'one'],
         'binary_operator_spaces' => ['default' => 'single_space'],
         'no_extra_blank_lines' => true,
+        'control_structure_braces' => true,
         'blank_line_before_statement' => [
             'statements' => ['return', 'if'],
         ],

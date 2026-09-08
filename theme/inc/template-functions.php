@@ -60,9 +60,9 @@ function theme_social_meta(): void {
 
     $description = (string) ($description ?? '');
     ?>
-    <?php if ($description) : ?>
+    <?php if ($description) { ?>
         <meta name="description" content="<?php echo esc_attr($description); ?>" />
-    <?php endif; ?>
+    <?php } ?>
     <meta property="og:type" content="website" />
     <meta property="og:title" content="<?php echo esc_attr($title); ?>" />
     <meta property="og:description" content="<?php echo esc_attr($description); ?>" />
@@ -70,10 +70,10 @@ function theme_social_meta(): void {
     <meta name="twitter:title" content="<?php echo esc_attr($title); ?>" />
     <meta name="twitter:description" content="<?php echo esc_attr($description); ?>" />
     <meta name="twitter:card" content="summary_large_image" />
-    <?php if ($image_url) : ?>
+    <?php if ($image_url) { ?>
         <meta property="og:image" content="<?php echo esc_url($image_url); ?>" />
         <meta name="twitter:image" content="<?php echo esc_url($image_url); ?>" />
-    <?php endif; ?>
+    <?php } ?>
     <?php
 }
 

@@ -13,12 +13,12 @@
     <div class="container">
         <hr class="mb-5">
         <div class="flex w-full">
-            <?php if ($copyright = get_field('copyright', 'option')) : ?>
+            <?php if ($copyright = get_field('copyright', 'option')) { ?>
                 <div>
                     <span><?php echo esc_html($copyright); ?></span>
                 </div>
-            <?php endif; ?>
-            <?php if (has_nav_menu('footer_navigation')) : ?>
+            <?php } ?>
+            <?php if (has_nav_menu('footer_navigation')) { ?>
                 <?php
                     wp_nav_menu([
                         'theme_location' => 'footer_navigation',
@@ -26,7 +26,7 @@
                         'container' => false,
                     ]);
                 ?>
-            <?php endif; ?>
+            <?php } ?>
         </div>
     </div>
 </footer>

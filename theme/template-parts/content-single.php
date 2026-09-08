@@ -16,11 +16,11 @@ $back_url = $posts_page_id ? get_permalink($posts_page_id) : home_url('/');
 <hr>
 
 <div class="flex py-5">
-    <?php if ($share_icons) : ?>
+    <?php if ($share_icons) { ?>
         <span><?php esc_html_e('Teilen auf:', 'ron-ulrich'); ?></span>
 
         <ul class="m-0 flex list-none gap-[15px] p-0">
-            <?php foreach ($share_icons as $row) : ?>
+            <?php foreach ($share_icons as $row) { ?>
                 <?php $share_icon_url = theme_image_url($row['icon'] ?? null, 'full'); ?>
                 <?php $share_icon_name = is_array($row['icon'] ?? null) ? ($row['icon']['name'] ?? '') : ''; ?>
                 <li>
@@ -28,16 +28,16 @@ $back_url = $posts_page_id ? get_permalink($posts_page_id) : home_url('/');
                         <img src="<?php echo esc_url($share_icon_url ?? ''); ?>" alt="<?php echo esc_attr($share_icon_name); ?>">
                     </a>
                 </li>
-            <?php endforeach; ?>
+            <?php } ?>
         </ul>
-    <?php endif; ?>
+    <?php } ?>
 
-    <?php if (! empty($published_in['activate'])) : ?>
+    <?php if (! empty($published_in['activate'])) { ?>
         <a class="ml-auto flex items-center" href="<?php echo esc_url($published_in['url']); ?>">
             <i class="material-icons mr-[5px]">link</i>
             <span><?php echo esc_html($published_in['name']); ?></span>
         </a>
-    <?php endif; ?>
+    <?php } ?>
 </div>
 
 <hr>
@@ -50,9 +50,9 @@ $back_url = $posts_page_id ? get_permalink($posts_page_id) : home_url('/');
 
         <h2 class="mb-5 lg:w-[70%]"><?php the_title(); ?></h2>
 
-        <?php if ($description = get_field('description')) : ?>
+        <?php if ($description = get_field('description')) { ?>
             <h3><?php echo wp_kses_post($description); ?></h3>
-        <?php endif; ?>
+        <?php } ?>
     </div>
 
     <?php the_content(); ?>

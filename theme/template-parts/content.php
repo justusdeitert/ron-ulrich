@@ -9,14 +9,14 @@ $has_thumbnail = has_post_thumbnail();
 ?>
 <article <?php post_class('mt-[60px]'); ?>>
     <div class="grid gap-[30px] pb-[60px] sm:grid-cols-3">
-        <?php if ($has_thumbnail) : ?>
+        <?php if ($has_thumbnail) { ?>
             <?php $feature_image_url = theme_image_url(get_post_thumbnail_id(), 'large'); ?>
             <div>
                 <a href="<?php the_permalink(); ?>">
                     <div class="h-full bg-cover bg-center bg-no-repeat max-sm:h-[250px]" style="background-image: url(<?php echo esc_url($feature_image_url ?? ''); ?>)"></div>
                 </a>
             </div>
-        <?php endif; ?>
+        <?php } ?>
 
         <div class="sm:col-span-2">
             <div class="mb-5 hidden text-[22px] font-light leading-8 [body.more-info_&]:block">

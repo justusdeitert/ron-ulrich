@@ -8,7 +8,7 @@
 get_header();
 ?>
 
-<?php if (is_home()) : ?>
+<?php if (is_home()) { ?>
     <hr>
     <div class="more-info my-2.5 flex cursor-pointer items-center">
         <div class="info-left flex items-center">
@@ -30,20 +30,20 @@ get_header();
             </select>
             <select name="archive-tag" class="archive-select">
                 <option value="/"><?php esc_html_e('Kategorie auswählen', 'ron-ulrich'); ?></option>
-                <?php foreach (get_tags() as $tag) : ?>
+                <?php foreach (get_tags() as $tag) { ?>
                     <option value="<?php echo esc_url(get_tag_link($tag->term_id)); ?>"><?php echo esc_html($tag->name); ?></option>
-                <?php endforeach; ?>
+                <?php } ?>
             </select>
         </div>
     </div>
     <hr>
-<?php endif; ?>
+<?php } ?>
 
 <?php
-while (have_posts()) :
+while (have_posts()) {
     the_post();
     get_template_part('template-parts/content', get_post_type());
-endwhile;
+}
 
 get_template_part('template-parts/pagination');
 

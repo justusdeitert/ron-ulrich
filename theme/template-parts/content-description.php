@@ -7,9 +7,9 @@
 
 ?>
 <a href="<?php the_permalink(); ?>">
-    <?php if ($description = get_field('description')) : ?>
+    <?php if ($description = get_field('description')) { ?>
         <p><?php echo wp_kses_post($description); ?></p>
-    <?php else : ?>
+    <?php } else { ?>
         <?php the_excerpt(); ?>
-    <?php endif; ?>
+    <?php } ?>
 </a>

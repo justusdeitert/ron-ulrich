@@ -36,9 +36,9 @@
         <a class="flex" href="<?php echo esc_url(home_url('/')); ?>">
             <?php $brand_image = get_field('brand_image', 'option'); ?>
             <?php $brand_image_url = theme_image_url($brand_image, 'medium_large'); ?>
-            <?php if ($brand_image_url) : ?>
+            <?php if ($brand_image_url) { ?>
                 <div class="brand-image mr-5 hidden aspect-square h-full bg-cover bg-center sm:block" style="background-image: url(<?php echo esc_url($brand_image_url); ?>)"></div>
-            <?php endif; ?>
+            <?php } ?>
             <div>
                 <h1><?php bloginfo('name'); ?></h1>
                 <h2><?php bloginfo('description'); ?></h2>
