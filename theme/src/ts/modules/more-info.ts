@@ -19,7 +19,11 @@ function initMoreInfo(): void {
 
 function initSelectFields(): void {
     for (const select of document.querySelectorAll<HTMLSelectElement>('.more-info select')) {
-        for (const option of Array.from(select.options)) {
+        select.addEventListener('change', () => {
+            document.location.href = select.value;
+        });
+
+        for (const option of select.options) {
             if (window.location.pathname === option.value) {
                 select.value = option.value;
             }

@@ -44,27 +44,14 @@ $published_in = get_field('published_in');
 
 <article <?php post_class('mt-[70px]'); ?>>
     <div class="mb-[30px]">
-        <?php if (get_the_tags()) : ?>
-            <div class="mb-5 flex flex-wrap">
-                <?php foreach (get_the_tags() as $tag) : ?>
-                    <span class="tag"><?php echo esc_html($tag->name); ?></span>
-                <?php endforeach; ?>
-            </div>
-        <?php endif; ?>
-
         <div class="mb-5 text-[22px] font-light leading-8">
-            <span><?php echo esc_html(get_the_date('j. F Y')); ?></span>
-            <?php if (! empty($published_in['activate'])) : ?>
-                <?php echo ' / '; ?>
-                <?php esc_html_e('published in:', 'ron-ulrich'); ?>
-                <a href="<?php echo esc_url($published_in['url']); ?>"><?php echo esc_html($published_in['name']); ?></a>
-            <?php endif; ?>
+            <?php get_template_part('template-parts/post-meta'); ?>
         </div>
 
         <h2 class="mb-5 lg:w-[70%]"><?php the_title(); ?></h2>
 
-        <?php if (get_field('description')) : ?>
-            <h3><?php echo wp_kses_post(get_field('description')); ?></h3>
+        <?php if ($description = get_field('description')) : ?>
+            <h3><?php echo wp_kses_post($description); ?></h3>
         <?php endif; ?>
     </div>
 

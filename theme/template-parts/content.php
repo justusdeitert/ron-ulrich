@@ -5,7 +5,6 @@
  * @package ron-ulrich
  */
 
-$published_in = get_field('published_in');
 ?>
 <article <?php post_class('mt-[60px]'); ?>>
     <div class="grid gap-[30px] pb-[60px] sm:grid-cols-3">
@@ -20,35 +19,14 @@ $published_in = get_field('published_in');
 
         <div class="sm:col-span-2">
             <div class="mb-5 hidden text-[22px] font-light leading-8 [body.more-info_&]:block">
-                <?php if (get_the_tags()) : ?>
-                    <div class="mb-5 flex flex-wrap">
-                        <?php foreach (get_the_tags() as $tag) : ?>
-                            <a href="<?php echo esc_url(get_tag_link($tag->term_id)); ?>">
-                                <span class="tag"><?php echo esc_html($tag->name); ?></span>
-                            </a>
-                        <?php endforeach; ?>
-                    </div>
-                <?php endif; ?>
-
-                <span><?php echo esc_html(get_the_date('j. F Y')); ?></span>
-                <?php if (! empty($published_in['activate'])) : ?>
-                    <?php echo ' / '; ?>
-                    <?php esc_html_e('published in:', 'ron-ulrich'); ?>
-                    <a href="<?php echo esc_url($published_in['url']); ?>"><?php echo esc_html($published_in['name']); ?></a>
-                <?php endif; ?>
+                <?php get_template_part('template-parts/post-meta', null, ['link_tags' => true]); ?>
             </div>
 
             <a href="<?php the_permalink(); ?>">
                 <h2 class="mb-5<?php echo has_post_thumbnail() ? '' : ' md:w-[70%]'; ?>"><?php the_title(); ?></h2>
             </a>
 
-            <a href="<?php the_permalink(); ?>">
-                <?php if (get_field('description')) : ?>
-                    <p><?php echo wp_kses_post(get_field('description')); ?></p>
-                <?php else : ?>
-                    <?php the_excerpt(); ?>
-                <?php endif; ?>
-            </a>
+            <?php get_template_part('template-parts/content-description'); ?>
 
             <a href="<?php the_permalink(); ?>">
                 <div class="flex items-center">

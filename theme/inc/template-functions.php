@@ -34,9 +34,7 @@ function theme_image_url($value, string $size = 'large'): ?string {
  * Canonical post URL with the ?job= tracking parameter.
  */
 function theme_share_url(): string {
-    global $wp;
-
-    return add_query_arg('job', get_post()->post_name, home_url($wp->request . '/'));
+    return add_query_arg('job', get_post()->post_name, get_permalink());
 }
 
 /**
@@ -63,10 +61,10 @@ function theme_social_meta(): void {
     ?>
     <meta property="og:type" content="website" />
     <meta property="og:title" content="<?php echo esc_attr($title); ?>" />
-    <meta property="og:description" content="<?php echo esc_attr($description); ?>" />
+    <meta property="og:description" content="<?php echo esc_attr($description ?? ''); ?>" />
     <meta property="og:url" content="<?php echo esc_url($url); ?>" />
     <meta name="twitter:title" content="<?php echo esc_attr($title); ?>" />
-    <meta name="twitter:description" content="<?php echo esc_attr($description); ?>" />
+    <meta name="twitter:description" content="<?php echo esc_attr($description ?? ''); ?>" />
     <meta name="twitter:card" content="summary_large_image" />
     <?php if ($image_url) : ?>
         <meta property="og:image" content="<?php echo esc_url($image_url); ?>" />
