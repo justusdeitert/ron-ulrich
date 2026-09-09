@@ -13,6 +13,16 @@ if (! defined('ABSPATH')) {
 }
 
 /**
+ * Origin of the Vite dev server. Overridable via THEME_VITE_DEV_ORIGIN
+ * (e.g. when accessing the Docker stack from another machine on the LAN).
+ */
+const THEME_VITE_DEV_ORIGIN = 'http://localhost:5174';
+
+function theme_vite_dev_origin(): string {
+    return defined('THEME_VITE_DEV_ORIGIN_OVERRIDE') ? THEME_VITE_DEV_ORIGIN_OVERRIDE : THEME_VITE_DEV_ORIGIN;
+}
+
+/**
  * Whether the theme runs in development mode: no build manifest, so
  * assets are served by the Vite dev server instead of theme/assets/.
  */
@@ -28,7 +38,7 @@ function theme_is_dev(): bool {
  */
 function theme_public_url(string $path): string {
     if (theme_is_dev()) {
-        return 'http://localhost:5174/' . ltrim($path, '/');
+        return theme_vite_dev_origin() . '/' . ltrim($path, '/');
     }
 
     return get_template_directory_uri() . '/assets/' . ltrim($path, '/');
@@ -37,8 +47,8 @@ function theme_public_url(string $path): string {
 function theme_enqueue_assets(): void {
     if (theme_is_dev()) {
         // Dev mode: load from Vite dev server
-        wp_enqueue_script_module('vite-client', 'http://localhost:5174/@vite/client', [], null);
-        wp_enqueue_script_module('theme-main', 'http://localhost:5174/ts/main.ts', [], null);
+        wp_enqueue_script_module('vite-client', theme_vite_dev_origin() . '/@vite/client', [], null);
+        wp_enqueue_script_module('theme-main', theme_vite_dev_origin() . '/ts/main.ts', [], null);
 
         return;
     }
@@ -68,3 +78,14 @@ add_action('wp_enqueue_scripts', function (): void {
         wp_enqueue_script('comment-reply');
     }
 }, 100);
+
+// CF7 ships its CSS/JS on every page; only load them where a form exists.
+add_filter('wpcf7_load_js', '__return_false');
+add_filter('wpcf7_load_css', '__return_false');
+
+add_action('wp_enqueue_scripts', function (): void {
+    if (function_exists('wpcf7_enqueue_scripts') && is_singular() && has_shortcode(get_post()->post_content ?? '', 'contact-form-7')) {
+        wpcf7_enqueue_scripts();
+        wpcf7_enqueue_styles();
+    }
+}, 200);

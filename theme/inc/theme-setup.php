@@ -28,6 +28,11 @@ add_action('after_setup_theme', function (): void {
 }, 20);
 
 add_action('admin_menu', function (): void {
+    // Keep admin pages reachable for administrators; hide them from editors.
+    if (current_user_can('manage_options')) {
+        return;
+    }
+
     remove_menu_page('edit-comments.php');
     remove_menu_page('tools.php');
     remove_menu_page('users.php');
