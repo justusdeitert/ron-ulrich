@@ -19,7 +19,7 @@ $back_url = $posts_page_id ? get_permalink($posts_page_id) : home_url('/');
     <?php if ($share_icons) { ?>
         <span><?php esc_html_e('Teilen auf:', 'ron-ulrich'); ?></span>
 
-        <ul class="m-0 flex list-none gap-4 p-0">
+        <ul class="m-0 ml-4 flex list-none gap-4 p-0">
             <?php foreach ($share_icons as $row) { ?>
                 <?php $share_icon_url = theme_image_url($row['icon'] ?? null, 'full'); ?>
                 <?php $share_icon_name = is_array($row['icon'] ?? null) ? ($row['icon']['name'] ?? '') : ''; ?>
