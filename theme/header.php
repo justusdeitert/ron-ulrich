@@ -28,7 +28,7 @@
     <?php wp_head(); ?>
 </head>
 
-<body <?php body_class('flex h-full flex-col font-sans text-base leading-normal text-[#212529]'); ?>>
+<body <?php body_class('flex h-full flex-col font-sans text-base leading-normal text-ink'); ?>>
 <?php wp_body_open(); ?>
 
 <header class="mt-10 mb-20">
@@ -55,7 +55,7 @@
         <span id="toggle-sidebar" class="ml-auto cursor-pointer sm:hidden">
             <i class="material-icons text-5xl">menu</i>
         </span>
-        <div id="sidebar" class="fixed top-0 -left-72 z-50 h-full w-72 overflow-y-auto bg-white transition-[left] duration-300 [.sidebar-open_&]:left-0 [.sidebar-open_&]:shadow-[2px_0_8px_rgba(0,0,0,0.15)]">
+        <div id="sidebar" class="fixed top-0 -left-72 z-50 h-full w-72 overflow-y-auto bg-white transition-[left] duration-300 [.sidebar-open_&]:left-0 [.sidebar-open_&]:shadow-sidebar">
             <div id="sidebar-wrapper" class="flex h-full items-center justify-center text-center">
                 <?php
                     wp_nav_menu([

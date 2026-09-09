@@ -7,7 +7,7 @@
 
 a,
 a:hover {
-    color: #000;
+    color: theme('colors.ink.950');
     text-decoration: none;
 }
 
@@ -60,11 +60,11 @@ ol { list-style: decimal; }
 
 hr {
     margin: 0;
-    border: 1px solid rgba(204, 204, 204, 0.6);
+    border: 1px solid theme('colors.line.DEFAULT');
 }
 
 article p {
-    color: #3e3e3e;
+    color: theme('colors.ink.800');
 }
 
 /* WordPress generated classes (media alignment, captions) */
@@ -111,7 +111,7 @@ article p {
 
 .wp-caption-text {
     font-size: 90%;
-    color: #6c757d;
+    color: theme('colors.ink.600');
 }
 
 .screen-reader-text {
@@ -191,12 +191,12 @@ figcaption {
         height: 2rem;
         line-height: 2rem;
         text-align: center;
-        border: 2px solid #000;
+        border: 2px solid theme('colors.ink.950');
         margin-right: 1rem;
 
         &.current,
         &:hover {
-            background-color: #dbdbdb;
+            background-color: theme('colors.highlight');
         }
     }
 
@@ -218,7 +218,7 @@ figcaption {
     height: 1.75rem;
     padding: 0 1.75rem 0 0.75rem;
     line-height: 1.625rem;
-    color: #495057;
+    color: theme('colors.ink.700');
     vertical-align: middle;
     cursor: pointer;
     border: none;
@@ -240,7 +240,7 @@ figcaption {
 
 .wpcf7-not-valid-tip {
     margin-top: 0.25rem;
-    color: rgba(255, 0, 0, 0.6) !important;
+    color: theme('colors.danger') !important;
 }
 
 input,
