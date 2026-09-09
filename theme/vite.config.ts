@@ -2,6 +2,7 @@ import path from 'node:path';
 import UnoCSS from 'unocss/vite';
 import type { UserConfig } from 'vite';
 import { defineConfig } from 'vite';
+import fullReload from 'vite-plugin-full-reload';
 import unoConfig from './uno.config.ts';
 
 export default defineConfig(async ({ mode }) => {
@@ -60,7 +61,12 @@ export default defineConfig(async ({ mode }) => {
         css: {
             devSourcemap: true,
         },
-        plugins: [UnoCSS(unoConfig)],
+        plugins: [
+            UnoCSS(unoConfig),
+            // PHP templates are outside the Vite module graph (root is
+            // src/), so reload the full page when one changes.
+            fullReload(['**/*.php'], { root: import.meta.dirname }),
+        ],
         server: {
             host: '0.0.0.0',
             port: 5173,
@@ -69,7 +75,9 @@ export default defineConfig(async ({ mode }) => {
             // The container publishes 5174 -> 5173 (5173 is used by another project).
             origin: `http://${process.env.HOST_LAN_IP || 'localhost'}:5174`,
             hmr: {
-                port: 5174,
+                // The WebSocket server stays on 5173 inside the container;
+                // the browser must dial the published host port 5174.
+                clientPort: 5174,
             },
         },
         resolve: {
