@@ -7,7 +7,7 @@
 
 ?>
 <!doctype html>
-<html <?php language_attributes(); ?> class="h-full<?php echo is_admin_bar_showing() ? ' !pt-[32px] max-[782px]:!pt-[46px]' : ''; ?>">
+<html <?php language_attributes(); ?> class="h-full">
 <head>
     <meta charset="<?php bloginfo('charset'); ?>">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
