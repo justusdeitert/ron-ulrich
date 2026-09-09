@@ -37,7 +37,8 @@
             <?php $brand_image = get_field('brand_image', 'option'); ?>
             <?php $brand_image_url = theme_image_url($brand_image, 'medium_large'); ?>
             <?php if ($brand_image_url) { ?>
-                <div class="brand-image mr-5 hidden aspect-square h-full bg-cover bg-center sm:block" style="background-image: url(<?php echo esc_url($brand_image_url); ?>)"></div>
+                <?php // Fixed square, matches the height of the h1 + h2 brand text block. ?>
+                <div class="brand-image mr-5 hidden size-[102px] shrink-0 bg-cover bg-center sm:block" style="background-image: url(<?php echo esc_url($brand_image_url); ?>)"></div>
             <?php } ?>
             <div>
                 <h1><?php bloginfo('name'); ?></h1>
