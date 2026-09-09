@@ -16,7 +16,7 @@ if (! $links) {
 }
 ?>
 <hr>
-<div class="pagination my-[30px] flex">
+<div class="pagination my-8 flex">
     <?php
         // paginate_links() returns safe HTML
         echo $links;

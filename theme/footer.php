@@ -9,7 +9,7 @@
     </div>
 </main>
 
-<footer class="pt-[70px] pb-10">
+<footer class="pt-20 pb-10">
     <div class="container">
         <hr class="mb-5">
         <div class="flex w-full">

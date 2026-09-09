@@ -6,7 +6,7 @@
  */
 
 ?>
-<div class="mb-[60px]">
+<div class="mb-16">
     <h2><?php echo wp_kses_post(theme_page_title()); ?></h2>
     <hr>
 </div>

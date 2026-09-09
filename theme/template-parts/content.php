@@ -7,19 +7,19 @@
 
 $has_thumbnail = has_post_thumbnail();
 ?>
-<article <?php post_class('mt-[60px]'); ?>>
-    <div class="grid gap-[30px] pb-[60px] sm:grid-cols-3">
+<article <?php post_class('mt-16'); ?>>
+    <div class="grid gap-8 pb-16 sm:grid-cols-3">
         <?php if ($has_thumbnail) { ?>
             <?php $feature_image_url = theme_image_url(get_post_thumbnail_id(), 'large'); ?>
             <div>
                 <a href="<?php the_permalink(); ?>">
-                    <div class="h-full bg-cover bg-center bg-no-repeat max-sm:h-[250px]" style="background-image: url(<?php echo esc_url($feature_image_url ?? ''); ?>)"></div>
+                    <div class="h-full bg-cover bg-center bg-no-repeat max-sm:h-64" style="background-image: url(<?php echo esc_url($feature_image_url ?? ''); ?>)"></div>
                 </a>
             </div>
         <?php } ?>
 
         <div class="sm:col-span-2">
-            <div class="mb-5 hidden text-[22px] font-light leading-8 [body.more-info_&]:block">
+            <div class="mb-5 hidden text-xl font-light leading-8 [body.more-info_&]:block">
                 <?php get_template_part('template-parts/post-meta', null, ['link_tags' => true]); ?>
             </div>
 
@@ -31,7 +31,7 @@ $has_thumbnail = has_post_thumbnail();
 
             <a href="<?php the_permalink(); ?>">
                 <div class="flex items-center">
-                    <i class="material-icons text-[28px]">arrow_right</i>
+                    <i class="material-icons text-3xl">arrow_right</i>
                     <span>weiterlesen</span>
                 </div>
             </a>

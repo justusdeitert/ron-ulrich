@@ -31,7 +31,7 @@
 <body <?php body_class('flex h-full flex-col font-sans text-base leading-normal text-[#212529]'); ?>>
 <?php wp_body_open(); ?>
 
-<header class="mt-10 mb-[70px]">
+<header class="mt-10 mb-20">
     <div class="container flex">
         <a class="flex" href="<?php echo esc_url(home_url('/')); ?>">
             <?php $brand_image = get_field('brand_image', 'option'); ?>
@@ -48,14 +48,14 @@
             <?php
                 wp_nav_menu([
                     'theme_location' => 'header_navigation',
-                    'menu_class' => 'm-0 flex min-w-[100px] list-none flex-col items-end gap-2.5 p-0 lg:min-w-0 lg:flex-row lg:items-start lg:gap-10',
+                    'menu_class' => 'm-0 flex min-w-24 list-none flex-col items-end gap-2.5 p-0 lg:min-w-0 lg:flex-row lg:items-start lg:gap-10',
                 ]);
             ?>
         </nav>
         <span id="toggle-sidebar" class="ml-auto cursor-pointer sm:hidden">
-            <i class="material-icons text-[52px]">menu</i>
+            <i class="material-icons text-5xl">menu</i>
         </span>
-        <div id="sidebar" class="fixed top-0 -left-[300px] z-[3000] h-full w-[300px] overflow-y-auto bg-white transition-[left] duration-300 [.sidebar-open_&]:left-0 [.sidebar-open_&]:shadow-[2px_0_8px_rgba(0,0,0,0.15)]">
+        <div id="sidebar" class="fixed top-0 -left-72 z-50 h-full w-72 overflow-y-auto bg-white transition-[left] duration-300 [.sidebar-open_&]:left-0 [.sidebar-open_&]:shadow-[2px_0_8px_rgba(0,0,0,0.15)]">
             <div id="sidebar-wrapper" class="flex h-full items-center justify-center text-center">
                 <?php
                     wp_nav_menu([

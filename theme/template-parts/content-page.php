@@ -6,6 +6,6 @@
  */
 
 ?>
-<div class="[&_.wp-block-separator]:my-[60px]">
+<div class="[&_.wp-block-separator]:my-16">
     <?php the_content(); ?>
 </div>

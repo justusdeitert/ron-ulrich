@@ -16,9 +16,9 @@ export default defineConfig({
     },
     shortcuts: {
         // Bootstrap's .container with the site's max-widths (md 720px, lg 960px)
-        container: 'w-full px-[15px] mx-auto md:max-w-[720px] lg:max-w-[960px]',
+        container: 'w-full px-4 mx-auto md:max-w-[720px] lg:max-w-[960px]',
         // Tag pill on posts
-        tag: 'mr-2.5 inline-block border-2 border-solid border-black px-[5px] py-[2px] text-base hover:bg-[#DBDBDB]',
+        tag: 'mr-2.5 inline-block border-2 border-solid border-black px-1.5 py-0.5 text-base hover:bg-[#DBDBDB]',
         // Warning box on 404 and empty search pages (Bootstrap's .alert-warning)
         'alert-warning': 'relative mb-4 rounded border border-[#ffeeba] bg-[#fff3cd] px-5 py-3 text-[#856404]',
     },

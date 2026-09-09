@@ -19,7 +19,7 @@ $back_url = $posts_page_id ? get_permalink($posts_page_id) : home_url('/');
     <?php if ($share_icons) { ?>
         <span><?php esc_html_e('Teilen auf:', 'ron-ulrich'); ?></span>
 
-        <ul class="m-0 flex list-none gap-[15px] p-0">
+        <ul class="m-0 flex list-none gap-4 p-0">
             <?php foreach ($share_icons as $row) { ?>
                 <?php $share_icon_url = theme_image_url($row['icon'] ?? null, 'full'); ?>
                 <?php $share_icon_name = is_array($row['icon'] ?? null) ? ($row['icon']['name'] ?? '') : ''; ?>
@@ -34,7 +34,7 @@ $back_url = $posts_page_id ? get_permalink($posts_page_id) : home_url('/');
 
     <?php if (! empty($published_in['activate'])) { ?>
         <a class="ml-auto flex items-center" href="<?php echo esc_url($published_in['url']); ?>">
-            <i class="material-icons mr-[5px]">link</i>
+            <i class="material-icons mr-1">link</i>
             <span><?php echo esc_html($published_in['name']); ?></span>
         </a>
     <?php } ?>
@@ -42,9 +42,9 @@ $back_url = $posts_page_id ? get_permalink($posts_page_id) : home_url('/');
 
 <hr>
 
-<article <?php post_class('mt-[70px]'); ?>>
-    <div class="mb-[30px]">
-        <div class="mb-5 text-[22px] font-light leading-8">
+<article <?php post_class('mt-16'); ?>>
+    <div class="mb-8">
+        <div class="mb-5 text-xl font-light leading-8">
             <?php get_template_part('template-parts/post-meta', null, ['published_in' => $published_in]); ?>
         </div>
 
@@ -59,6 +59,6 @@ $back_url = $posts_page_id ? get_permalink($posts_page_id) : home_url('/');
 </article>
 
 <a class="back-link mt-2.5 flex items-center" href="<?php echo esc_url($back_url); ?>">
-    <i class="material-icons text-[28px]">arrow_left</i>
+    <i class="material-icons text-3xl">arrow_left</i>
     <span class="text-xl"><?php esc_html_e('zurück', 'ron-ulrich'); ?></span>
 </a>
