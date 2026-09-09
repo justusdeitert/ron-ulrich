@@ -31,10 +31,10 @@ function theme_image_url($value, string $size = 'large'): ?string {
 }
 
 /**
- * Canonical post URL with the ?job= tracking parameter.
+ * Canonical post URL used for share links and social meta.
  */
 function theme_share_url(): string {
-    return add_query_arg('job', get_post()->post_name, get_permalink());
+    return get_permalink();
 }
 
 /**
@@ -94,7 +94,7 @@ function theme_page_title(): string {
     }
 
     if (is_search()) {
-        return sprintf(__('Search Results for %s', 'ron-ulrich'), get_search_query());
+        return sprintf(__('Search Results for %s', 'ron-ulrich'), get_search_query(false));
     }
 
     if (is_404()) {
