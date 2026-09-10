@@ -23,7 +23,7 @@
                     <?php
                         wp_nav_menu([
                             'theme_location' => 'footer_navigation',
-                            'menu_class' => 'my-0 flex list-none flex-wrap gap-x-8 gap-y-2 p-0 text-xs font-semibold uppercase tracking-[0.12em] text-ink-600 [&_a:hover]:text-accent',
+                            'menu_class' => 'my-0 flex list-none flex-wrap gap-x-8 gap-y-2 p-0 text-sm font-semibold uppercase tracking-[0.08em] text-ink-600 [&_a:hover]:text-accent',
                             'container' => false,
                         ]);
                     ?>
