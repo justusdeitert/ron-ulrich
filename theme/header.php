@@ -55,18 +55,25 @@
                 ]);
             ?>
         </nav>
-        <span id="toggle-sidebar" class="ml-auto cursor-pointer leading-none text-ink-900 sm:hidden">
-            <i class="material-icons !text-4xl">menu</i>
-        </span>
-        <div id="sidebar" class="fixed top-0 -left-72 z-[3000] h-full w-72 overflow-y-auto bg-paper-raised transition-[left] duration-300 [.sidebar-open_&]:left-0 [.sidebar-open_&]:shadow-sidebar">
-            <div id="sidebar-wrapper" class="flex h-full items-center justify-center text-center">
+        <button id="toggle-sidebar" type="button" class="ml-auto cursor-pointer border-0 bg-transparent p-0 leading-none text-ink-900 sm:hidden" aria-controls="sidebar" aria-expanded="false" aria-label="<?php esc_attr_e('Menü öffnen', 'ron-ulrich'); ?>">
+            <i class="material-icons !text-4xl" aria-hidden="true">menu</i>
+        </button>
+        <div id="sidebar" class="fixed top-0 -left-72 z-[3000] flex h-full w-72 flex-col bg-paper-raised transition-[left] duration-300 sm:hidden [.sidebar-open_&]:left-0 [.sidebar-open_&]:shadow-sidebar">
+            <!-- py-8 matches the header's pt-8, so the close icon lines up with the burger it replaces -->
+            <div class="flex items-center justify-between border-0 border-b border-solid border-line px-6 py-8">
+                <span class="kicker text-base text-ink-900"><?php bloginfo('name'); ?></span>
+                <button id="close-sidebar" type="button" class="cursor-pointer border-0 bg-transparent p-0 leading-none text-ink-900" aria-label="<?php esc_attr_e('Menü schließen', 'ron-ulrich'); ?>">
+                    <i class="material-icons !text-4xl" aria-hidden="true">close</i>
+                </button>
+            </div>
+            <nav class="flex-1 overflow-y-auto">
                 <?php
                     wp_nav_menu([
                         'theme_location' => 'header_navigation',
-                        'menu_class' => 'm-0 flex list-none flex-col items-center gap-6 p-0 [&_a]:font-serif [&_a]:text-2xl',
+                        'menu_class' => 'm-0 flex list-none flex-col p-0 [&_li]:border-0 [&_li]:border-b [&_li]:border-solid [&_li]:border-line [&_li:last-child]:border-b-0 [&_a]:block [&_a]:px-6 [&_a]:py-4 [&_a]:font-serif [&_a]:text-xl [&_a]:text-ink-900 [&_.current-menu-item>a]:bg-accent-soft [&_.current-menu-item>a]:text-accent',
                     ]);
                 ?>
-            </div>
+            </nav>
         </div>
     </div>
 </header>
