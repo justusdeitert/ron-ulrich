@@ -5,7 +5,8 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "build": "vite build",
+        "build": "yarn gen:theme-json && vite build",
+        "gen:theme-json": "node --experimental-strip-types scripts/generate-theme-json.ts",
         "lint": "biome check",
         "lint:fix": "biome check --fix",
         "format": "biome format --write"

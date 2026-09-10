@@ -22,7 +22,6 @@ add_action('after_setup_theme', function (): void {
     add_theme_support('customize-selective-refresh-widgets');
     add_theme_support('editor-styles');
     add_theme_support('responsive-embeds');
-    add_theme_support('align-wide');
 
     load_theme_textdomain('ron-ulrich', get_template_directory() . '/lang');
 }, 20);

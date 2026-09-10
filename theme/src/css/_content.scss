@@ -1,0 +1,58 @@
+/*
+ * Reading copy for post and page content.
+ *
+ * Exposed as a mixin because the two consumers need different scopes:
+ * main.scss nests it under `article, .entry-content`, editor.scss emits
+ * it at root level so WordPress can prefix it with `.editor-styles-wrapper`.
+ */
+
+@mixin reading-copy {
+    p,
+    ul,
+    ol,
+    dl {
+        font-family: theme('fontFamily.serif');
+        font-size: 1.0625rem;
+        line-height: 1.75;
+        color: theme('colors.ink.800');
+
+        @media (min-width: 768px) {
+            font-size: 1.125rem;
+        }
+    }
+
+    /* Inline links in running text keep the editorial underline */
+    p > a,
+    li > a {
+        text-decoration: underline;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 0.18em;
+        text-decoration-color: theme('colors.line.strong');
+
+        &:hover {
+            color: theme('colors.accent.DEFAULT');
+            text-decoration-color: currentcolor;
+        }
+    }
+
+    blockquote {
+        margin-left: 0;
+        margin-right: 0;
+        padding-left: 1.25rem;
+        border-left: 2px solid theme('colors.ink.900');
+
+        p {
+            font-size: 1.25rem;
+            line-height: 1.5;
+            color: theme('colors.ink.900');
+
+            @media (min-width: 768px) {
+                font-size: 1.5rem;
+            }
+        }
+
+        p:last-child {
+            margin-bottom: 0;
+        }
+    }
+}

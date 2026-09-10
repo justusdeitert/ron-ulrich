@@ -44,6 +44,11 @@ function theme_public_url(string $path): string {
     return get_template_directory_uri() . '/assets/' . ltrim($path, '/');
 }
 
+/** Webfonts used by the theme, loaded in the frontend head and in the editor canvas. */
+function theme_google_fonts_url(): string {
+    return 'https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..500&family=Source+Sans+3:ital,wght@0,400..700;1,400..600&display=swap';
+}
+
 function theme_enqueue_assets(): void {
     if (theme_is_dev()) {
         // Dev mode: load from Vite dev server
@@ -78,6 +83,30 @@ add_action('wp_enqueue_scripts', function (): void {
         wp_enqueue_script('comment-reply');
     }
 }, 100);
+
+/**
+ * Theme-relative path of the built editor stylesheet, for add_editor_style().
+ * Not hashed: WordPress inlines the file from disk, so there is nothing to
+ * cache bust, and the editor keeps working while the dev server runs. It shows
+ * the last `make build` result, since add_editor_style() has no dev equivalent.
+ */
+function theme_editor_style_path(): ?string {
+    return file_exists(get_template_directory() . '/assets/css/editor.css') ? 'assets/css/editor.css' : null;
+}
+
+add_action('after_setup_theme', function (): void {
+    if ($path = theme_editor_style_path()) {
+        add_editor_style($path);
+    }
+}, 30);
+
+add_action('enqueue_block_assets', function (): void {
+    // add_editor_style() rewrites selectors to scope them to the canvas, which
+    // would mangle @font-face rules, so the webfonts are enqueued directly.
+    if (is_admin()) {
+        wp_enqueue_style('theme-fonts', theme_google_fonts_url(), [], null);
+    }
+});
 
 // CF7 ships its CSS/JS on every page; only load them where a form exists.
 add_filter('wpcf7_load_js', '__return_false');

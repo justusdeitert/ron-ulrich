@@ -19,7 +19,7 @@ $has_thumbnail = has_post_thumbnail();
         <?php } ?>
 
         <div class="sm:col-span-2">
-            <div class="mb-3 font-sans text-sm font-semibold uppercase tracking-[0.12em] text-ink-600">
+            <div class="kicker mb-3">
                 <?php get_template_part('template-parts/post-meta', null, ['inline' => true]); ?>
             </div>
 
@@ -31,7 +31,7 @@ $has_thumbnail = has_post_thumbnail();
                 <?php get_template_part('template-parts/content-description'); ?>
             </div>
 
-            <a class="inline-flex items-center gap-1 font-sans text-sm font-semibold uppercase tracking-[0.12em] text-ink-600 transition-colors hover:text-accent" href="<?php the_permalink(); ?>">
+            <a class="kicker inline-flex items-center gap-1 transition-colors hover:text-accent" href="<?php the_permalink(); ?>">
                 <span><?php esc_html_e('weiterlesen', 'ron-ulrich'); ?></span>
                 <i class="material-icons !text-xl">arrow_right_alt</i>
             </a>

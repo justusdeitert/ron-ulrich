@@ -1,0 +1,88 @@
+/*
+ * Base element typography. Loaded at root level by both main.scss
+ * (frontend) and editor.scss (block editor canvas), so headings and
+ * spacing read the same in both places.
+ */
+
+/* Shared so editor.scss can size the post title like a frontend page header */
+$font-size-h2: clamp(1.625rem, 1.2rem + 1.5vw, 2.125rem);
+
+::selection {
+    background: theme('colors.accent.soft');
+    color: theme('colors.ink.900');
+}
+
+/* No blanket hover colour: it would bleed into linked headlines. Links that
+ * should react carry their own hover utility, or the prose rule below. */
+a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-family: theme('fontFamily.serif');
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: -0.011em;
+    text-wrap: balance;
+}
+
+/* Fluid display sizes so headlines stay in proportion from phone to desktop */
+h1 { font-size: clamp(2rem, 1.35rem + 2.2vw, 2.75rem); }
+h2 { font-size: $font-size-h2; }
+h4 { font-size: 1.375rem; }
+h5 { font-size: 1.125rem; }
+
+/* h3 is the standfirst/lead under article and teaser headlines */
+h3 {
+    font-size: clamp(1.125rem, 1rem + 0.5vw, 1.3125rem);
+    font-weight: 400;
+    line-height: 1.55;
+    letter-spacing: 0;
+    color: theme('colors.ink.700');
+}
+
+h6 {
+    font-family: theme('fontFamily.sans');
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: theme('colors.ink.600');
+}
+
+p,
+ul,
+ol,
+dl,
+blockquote {
+    margin-top: 0;
+    margin-bottom: 1.25rem;
+}
+
+ul,
+ol {
+    padding-left: 1.5rem;
+
+    ul,
+    ol {
+        margin-bottom: 0;
+    }
+}
+
+ul { list-style: disc; }
+ol { list-style: decimal; }
+
+hr {
+    margin: 0;
+    border: 0;
+    border-top: 1px solid theme('colors.line.DEFAULT');
+}

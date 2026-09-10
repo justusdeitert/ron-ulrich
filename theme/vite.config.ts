@@ -12,11 +12,14 @@ export default defineConfig(async ({ mode }) => {
     if (!isProduction) {
         const fs = await import('node:fs');
 
-        // Delete the assets folder in development mode so the theme
-        // falls back to the Vite dev server (see theme/functions.php)
-        if (fs.existsSync(assetsPath)) {
-            fs.rmSync(assetsPath, { recursive: true, force: true });
-            console.log('Assets folder deleted during development mode.');
+        // Delete the build manifest in development mode so the theme falls back
+        // to the Vite dev server (see inc/vite.php). The rest of assets/ stays:
+        // the editor stylesheet has no dev server equivalent.
+        const manifestPath = path.resolve(assetsPath, '.vite');
+
+        if (fs.existsSync(manifestPath)) {
+            fs.rmSync(manifestPath, { recursive: true, force: true });
+            console.log('Build manifest deleted during development mode.');
         }
     }
 
@@ -34,6 +37,8 @@ export default defineConfig(async ({ mode }) => {
             rollupOptions: {
                 input: {
                     main: 'src/ts/main.ts',
+                    // Block editor canvas, loaded through add_editor_style() in inc/vite.php
+                    editor: 'src/css/editor.scss',
                 },
                 output: {
                     entryFileNames: 'js/[name]-[hash].js',
@@ -42,7 +47,9 @@ export default defineConfig(async ({ mode }) => {
                         const name = assetInfo.name ?? '';
 
                         if (name.endsWith('.css')) {
-                            return 'css/[name]-[hash][extname]';
+                            // add_editor_style() inlines this one from disk, so it needs a
+                            // stable name and there is nothing to cache bust.
+                            return name === 'editor.css' ? 'css/editor.css' : 'css/[name]-[hash][extname]';
                         }
 
                         if (['.ttf', '.woff', '.woff2'].some((ext) => name.endsWith(ext))) {

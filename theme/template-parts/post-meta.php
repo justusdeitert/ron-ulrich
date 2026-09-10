@@ -26,7 +26,7 @@ $tags = get_the_tags() ?: [];
     <?php if ($tags) { ?>
         <div class="mb-3 flex flex-wrap gap-2">
             <?php foreach ($tags as $tag) { ?>
-                <a class="post-tag" href="<?php echo esc_url(get_tag_link($tag->term_id)); ?>"><?php echo esc_html($tag->name); ?></a>
+                <a class="chip" href="<?php echo esc_url(get_tag_link($tag->term_id)); ?>"><?php echo esc_html($tag->name); ?></a>
             <?php } ?>
         </div>
     <?php } ?>

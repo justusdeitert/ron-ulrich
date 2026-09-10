@@ -6,7 +6,7 @@
         "useIgnoreFile": true
     },
     "files": {
-        "includes": ["src/**/*", "vite.config.ts", "uno.config.ts"]
+        "includes": ["src/**/*", "scripts/**/*", "vite.config.ts", "uno.config.ts", "tokens.ts"]
     },
     "formatter": {
         "enabled": true,

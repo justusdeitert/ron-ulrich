@@ -1,0 +1,77 @@
+/*
+ * Block editor canvas stylesheet, registered via add_editor_style()
+ * in inc/vite.php. WordPress prefixes every selector in here with
+ * `.editor-styles-wrapper`, so only write root-level selectors: the
+ * frontend wrappers (`article`, `.entry-content`) do not exist in the
+ * editor and would never match.
+ *
+ * Nothing that styles page chrome (header, footer, pagination, forms)
+ * belongs here - the editor only renders post content.
+ */
+
+@use 'typography';
+@use 'wordpress';
+@use 'content';
+
+@include content.reading-copy;
+
+/* --- The canvas, mirroring the `container` shortcut in uno.config.ts -------
+ * The canvas iframe is as wide as the previewed device, so these breakpoints
+ * track Gutenberg's desktop/tablet/mobile modes. WordPress rewrites `body` to
+ * `.editor-styles-wrapper`, which ships without any horizontal padding. */
+
+body {
+    padding-inline: 1.25rem;
+    background-color: theme('colors.paper.DEFAULT');
+    font-family: theme('fontFamily.sans');
+    font-size: 1rem;
+    line-height: 1.5;
+    color: theme('colors.ink.DEFAULT');
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    @media (min-width: 768px) {
+        padding-inline: 1.5rem;
+    }
+}
+
+/* Blocks are capped at theme.json's contentSize, which is the `lg` container
+ * (960px minus its padding) and the only width theme.json can express. Below
+ * `lg` the container is narrower, so the `md` step needs its own cap; under
+ * `md` the container is full width and the body padding above is enough.
+ * The doubled classes outrank Gutenberg's generated max-widths, which target
+ * the title and the blocks in the root container with separate selectors. */
+@media (min-width: 768px) and (max-width: 991px) {
+    .wp-block.wp-block,
+    .is-root-container > .wp-block.wp-block {
+        max-width: 672px;
+    }
+}
+
+/* --- Blocks that the editor renders differently from the frontend --------- */
+
+/* The title field, matched to the page header in template-parts/page-header.php */
+.editor-post-title__input {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1rem;
+    font-size: typography.$font-size-h2;
+    border-bottom: 1px solid theme('colors.line.DEFAULT');
+
+    @media (min-width: 768px) {
+        margin-bottom: 3.5rem;
+    }
+}
+
+/* A 1px rule is barely clickable, so grow the block's box downwards and take
+ * the same amount off its bottom margin to keep the frontend spacing. The
+ * doubled class outranks Gutenberg's own `padding: 0.1px` on separators. */
+$separator-hit-area: 1.25rem;
+
+.wp-block-separator.wp-block-separator {
+    padding-bottom: $separator-hit-area;
+    margin-bottom: wordpress.$separator-gap - $separator-hit-area;
+
+    @media (min-width: 768px) {
+        margin-bottom: wordpress.$separator-gap-md - $separator-hit-area;
+    }
+}

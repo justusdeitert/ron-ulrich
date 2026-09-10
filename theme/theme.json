@@ -1,0 +1,96 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/theme.json",
+    "version": 3,
+    "settings": {
+        "appearanceTools": false,
+        "layout": {
+            "contentSize": "912px",
+            "wideSize": "912px"
+        },
+        "color": {
+            "palette": [
+                {
+                    "slug": "ink",
+                    "name": "Ink",
+                    "color": "#1c1b19"
+                },
+                {
+                    "slug": "ink-muted",
+                    "name": "Ink muted",
+                    "color": "#6b6762"
+                },
+                {
+                    "slug": "accent",
+                    "name": "Accent",
+                    "color": "#9c3025"
+                },
+                {
+                    "slug": "paper",
+                    "name": "Paper",
+                    "color": "#fbfaf8"
+                },
+                {
+                    "slug": "paper-raised",
+                    "name": "Paper raised",
+                    "color": "#ffffff"
+                },
+                {
+                    "slug": "highlight",
+                    "name": "Highlight",
+                    "color": "#e8e4dc"
+                }
+            ],
+            "defaultPalette": false,
+            "custom": false,
+            "text": true,
+            "background": false,
+            "link": false,
+            "gradients": [],
+            "defaultGradients": false,
+            "customGradient": false,
+            "duotone": [],
+            "defaultDuotone": false,
+            "customDuotone": false
+        },
+        "typography": {
+            "fontSizes": [],
+            "defaultFontSizes": false,
+            "customFontSize": false,
+            "fluid": false,
+            "dropCap": false,
+            "fontStyle": false,
+            "fontWeight": false,
+            "letterSpacing": false,
+            "lineHeight": false,
+            "textDecoration": false,
+            "textTransform": false,
+            "writingMode": false
+        },
+        "spacing": {
+            "margin": false,
+            "padding": false,
+            "defaultSpacingSizes": false,
+            "units": [
+                "px",
+                "rem"
+            ]
+        },
+        "border": {
+            "color": false,
+            "radius": false,
+            "style": false,
+            "width": false
+        },
+        "dimensions": {
+            "aspectRatio": false,
+            "minHeight": false
+        },
+        "position": {
+            "sticky": false
+        },
+        "shadow": {
+            "presets": [],
+            "defaultPresets": false
+        }
+    }
+}

@@ -51,6 +51,8 @@ $share_icons = array_filter(
         <?php if ($description = get_field('description')) { ?>
             <h3 class="mb-0 lg:w-[85%]"><?php echo wp_kses_post($description); ?></h3>
         <?php } ?>
+
+        <hr class="mt-4">
     </div>
 
     <?php the_content(); ?>
