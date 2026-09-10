@@ -15,17 +15,17 @@ $back_url = $posts_page_id ? get_permalink($posts_page_id) : home_url('/');
 ?>
 <hr>
 
-<div class="flex py-5">
+<div class="flex flex-wrap items-center gap-x-4 gap-y-2 py-4">
     <?php if ($share_icons) { ?>
-        <span><?php esc_html_e('Teilen auf:', 'ron-ulrich'); ?></span>
+        <span class="kicker"><?php esc_html_e('Teilen auf:', 'ron-ulrich'); ?></span>
 
-        <ul class="m-0 ml-4 flex list-none gap-4 p-0">
+        <ul class="m-0 flex list-none items-center gap-4 p-0">
             <?php foreach ($share_icons as $row) { ?>
                 <?php $share_icon_url = theme_image_url($row['icon'] ?? null, 'full'); ?>
                 <?php $share_icon_name = is_array($row['icon'] ?? null) ? ($row['icon']['name'] ?? '') : ''; ?>
-                <li>
+                <li class="flex">
                     <a href="<?php echo esc_url($row['url'] . theme_share_url()); ?>" target="_blank" rel="noopener">
-                        <img src="<?php echo esc_url($share_icon_url ?? ''); ?>" alt="<?php echo esc_attr($share_icon_name); ?>">
+                        <img class="h-5 w-auto opacity-70 transition-opacity hover:opacity-100" src="<?php echo esc_url($share_icon_url ?? ''); ?>" alt="<?php echo esc_attr($share_icon_name); ?>">
                     </a>
                 </li>
             <?php } ?>
@@ -33,8 +33,8 @@ $back_url = $posts_page_id ? get_permalink($posts_page_id) : home_url('/');
     <?php } ?>
 
     <?php if (! empty($published_in['activate'])) { ?>
-        <a class="ml-auto flex items-center" href="<?php echo esc_url($published_in['url']); ?>">
-            <i class="material-icons mr-1">link</i>
+        <a class="kicker ml-auto flex items-center gap-1 transition-colors hover:text-accent" href="<?php echo esc_url($published_in['url']); ?>">
+            <i class="material-icons !text-lg">link</i>
             <span><?php echo esc_html($published_in['name']); ?></span>
         </a>
     <?php } ?>
@@ -42,23 +42,27 @@ $back_url = $posts_page_id ? get_permalink($posts_page_id) : home_url('/');
 
 <hr>
 
-<article <?php post_class('mt-16'); ?>>
-    <div class="mb-8">
-        <div class="mb-5 text-xl font-light leading-8">
+<article <?php post_class('mt-10 md:mt-14'); ?>>
+    <div class="mb-8 md:mb-10">
+        <div class="kicker mb-4">
             <?php get_template_part('template-parts/post-meta', null, ['published_in' => $published_in]); ?>
         </div>
 
-        <h2 class="mb-5 lg:w-[70%]"><?php the_title(); ?></h2>
+        <h2 class="mb-4 lg:w-[85%]"><?php the_title(); ?></h2>
 
         <?php if ($description = get_field('description')) { ?>
-            <h3><?php echo wp_kses_post($description); ?></h3>
+            <h3 class="mb-0 lg:w-[85%]"><?php echo wp_kses_post($description); ?></h3>
         <?php } ?>
     </div>
 
     <?php the_content(); ?>
 </article>
 
-<a class="back-link mt-2.5 flex items-center" href="<?php echo esc_url($back_url); ?>">
-    <i class="material-icons text-3xl">arrow_left</i>
-    <span class="text-xl"><?php esc_html_e('zurück', 'ron-ulrich'); ?></span>
-</a>
+<hr class="mt-10 md:mt-14">
+<div class="py-4">
+    <a class="back-link inline-flex items-center gap-1 font-sans text-sm font-semibold uppercase tracking-[0.12em] text-ink-600 transition-colors hover:text-accent" href="<?php echo esc_url($back_url); ?>">
+        <i class="material-icons !text-xl">arrow_back</i>
+        <span><?php esc_html_e('zurück', 'ron-ulrich'); ?></span>
+    </a>
+</div>
+<hr>

@@ -16,7 +16,7 @@ if (have_posts()) {
         get_template_part('template-parts/content', 'search');
     }
 
-    get_template_part('template-parts/pagination');
+    get_template_part('template-parts/post-list-nav');
 } else {
     get_template_part('template-parts/content', 'none');
 }

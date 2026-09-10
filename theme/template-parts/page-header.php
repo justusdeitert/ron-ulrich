@@ -6,7 +6,7 @@
  */
 
 ?>
-<div class="mb-16">
-    <h2><?php echo wp_kses_post(theme_page_title()); ?></h2>
-    <hr>
+<div class="mb-10 md:mb-14">
+    <h2 class="mb-0"><?php echo wp_kses_post(theme_page_title()); ?></h2>
+    <hr class="mt-4 border-t-2 border-ink-900">
 </div>

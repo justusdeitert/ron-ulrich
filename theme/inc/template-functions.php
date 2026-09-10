@@ -78,6 +78,14 @@ function theme_social_meta(): void {
 }
 
 /**
+ * Whether the current request is a post list that offers archive navigation:
+ * the blog overview and the tag/date archives it links to.
+ */
+function theme_is_archive_list(): bool {
+    return is_home() || is_tag() || is_date();
+}
+
+/**
  * Context-aware page title (ported from the Sage App controller).
  */
 function theme_page_title(): string {
