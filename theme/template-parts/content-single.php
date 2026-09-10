@@ -11,7 +11,6 @@ $share_icons = array_filter(
     fn (array $row): bool => ! empty($row['show']),
 );
 ?>
-<hr>
 
 <div class="flex flex-wrap items-center gap-x-4 gap-y-2 py-4">
     <?php if ($share_icons) { ?>

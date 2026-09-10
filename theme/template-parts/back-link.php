@@ -9,7 +9,7 @@
 $back_url = theme_posts_page_url();
 ?>
 <div class="mt-10 py-4 md:mt-14">
-    <a class="back-link kicker inline-flex items-center gap-1 transition-colors hover:text-accent" href="<?php echo esc_url($back_url); ?>">
+    <a class="back-link chip inline-flex items-center gap-1" href="<?php echo esc_url($back_url); ?>">
         <i class="material-icons !text-xl">arrow_back</i>
         <span><?php esc_html_e('zurück', 'ron-ulrich'); ?></span>
     </a>
