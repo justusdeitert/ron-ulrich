@@ -78,6 +78,16 @@ function theme_social_meta(): void {
 }
 
 /**
+ * URL of the blog overview: the assigned posts page, or the front page
+ * when the site shows posts there.
+ */
+function theme_posts_page_url(): string {
+    $posts_page_id = (int) get_option('page_for_posts');
+
+    return $posts_page_id ? get_permalink($posts_page_id) : home_url('/');
+}
+
+/**
  * Whether the current request is a post list that offers archive navigation:
  * the blog overview and the tag/date archives it links to.
  */

@@ -6,8 +6,7 @@
  * @package ron-ulrich
  */
 
-$posts_page_id = (int) get_option('page_for_posts');
-$posts_page_url = $posts_page_id ? get_permalink($posts_page_id) : home_url('/');
+$posts_page_url = theme_posts_page_url();
 $current_tag_id = is_tag() ? (int) get_queried_object_id() : 0;
 
 $filters = [[
@@ -33,4 +32,3 @@ foreach (get_tags() as $tag) {
         </a>
     <?php } ?>
 </div>
-<hr>

@@ -10,8 +10,6 @@ $share_icons = array_filter(
     get_field('share_icons', 'option') ?: [],
     fn (array $row): bool => ! empty($row['show']),
 );
-$posts_page_id = (int) get_option('page_for_posts');
-$back_url = $posts_page_id ? get_permalink($posts_page_id) : home_url('/');
 ?>
 <hr>
 
@@ -58,11 +56,4 @@ $back_url = $posts_page_id ? get_permalink($posts_page_id) : home_url('/');
     <?php the_content(); ?>
 </article>
 
-<hr class="mt-10 md:mt-14">
-<div class="py-4">
-    <a class="back-link inline-flex items-center gap-1 font-sans text-sm font-semibold uppercase tracking-[0.12em] text-ink-600 transition-colors hover:text-accent" href="<?php echo esc_url($back_url); ?>">
-        <i class="material-icons !text-xl">arrow_back</i>
-        <span><?php esc_html_e('zurück', 'ron-ulrich'); ?></span>
-    </a>
-</div>
-<hr>
+<?php get_template_part('template-parts/back-link'); ?>

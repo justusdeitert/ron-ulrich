@@ -15,4 +15,6 @@ while (have_posts()) {
     get_template_part('template-parts/content', 'page');
 }
 
+get_template_part('template-parts/back-link');
+
 get_footer();
