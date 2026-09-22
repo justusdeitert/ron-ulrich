@@ -12,13 +12,13 @@
         "format": "biome format --write"
     },
     "devDependencies": {
-        "@biomejs/biome": "^2.5.13",
-        "@types/node": "^26.5.1",
-        "@unocss/reset": "^66.10.3",
-        "sass": "^1.104.1",
+        "@biomejs/biome": "^2.5.14",
+        "@types/node": "^26.6.3",
+        "@unocss/reset": "^66.10.5",
+        "sass": "^1.105.0",
         "typescript": "^7.0.2",
-        "unocss": "^66.10.2",
-        "vite": "^8.3.0",
+        "unocss": "^66.10.5",
+        "vite": "^8.3.1",
         "vite-plugin-full-reload": "^1.2.0"
     },
     "dependencies": {}
