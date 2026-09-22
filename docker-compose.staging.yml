@@ -9,6 +9,7 @@ services:
             - "80"
         volumes:
             - uploads:/var/www/html/wp-content/uploads
+            - uploads-webpc:/var/www/html/wp-content/uploads-webpc
         depends_on:
             php:
                 condition: service_healthy
@@ -42,6 +43,7 @@ services:
             NONCE_SALT: ${NONCE_SALT}
         volumes:
             - uploads:/var/www/html/wp-content/uploads
+            - uploads-webpc:/var/www/html/wp-content/uploads-webpc
         depends_on:
             mysql:
                 condition: service_healthy
@@ -81,4 +83,5 @@ services:
 
 volumes:
     uploads:
+    uploads-webpc:
     mysql-data:
