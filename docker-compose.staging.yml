@@ -2,7 +2,7 @@ services:
     nginx:
         build:
             context: .
-            dockerfile: devops/Dockerfile.prod
+            dockerfile: devops/Dockerfile
             target: nginx
         restart: unless-stopped
         expose:
@@ -16,7 +16,7 @@ services:
     php:
         build:
             context: .
-            dockerfile: devops/Dockerfile.prod
+            dockerfile: devops/Dockerfile
             target: php
         restart: unless-stopped
         environment:

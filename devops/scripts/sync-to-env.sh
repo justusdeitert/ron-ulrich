@@ -4,8 +4,8 @@
 # WordPress deployment running on Coolify (staging or production).
 #
 # Usage:
-#   TARGET=staging    ./devops/sync-to-env.sh
-#   TARGET=production ./devops/sync-to-env.sh
+#   TARGET=staging    ./devops/scripts/sync-to-env.sh
+#   TARGET=production ./devops/scripts/sync-to-env.sh
 #
 # Required env vars (read from .env unless overridden in the shell):
 #   LOCAL_DOMAIN
@@ -14,7 +14,7 @@
 #
 # Steps:
 #   1. Export the local DB through wp-cli with LOCAL_DOMAIN -> TARGET_DOMAIN
-#      search-replace (handled by search-replace-export-db.sh in the php
+#      search-replace (handled by db-export.sh in the php
 #      container).
 #   2. (production only) Take a timestamped backup of the remote DB.
 #   3. Locate the remote MariaDB container and import the dump (drop +
@@ -40,11 +40,14 @@ step() { printf '\n==> %s\n' "$*"; }
 info() { printf '    %s\n' "$*"; }
 fail() { printf 'error: %s\n' "$*" >&2; exit 1; }
 
-repo_root=$(cd "$(dirname "$0")/.." && pwd)
+repo_root=$(cd "$(dirname "$0")/../.." && pwd)
 cd "$repo_root"
 
+[ -f .env ] || fail ".env not found in $repo_root"
+
+# A missing key yields an empty value instead of tripping set -e/pipefail
 read_env() {
-    grep -E "^$1=" .env 2>/dev/null | head -n1 | cut -d= -f2- | sed -E 's/^"(.*)"$/\1/; s/^'\''(.*)'\''$/\1/'
+    { grep -E "^$1=" .env || true; } | head -n1 | cut -d= -f2- | sed -E 's/^"(.*)"$/\1/; s/^'\''(.*)'\''$/\1/'
 }
 
 LOCAL_DOMAIN=$(read_env LOCAL_DOMAIN)
@@ -68,7 +71,7 @@ else
     RSYNC_DELETE=""
 fi
 
-DUMP_FILE="db-export.sql"
+DUMP_FILE="db/db-export.sql"
 REMOTE_DUMP="/tmp/ron-ulrich-db-sync.sql"
 
 [ -d "./uploads" ] || fail "uploads/ directory not found at $repo_root/uploads"
@@ -94,7 +97,7 @@ fi
 
 # --- 1. Export local DB ----------------------------------------------------
 step "Exporting local DB with $TARGET domain replacement ($LOCAL_DOMAIN -> $TARGET_DOMAIN)"
-docker compose exec -e TARGET="$TARGET" php /usr/local/bin/search-replace-export-db.sh
+docker compose exec -e TARGET="$TARGET" php /devops/scripts/db-export.sh
 [ -f "$DUMP_FILE" ] || fail "expected $DUMP_FILE after export"
 
 # --- 2. Discover remote MariaDB container ----------------------------------

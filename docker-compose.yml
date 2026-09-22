@@ -16,10 +16,13 @@ services:
     php:
         build:
             context: .
-            dockerfile: devops/php/Dockerfile
+            dockerfile: devops/Dockerfile
+            target: php-dev
         restart: unless-stopped
         volumes:
             - ./wordpress:/var/www/html
+            - ./devops:/devops:ro
+            - ./db:/db
             - ./devops/php/php.ini:/usr/local/etc/php/php.ini:ro
             - ./theme:/var/www/html/wp-content/themes/ron-ulrich-theme
             - ./uploads:/var/www/html/wp-content/uploads
@@ -67,13 +70,12 @@ services:
     node:
         build:
             context: .
-            dockerfile: devops/node/Dockerfile
+            dockerfile: devops/Dockerfile
+            target: node-dev
         volumes:
             - ./theme:/usr/src/theme
         ports:
             - "5174:5173"
-        depends_on:
-            - php
 
 volumes:
     mysql-data:

@@ -33,11 +33,11 @@ Services:
 
 Run `make help` for the full list. Most used:
 
-- `make install`: stop, build, and start all containers.
+- `make install`: build images and (re)start all containers.
 - `make dev`: run Vite dev server inside the node container.
 - `make build`: production build of theme assets.
 - `make setup_wordpress`: install WordPress core and activate the theme.
-- `make import_db` / `make export_db`: DB import/export against the production domain.
+- `make import_db` / `make export_db`: DB import/export against the production domain. Dumps live in `db/` (`db/db-import.sql`, `db/db-export.sql`).
 - `make sync_to_staging` / `make sync_to_production`: push local DB + uploads to a Coolify deployment.
 - `make enter_php` / `make enter_node`: shell into the given container.
 
@@ -51,8 +51,10 @@ theme/                 WordPress theme (ron-ulrich-theme)
   src/                 Frontend source (TypeScript, plain CSS, images)
   assets/              Vite build output (git-ignored)
   vite.config.ts       Vite config
-devops/                Docker config (nginx, PHP, node Dockerfiles, scripts)
-  Dockerfile.prod      Self-contained production image for Coolify
+devops/                Docker config (nginx, PHP, scripts)
+  Dockerfile           Multi-stage image: dev targets and Coolify prod targets
+  scripts/             WordPress setup, DB import/export, sync to Coolify
+db/                    Local DB dumps (git-ignored)
 uploads/               WordPress uploads (mounted into the container)
 wordpress/             WordPress core (git-ignored, installed via make)
 ```
@@ -60,6 +62,6 @@ wordpress/             WordPress core (git-ignored, installed via make)
 ## Deployment
 
 Deployment is handled by [Coolify](https://coolify.io): it pulls this repo and
-builds `devops/Dockerfile.prod` (see `docker-compose.staging.yml`). No CI
-pipeline is needed — the image contains WordPress core, all plugins (pinned in
+builds the `php` and `nginx` targets of `devops/Dockerfile` (see
+`docker-compose.staging.yml`). No CI pipeline is needed: the image contains WordPress core, all plugins (pinned in
 `devops/plugins.txt`), the theme, and the compiled assets.

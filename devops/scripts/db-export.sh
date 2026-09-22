@@ -1,11 +1,6 @@
 #!/bin/bash
 set -e
 
-if ! command -v wp &> /dev/null; then
-    echo "wp-cli could not be found."
-    exit 1
-fi
-
 TARGET="${TARGET:-production}"
 
 case "$TARGET" in

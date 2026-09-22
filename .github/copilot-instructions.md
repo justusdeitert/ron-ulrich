@@ -35,14 +35,16 @@
   - `public/` - Static files copied verbatim into the Vite build (`publicDir`)
   - `assets/` - Vite build output (production only, git-ignored)
 - `devops/` - Docker configuration
-  - `Dockerfile.prod` - Multi-stage production build (node builder, PHP-FPM, nginx targets)
+  - `Dockerfile` - Multi-stage build: shared `node-base` and `php-base`, dev targets `node-dev` (Vite) and `php-dev` (local PHP-FPM), prod `php` and `nginx` targets. Pins the WordPress, WP-CLI, Composer and php-cs-fixer versions
   - `plugins.txt` - Single source of truth for plugin slugs, versions, and activation state
   - `nginx/conf.d/` - nginx site config (shared by dev and prod)
-  - `node/Dockerfile`, `php/Dockerfile` - Dev-only images
-  - `php/entrypoint.prod.sh` - Production entrypoint (DB wait, WP install, plugin activation)
+  - `php/entrypoint.prod.sh` - Production entrypoint (WP install, plugin activation, menu mapping)
   - `php/wp-config.prod.php` - Production wp-config (env-driven)
-  - `php/setup-wordpress.sh` - Dev WordPress setup script (reads `plugins.txt`)
-  - `sync-to-env.sh` - Syncs DB + uploads to staging/production over SSH
+  - `php/mariadb-wrapper.sh` - Forces `--skip-ssl` so WP-CLI DB commands work against MariaDB
+  - `scripts/setup-wordpress.sh` - Dev WordPress setup, run by the dev entrypoint (reads `plugins.txt`)
+  - `scripts/db-export.sh` / `scripts/db-import.sh` - DB export/import with domain search-replace (run inside the php container)
+  - `scripts/sync-to-env.sh` - Push local DB and uploads to staging or production (runs on the host)
+- `db/` - Local DB dumps (`db-import.sql`, `db-export.sql`), mounted at `/db` in the php container
 - `uploads/` - WordPress uploads directory
 - `wordpress/` - WordPress core (git-ignored, installed via setup script)
 - `docker-compose.yml` / `docker-compose.staging.yml` - Local stack / Coolify staging
@@ -50,9 +52,9 @@
 ## Development
 
 - Runs via Docker Compose, controlled with `make` commands
-- `make install` - Stop, build, and start all containers
+- `make install` - Build images and (re)start all containers
 - `make start` / `make stop` - Start or stop the stack
-- `make clean_install` - Fresh install, removes volumes and network
+- `make clean_install` - Fresh install, removes volumes (local DB)
 - `make dev` - Vite dev server inside the node container (HMR on port 5174)
 - `make build` - Production build of theme assets
 - `make setup_wordpress` - Install WordPress core and activate the theme
@@ -77,7 +79,6 @@
 
 - Don't modify files inside `wordpress/` or `theme/assets/` - they are not version-controlled source code.
 - Don't use npm or pnpm for theme dependencies - yarn inside the node container only.
-- Don't run WP-CLI database commands from the php container against MariaDB ("SSL is required" error); use the mysql container instead.
 
 ## Installed Tools
 

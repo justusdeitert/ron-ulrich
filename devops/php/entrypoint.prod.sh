@@ -2,9 +2,6 @@
 
 cd /var/www/html
 
-# Wait for the database to be reachable.
-/usr/local/bin/wait-for-it.sh "${MYSQL_HOST:-mysql}:3306" --timeout=60 --strict -- echo "Database is up"
-
 # Ensure the uploads directory exists and is writable by www-data
 # (volume mount can reset ownership on first boot).
 mkdir -p wp-content/uploads

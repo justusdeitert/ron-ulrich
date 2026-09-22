@@ -1,11 +1,6 @@
 #!/bin/bash
 set -e
 
-if ! command -v wp &> /dev/null; then
-    echo "wp-cli could not be found."
-    exit 1
-fi
-
 if [ ! -f "$DB_IMPORT_FILE" ]; then
     echo "Database dump file '$DB_IMPORT_FILE' does not exist."
     exit 1
