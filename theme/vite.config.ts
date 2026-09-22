@@ -4,6 +4,7 @@ import type { UserConfig } from 'vite';
 import { defineConfig } from 'vite';
 import fullReload from 'vite-plugin-full-reload';
 import unoConfig from './uno.config.ts';
+import { printWpUrls } from './vite-plugins/print-wp-urls.ts';
 
 export default defineConfig(async ({ mode }) => {
     const isProduction = mode === 'production';
@@ -69,6 +70,7 @@ export default defineConfig(async ({ mode }) => {
             devSourcemap: true,
         },
         plugins: [
+            printWpUrls(),
             UnoCSS(unoConfig),
             // PHP templates are outside the Vite module graph (root is
             // src/), so reload the full page when one changes.
