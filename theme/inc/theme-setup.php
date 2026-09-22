@@ -37,3 +37,15 @@ add_action('admin_menu', function (): void {
     remove_menu_page('users.php');
     remove_menu_page('plugins.php');
 });
+
+// The SEO Framework rewrites robots.txt wholesale at priority 10, which drops the
+// Sitemap line core adds at priority 0. Sitemaps are core's here, so put it back.
+add_filter('robots_txt', function (string $output): string {
+    $sitemap = home_url('/wp-sitemap.xml');
+
+    if (str_contains($output, $sitemap)) {
+        return $output;
+    }
+
+    return rtrim($output) . "\n\nSitemap: " . esc_url_raw($sitemap) . "\n";
+}, 11);

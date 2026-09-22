@@ -23,11 +23,9 @@
 
     <meta name="google-site-verification" content="EBS4XKei4WioxC3QXiRKkBuV8cAOzt0TgetW2twkO4w" />
 
-    <meta property="og:locale" content="de_DE"/>
     <meta name="application-name" content="ron-ulrich" />
 
-    <?php theme_social_meta(); ?>
-
+    <?php // Titles, descriptions, Open Graph, canonicals and JSON-LD come from The SEO Framework. ?>
     <?php wp_head(); ?>
 </head>
 

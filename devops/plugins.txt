@@ -2,7 +2,7 @@ contact-form-7:6.1.7:activate
 contact-form-7-honeypot:3.7.2:activate
 contact-form-cfdb7:1.4.0:activate
 disable-comments:2.9.0:activate
-google-sitemap-generator:4.1.24:activate
+autodescription:5.1.4:activate
 secure-custom-fields:6.9.5:activate
 svg-support:2.6.1:activate
 user-switching:1.12.2:activate

@@ -31,50 +31,10 @@ function theme_image_url($value, string $size = 'large'): ?string {
 }
 
 /**
- * Canonical post URL used for share links and social meta.
+ * Canonical post URL, used to build the share links on single posts.
  */
 function theme_share_url(): string {
     return get_permalink();
-}
-
-/**
- * Render Open Graph / Twitter Card meta tags for the current request.
- * Called from header.php inside <head>.
- */
-function theme_social_meta(): void {
-    $blog_description = get_field('blog_description', 'option');
-    $blog_share_image = get_field('blog_share_image', 'option');
-
-    if (! is_single()) {
-        $title = get_bloginfo('name') . ' - ' . get_bloginfo('description');
-        $description = $blog_description;
-        $url = home_url();
-        $image_url = $blog_share_image ? theme_image_url($blog_share_image) : null;
-    } else {
-        $post = get_post();
-        $title = $post->post_title;
-        $description = get_field('description', $post->ID);
-        $url = theme_share_url();
-        $image_url = theme_image_url(get_post_thumbnail_id(), 'large');
-    }
-
-    $description = (string) ($description ?? '');
-    ?>
-    <?php if ($description) { ?>
-        <meta name="description" content="<?php echo esc_attr($description); ?>" />
-    <?php } ?>
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="<?php echo esc_attr($title); ?>" />
-    <meta property="og:description" content="<?php echo esc_attr($description); ?>" />
-    <meta property="og:url" content="<?php echo esc_url($url); ?>" />
-    <meta name="twitter:title" content="<?php echo esc_attr($title); ?>" />
-    <meta name="twitter:description" content="<?php echo esc_attr($description); ?>" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <?php if ($image_url) { ?>
-        <meta property="og:image" content="<?php echo esc_url($image_url); ?>" />
-        <meta name="twitter:image" content="<?php echo esc_url($image_url); ?>" />
-    <?php } ?>
-    <?php
 }
 
 /**
