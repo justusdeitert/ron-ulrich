@@ -14,17 +14,15 @@
 #
 # Steps:
 #   1. Export the local DB through wp-cli with LOCAL_DOMAIN -> TARGET_DOMAIN
-#      search-replace (handled by db-export.sh in the php
-#      container).
-#   2. (production only) Take a timestamped backup of the remote DB.
-#   3. Locate the remote MariaDB container and import the dump (drop +
-#      recreate the database first).
-#   4. Run wp search-replace inside the remote PHP container to swap any
-#      remaining domains (production <-> staging) so the deployment always
-#      ends up pointing at TARGET_DOMAIN.
+#      search-replace (handled by db-export.sh in the php container).
+#   2. (production only) Back up the remote DB to /tmp on the server.
+#   3. Reset the remote DB and stream the dump into `wp db import`.
+#   4. Swap any remaining OTHER_DOMAIN URLs and force https for TARGET_DOMAIN.
 #   5. Rsync ./uploads into the remote uploads volume (no --delete on prod).
 #
 # Safety:
+#   - the remote deployment is resolved from the Coolify compose project
+#     whose nginx serves TARGET_DOMAIN (other sites share the server).
 #   - production runs require typing the production domain to confirm.
 #   - production runs are non-destructive for uploads (no --delete).
 
@@ -72,7 +70,6 @@ else
 fi
 
 DUMP_FILE="db/db-export.sql"
-REMOTE_DUMP="/tmp/ron-ulrich-db-sync.sql"
 
 [ -d "./uploads" ] || fail "uploads/ directory not found at $repo_root/uploads"
 
@@ -95,65 +92,56 @@ EOF
     [ "$confirm" = "$TARGET_DOMAIN" ] || fail "confirmation mismatch, aborting"
 fi
 
+# --- 0b. Resolve the Coolify deployment serving TARGET_DOMAIN -------------
+step "Locating the deployment serving $TARGET_DOMAIN on $SSH_HOST"
+PROJECT=$(ssh "$SSH_HOST" "docker ps --filter label=com.docker.compose.service=nginx --format '{{.Label \"com.docker.compose.project\"}} {{.Labels}}'" \
+    | { grep -F "Host(\`$TARGET_DOMAIN\`)" || true; } | awk '{print $1}' | sort -u)
+[ -n "$PROJECT" ] || fail "no running deployment serves $TARGET_DOMAIN on $SSH_HOST"
+[ "$(printf '%s\n' "$PROJECT" | wc -l)" -eq 1 ] || fail "multiple deployments serve $TARGET_DOMAIN: $PROJECT"
+
+PHP_CONTAINER=$(ssh "$SSH_HOST" "docker ps --filter label=com.docker.compose.project=$PROJECT --filter label=com.docker.compose.service=php --format '{{.Names}}'")
+[ -n "$PHP_CONTAINER" ] || fail "no running php container in $PROJECT"
+[ "$(printf '%s\n' "$PHP_CONTAINER" | wc -l)" -eq 1 ] || fail "multiple php containers in $PROJECT: $PHP_CONTAINER"
+info "project: $PROJECT"
+info "php:     $PHP_CONTAINER"
+
+remote_wp() { ssh "$SSH_HOST" "docker exec -i $PHP_CONTAINER wp --allow-root $1"; }
+
 # --- 1. Export local DB ----------------------------------------------------
 step "Exporting local DB with $TARGET domain replacement ($LOCAL_DOMAIN -> $TARGET_DOMAIN)"
 docker compose exec -e TARGET="$TARGET" php /devops/scripts/db-export.sh
 [ -f "$DUMP_FILE" ] || fail "expected $DUMP_FILE after export"
 
-# --- 2. Discover remote MariaDB container ----------------------------------
-step "Locating remote MariaDB container on $SSH_HOST"
-DB_CONTAINER=$(ssh "$SSH_HOST" "docker ps --filter ancestor=mariadb:10.11 --filter name=mysql- --format '{{.Names}}' | head -n1")
-[ -n "$DB_CONTAINER" ] || fail "could not find remote MariaDB container on $SSH_HOST"
-info "container: $DB_CONTAINER"
-
-# --- 2b. Backup remote DB (production only) -------------------------------
+# --- 2. Backup remote DB (production only) --------------------------------
 if [ "$TARGET" = "production" ]; then
     BACKUP_REMOTE="/tmp/ron-ulrich-prod-backup-$(date +%Y%m%d-%H%M%S).sql"
     step "Backing up remote DB to $SSH_HOST:$BACKUP_REMOTE"
-    ssh "$SSH_HOST" "docker exec $DB_CONTAINER sh -c 'mariadb-dump -u root -p\"\$MARIADB_ROOT_PASSWORD\" \"\$MARIADB_DATABASE\"' > $BACKUP_REMOTE && ls -lh $BACKUP_REMOTE"
+    # mariadb-dump is not covered by the image's --skip-ssl mariadb wrapper
+    remote_wp "db export - --skip-ssl > $BACKUP_REMOTE"
 fi
 
-# --- 3. Push dump and import ----------------------------------------------
-step "Copying $DUMP_FILE to $SSH_HOST:$REMOTE_DUMP"
-scp "$DUMP_FILE" "$SSH_HOST:$REMOTE_DUMP"
+# --- 3. Import ------------------------------------------------------------
+step "Replacing remote DB with $DUMP_FILE"
+remote_wp "db reset --yes"
+remote_wp "db import -" < "$DUMP_FILE"
 
-step "Importing into remote DB (drop + recreate)"
-ssh "$SSH_HOST" "docker exec -i $DB_CONTAINER sh -c 'mariadb -u root -p\"\$MARIADB_ROOT_PASSWORD\" -e \"DROP DATABASE IF EXISTS \\\`\$MARIADB_DATABASE\\\`; CREATE DATABASE \\\`\$MARIADB_DATABASE\\\` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;\"' \
-  && docker exec -i $DB_CONTAINER sh -c 'mariadb -u root -p\"\$MARIADB_ROOT_PASSWORD\" \"\$MARIADB_DATABASE\"' < $REMOTE_DUMP \
-  && rm -f $REMOTE_DUMP"
+# --- 4. Point the remote DB at TARGET_DOMAIN -------------------------------
+step "Replacing $OTHER_DOMAIN with $TARGET_DOMAIN and forcing https"
+remote_wp "search-replace '//$OTHER_DOMAIN' '//$TARGET_DOMAIN' --all-tables --skip-columns=guid --report-changed-only"
+remote_wp "search-replace 'http://$TARGET_DOMAIN' 'https://$TARGET_DOMAIN' --all-tables --skip-columns=guid --report-changed-only"
+remote_wp "cache flush" || true
 
-# --- 3b. Replace stray cross-environment URLs with the target domain ------
-step "Locating remote PHP container on $SSH_HOST"
-PHP_CONTAINER=$(ssh "$SSH_HOST" "docker ps --filter name=php- --format '{{.Names}}' | head -n1")
-[ -n "$PHP_CONTAINER" ] || fail "could not find remote PHP container on $SSH_HOST"
-info "container: $PHP_CONTAINER"
-
-step "Replacing $OTHER_DOMAIN with $TARGET_DOMAIN in remote DB"
-ssh "$SSH_HOST" "docker exec $PHP_CONTAINER wp --allow-root search-replace 'https://$OTHER_DOMAIN' 'https://$TARGET_DOMAIN' --all-tables --skip-columns=guid"
-ssh "$SSH_HOST" "docker exec $PHP_CONTAINER wp --allow-root search-replace '//$OTHER_DOMAIN'      '//$TARGET_DOMAIN'      --all-tables --skip-columns=guid"
-
-step "Forcing https:// for $TARGET_DOMAIN in remote DB"
-ssh "$SSH_HOST" "docker exec $PHP_CONTAINER wp --allow-root search-replace 'http://$TARGET_DOMAIN' 'https://$TARGET_DOMAIN' --all-tables --skip-columns=guid"
-
-step "Stripping /wordpress/ subdir from remote DB (local installs WP under wordpress/, remote serves from root)"
-ssh "$SSH_HOST" "docker exec $PHP_CONTAINER wp --allow-root search-replace '/wordpress/wp-content/' '/wp-content/' --all-tables --skip-columns=guid"
-
-ssh "$SSH_HOST" "docker exec $PHP_CONTAINER wp --allow-root cache flush || true"
-
-# --- 4. Sync uploads ------------------------------------------------------
-step "Locating remote uploads volume on $SSH_HOST"
-UPLOADS_VOLUME=$(ssh "$SSH_HOST" "docker volume ls --format '{{.Name}}' | grep -E '_uploads\$' | head -n1")
-[ -n "$UPLOADS_VOLUME" ] || fail "could not find remote uploads volume"
-info "volume: $UPLOADS_VOLUME"
-
-UPLOADS_PATH=$(ssh "$SSH_HOST" "docker volume inspect $UPLOADS_VOLUME --format '{{.Mountpoint}}'")
-[ -n "$UPLOADS_PATH" ] || fail "could not resolve uploads volume mountpoint"
-info "path:   $UPLOADS_PATH"
+# --- 5. Sync uploads ------------------------------------------------------
+UPLOADS_PATH=$(ssh "$SSH_HOST" "docker volume inspect ${PROJECT}_uploads --format '{{.Mountpoint}}'") \
+    || fail "remote volume ${PROJECT}_uploads not found"
 
 step "Rsyncing local uploads/ to $SSH_HOST:$UPLOADS_PATH/"
 # shellcheck disable=SC2086
 rsync -az $RSYNC_DELETE --stats --human-readable \
   --exclude='cache/' \
   ./uploads/ "$SSH_HOST:$UPLOADS_PATH/"
+
+# rsync keeps the local uid, which www-data cannot write to
+ssh "$SSH_HOST" "docker exec $PHP_CONTAINER chown -R www-data:www-data wp-content/uploads"
 
 step "Done. Local DB and uploads synced to $TARGET ($TARGET_DOMAIN)."
