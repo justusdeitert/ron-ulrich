@@ -40,6 +40,8 @@ export default defineConfig(async ({ mode }) => {
                     main: 'src/ts/main.ts',
                     // Block editor canvas, loaded through add_editor_style() in inc/vite.php
                     editor: 'src/css/editor.scss',
+                    // Webfonts for the editor, enqueued separately in inc/vite.php
+                    'editor-fonts': 'src/css/editor-fonts.scss',
                 },
                 output: {
                     entryFileNames: 'js/[name]-[hash].js',
@@ -48,9 +50,11 @@ export default defineConfig(async ({ mode }) => {
                         const name = assetInfo.name ?? '';
 
                         if (name.endsWith('.css')) {
-                            // add_editor_style() inlines this one from disk, so it needs a
-                            // stable name and there is nothing to cache bust.
-                            return name === 'editor.css' ? 'css/editor.css' : 'css/[name]-[hash][extname]';
+                            // The editor stylesheets are loaded from disk by name (inc/vite.php),
+                            // so they need stable names; there is nothing to cache bust.
+                            return ['editor.css', 'editor-fonts.css'].includes(name)
+                                ? `css/${name}`
+                                : 'css/[name]-[hash][extname]';
                         }
 
                         if (['.ttf', '.woff', '.woff2'].some((ext) => name.endsWith(ext))) {
@@ -68,6 +72,10 @@ export default defineConfig(async ({ mode }) => {
         },
         css: {
             devSourcemap: true,
+        },
+        // The dependency scanner defaults to the build inputs and cannot resolve the SCSS-only entries.
+        optimizeDeps: {
+            entries: ['ts/main.ts'],
         },
         plugins: [
             printWpUrls(),

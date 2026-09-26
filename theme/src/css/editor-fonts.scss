@@ -1,0 +1,6 @@
+/*
+ * Webfonts for the block editor. Kept out of editor.scss because
+ * add_editor_style() rewrites that file; enqueued in inc/vite.php.
+ */
+
+@use 'fonts';

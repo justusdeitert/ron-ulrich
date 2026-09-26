@@ -44,9 +44,13 @@ function theme_public_url(string $path): string {
     return get_template_directory_uri() . '/assets/' . ltrim($path, '/');
 }
 
-/** Webfonts used by the theme, loaded in the frontend head and in the editor canvas. */
-function theme_google_fonts_url(): string {
-    return 'https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..500&family=Source+Sans+3:ital,wght@0,400..700;1,400..600&display=swap';
+/** Parsed Vite build manifest, or an empty array in development. */
+function theme_vite_manifest(): array {
+    static $manifest = null;
+
+    return $manifest ??= theme_is_dev()
+        ? []
+        : json_decode(file_get_contents(get_template_directory() . '/assets/.vite/manifest.json'), true);
 }
 
 function theme_enqueue_assets(): void {
@@ -58,8 +62,7 @@ function theme_enqueue_assets(): void {
         return;
     }
 
-    $manifest = json_decode(file_get_contents(get_template_directory() . '/assets/.vite/manifest.json'), true);
-    $entry = $manifest['ts/main.ts'] ?? null;
+    $entry = theme_vite_manifest()['ts/main.ts'] ?? null;
 
     if (! $entry) {
         return;
@@ -75,6 +78,22 @@ function theme_enqueue_assets(): void {
 
     wp_enqueue_script_module('theme-main', $base . $entry['file'], [], null);
 }
+
+// Preload the UI font (header tagline, category chips, meta lines) so it is ready for first paint.
+add_filter('wp_preload_resources', function (array $resources): array {
+    $font = theme_vite_manifest()['fonts/source-sans-3-normal-latin.woff2']['file'] ?? null;
+
+    if ($font) {
+        $resources[] = [
+            'href' => get_template_directory_uri() . '/assets/' . $font,
+            'as' => 'font',
+            'type' => 'font/woff2',
+            'crossorigin' => 'anonymous',
+        ];
+    }
+
+    return $resources;
+});
 
 add_action('wp_enqueue_scripts', function (): void {
     theme_enqueue_assets();
@@ -103,8 +122,10 @@ add_action('after_setup_theme', function (): void {
 add_action('enqueue_block_assets', function (): void {
     // add_editor_style() rewrites selectors to scope them to the canvas, which
     // would mangle @font-face rules, so the webfonts are enqueued directly.
-    if (is_admin()) {
-        wp_enqueue_style('theme-fonts', theme_google_fonts_url(), [], null);
+    $path = get_template_directory() . '/assets/css/editor-fonts.css';
+
+    if (is_admin() && file_exists($path)) {
+        wp_enqueue_style('theme-fonts', get_template_directory_uri() . '/assets/css/editor-fonts.css', [], (string) filemtime($path));
     }
 });
 

@@ -12,10 +12,11 @@ export const breakpoints = {
     xl: '1200px',
 };
 
-/** Editorial pairing: serif for headlines and article copy, sans for UI and meta */
+/** Editorial pairing: serif for headlines and article copy, sans for UI and meta.
+ * The "Fallback" families are metric-matched system fonts from src/css/_fonts.scss. */
 export const fontFamily = {
-    serif: '"Newsreader", Georgia, "Times New Roman", serif',
-    sans: '"Source Sans 3", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif',
+    serif: '"Newsreader", "Newsreader Fallback", Georgia, "Times New Roman", serif',
+    sans: '"Source Sans 3", "Source Sans 3 Fallback", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif',
 };
 
 export const colors = {
