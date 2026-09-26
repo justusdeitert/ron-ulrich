@@ -33,6 +33,7 @@ db-import.sql
 .env
 .env.*
 !.env.dist
+!.env.staging.dist
 
 # Node
 node_modules/
