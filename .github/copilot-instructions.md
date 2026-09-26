@@ -38,8 +38,8 @@
   - `Dockerfile` - Multi-stage build: shared `node-base` and `php-base`, dev targets `node-dev` (Vite) and `php-dev` (local PHP-FPM), prod `php` and `nginx` targets. Pins the WordPress, WP-CLI, Composer and php-cs-fixer versions
   - `plugins.txt` - Single source of truth for plugin slugs, versions, and activation state
   - `nginx/conf.d/` - nginx site config (shared by dev and prod)
-  - `php/entrypoint.prod.sh` - Production entrypoint (WP install, plugin activation, menu mapping)
-  - `php/wp-config.prod.php` - Production wp-config (env-driven)
+  - `php/entrypoint.prod.sh` - Production entrypoint (upload dir ownership, first-boot WP install, plugin activation)
+  - `php/wp-config.php` - wp-config for all environments (env-driven; baked into the prod image, mounted in dev)
   - `php/mariadb-wrapper.sh` - Forces `--skip-ssl` so WP-CLI DB commands work against MariaDB
   - `scripts/setup-wordpress.sh` - Dev WordPress setup, run by the dev entrypoint (reads `plugins.txt`)
   - `scripts/db-export.sh` / `scripts/db-import.sh` - DB export/import with domain search-replace (run inside the php container)

@@ -91,7 +91,7 @@ RUN set -eux; \
 COPY --chown=www-data:www-data theme/ wp-content/themes/ron-ulrich-theme/
 COPY --chown=www-data:www-data --from=theme-builder /theme/assets/ wp-content/themes/ron-ulrich-theme/assets/
 
-COPY --chown=www-data:www-data devops/php/wp-config.prod.php wp-config.php
+COPY --chown=www-data:www-data devops/php/wp-config.php wp-config.php
 COPY devops/php/php.prod.ini /usr/local/etc/php/php.ini
 
 

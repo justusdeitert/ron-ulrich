@@ -24,6 +24,8 @@ services:
             - ./devops:/devops:ro
             - ./db:/db
             - ./devops/php/php.ini:/usr/local/etc/php/php.ini:ro
+            # One level above the WP root, where WordPress also looks; a file mount inside ./wordpress fails on fresh clones
+            - ./devops/php/wp-config.php:/var/www/wp-config.php:ro
             - ./theme:/var/www/html/wp-content/themes/ron-ulrich-theme
             - ./uploads:/var/www/html/wp-content/uploads
         env_file:

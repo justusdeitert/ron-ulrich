@@ -1,6 +1,6 @@
 <?php
 /**
- * Production wp-config.php for Coolify.
+ * wp-config.php for all environments (baked into the prod image, mounted in dev).
  * All secrets and credentials come from environment variables.
  */
 
@@ -14,15 +14,21 @@ define('DB_COLLATE',  '');
 
 $table_prefix = getenv('WORDPRESS_TABLE_PREFIX') ?: 'wp_';
 
-// ---- Salts (set unique values via Coolify env vars) ----
+$is_local = getenv('WP_ENVIRONMENT_TYPE') === 'local';
+
+// ---- Salts (unique values via Coolify env vars; only local dev may omit them) ----
 foreach ([
     'AUTH_KEY', 'SECURE_AUTH_KEY', 'LOGGED_IN_KEY', 'NONCE_KEY',
     'AUTH_SALT', 'SECURE_AUTH_SALT', 'LOGGED_IN_SALT', 'NONCE_SALT',
 ] as $constant) {
     $value = getenv($constant);
     if (! $value) {
-        // Fail loudly rather than running with a weak default.
-        $value = 'MISSING_' . $constant . '_PLEASE_SET_IN_COOLIFY';
+        if (! $is_local) {
+            http_response_code(500);
+            echo "Missing environment variable: $constant\n";
+            exit(1);
+        }
+        $value = 'local-dev-' . $constant;
     }
     define($constant, $value);
 }
@@ -39,7 +45,11 @@ if (! empty($_SERVER['HTTP_X_FORWARDED_HOST'])) {
 }
 
 // ---- Site URL ----
-if ($wp_url = getenv('WORDPRESS_URL')) {
+if ($is_local && isset($_SERVER['HTTP_HOST'])) {
+    // Follow the request host so the dev site also works on LAN IPs
+    define('WP_HOME',    'http://' . $_SERVER['HTTP_HOST']);
+    define('WP_SITEURL', 'http://' . $_SERVER['HTTP_HOST']);
+} elseif ($wp_url = getenv('WORDPRESS_URL')) {
     define('WP_HOME',    $wp_url);
     define('WP_SITEURL', $wp_url);
 }
