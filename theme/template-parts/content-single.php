@@ -19,10 +19,9 @@ $share_icons = array_filter(
         <ul class="m-0 flex list-none items-center gap-4 p-0">
             <?php foreach ($share_icons as $row) { ?>
                 <?php $share_icon_url = theme_image_url($row['icon'] ?? null, 'full'); ?>
-                <?php $share_icon_name = is_array($row['icon'] ?? null) ? ($row['icon']['name'] ?? '') : ''; ?>
                 <li class="flex">
                     <a href="<?php echo esc_url($row['url'] . theme_share_url()); ?>" target="_blank" rel="noopener">
-                        <img class="h-5 w-auto opacity-70 transition-opacity hover:opacity-100" src="<?php echo esc_url($share_icon_url ?? ''); ?>" alt="<?php echo esc_attr($share_icon_name); ?>">
+                        <img class="h-5 w-auto opacity-70 transition-opacity hover:opacity-100" src="<?php echo esc_url($share_icon_url ?? ''); ?>" alt="<?php echo esc_attr($row['name'] ?? ''); ?>">
                     </a>
                 </li>
             <?php } ?>

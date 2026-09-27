@@ -18,7 +18,6 @@ $is_first = $GLOBALS['wp_query']->current_post === 0;
                     // Absolutely positioned: the text column sizes the box, so the image never shifts layout.
                     the_post_thumbnail('large', [
                         'class' => 'absolute inset-0 size-full object-cover',
-                        'alt' => '',
                         'sizes' => '(min-width: 992px) 283px, (min-width: 768px) 203px, (min-width: 576px) 30vw, calc(100vw - 40px)',
                         'loading' => $is_first ? 'eager' : 'lazy',
                         'fetchpriority' => $is_first ? 'high' : 'auto',
