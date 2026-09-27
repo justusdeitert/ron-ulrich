@@ -32,14 +32,12 @@ Before committing, review **every changed file** against this checklist:
 ## 3. Consistency
 
 - Follows existing project patterns (file structure, naming, formatting).
-- ACF field changes are synced to `acf-json/`.
 - Static images referenced from PHP templates live in `theme/public/`, not `theme/src/`.
 
 ## 4. No Regressions
 
 - Changes don't break existing functionality.
 - Removed code is truly unused: grep for references before deleting.
-- Template changes still handle legacy ACF image fields stored as plain URL strings.
 
 ## 5. Commit Hygiene
 

@@ -3,7 +3,6 @@
 $finder = PhpCsFixer\Finder::create()
     ->in(__DIR__)
     ->name('*.php')
-    ->exclude('acf-json')
     ->exclude('assets')
     ->exclude('node_modules');
 

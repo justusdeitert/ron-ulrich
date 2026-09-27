@@ -3,7 +3,6 @@ contact-form-7-honeypot:3.8.0:activate
 contact-form-cfdb7:1.4.0:activate
 disable-comments:2.9.0:activate
 autodescription:5.1.4:activate
-secure-custom-fields:6.9.5:activate
 svg-support:2.6.1:activate
 user-switching:1.12.2:activate
 clean-image-filenames:1.5:activate

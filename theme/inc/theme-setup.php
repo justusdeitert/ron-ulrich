@@ -18,6 +18,7 @@ add_action('after_setup_theme', function (): void {
     ]);
 
     add_theme_support('post-thumbnails');
+    add_theme_support('custom-logo');
     add_theme_support('html5', ['caption', 'comment-form', 'comment-list', 'gallery', 'search-form', 'script', 'style']);
     add_theme_support('customize-selective-refresh-widgets');
     add_theme_support('editor-styles');
@@ -66,7 +67,7 @@ add_action('parse_request', function (WP $wp): void {
         array_push($lines, '', '## ' . $heading);
 
         foreach (get_posts(['post_type' => $post_type, 'numberposts' => -1, 'has_password' => false]) as $post) {
-            $summary = $plain(wp_trim_words(get_field('description', $post) ?: get_the_excerpt($post), 30));
+            $summary = $plain(wp_trim_words(get_the_excerpt($post), 30));
             $lines[] = sprintf('- [%s](%s)%s', $plain(get_the_title($post)), get_permalink($post), $summary ? ': ' . $summary : '');
         }
     }

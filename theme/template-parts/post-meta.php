@@ -5,13 +5,11 @@
  * @package ron-ulrich
  *
  * @param array $args {
- *     @type bool  $inline       Render a single "Tag · Tag · Datum" line (teaser) instead of tag pills above the date.
- *     @type mixed $published_in Optional pre-fetched ACF field, avoids a duplicate lookup.
+ *     @type bool $inline Render a single "Tag · Tag · Datum" line (teaser) instead of tag pills above the date.
  * }
  */
 
 $inline = $args['inline'] ?? false;
-$published_in = $inline ? null : ($args['published_in'] ?? get_field('published_in'));
 $tags = get_the_tags() ?: [];
 ?>
 <?php if ($inline) { ?>
@@ -32,9 +30,4 @@ $tags = get_the_tags() ?: [];
     <?php } ?>
 
     <time datetime="<?php echo esc_attr(get_the_date('c')); ?>"><?php echo esc_html(get_the_date('j. F Y')); ?></time>
-    <?php if (! empty($published_in['activate'])) { ?>
-        <?php echo ' / '; ?>
-        <?php esc_html_e('published in:', 'ron-ulrich'); ?>
-        <a class="transition-colors hover:text-accent" href="<?php echo esc_url($published_in['url']); ?>"><?php echo esc_html($published_in['name']); ?></a>
-    <?php } ?>
 <?php } ?>

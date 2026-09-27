@@ -32,8 +32,7 @@
 <header class="mb-8 pt-8 md:mb-12 md:pt-12">
     <div class="container flex items-start">
         <a class="flex items-center gap-4" href="<?php echo esc_url(home_url('/')); ?>">
-            <?php $brand_image = get_field('brand_image', 'option'); ?>
-            <?php $brand_image_url = theme_image_url($brand_image, 'medium_large'); ?>
+            <?php $brand_image_url = wp_get_attachment_image_url((int) get_theme_mod('custom_logo'), 'medium_large'); ?>
             <?php if ($brand_image_url) { ?>
                 <div class="brand-image hidden size-[76px] shrink-0 bg-cover bg-center sm:block md:size-[96px]" style="background-image: url(<?php echo esc_url($brand_image_url); ?>)"></div>
             <?php } ?>

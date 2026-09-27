@@ -9,35 +9,6 @@ if (! defined('ABSPATH')) {
 }
 
 /**
- * Normalize an image-ish ACF value that may come back as an array (new),
- * a plain URL string (old export), or a numeric attachment ID (old DB).
- */
-function theme_image_url($value, string $size = 'large'): ?string {
-    if (! $value) {
-        return null;
-    }
-
-    if (is_array($value)) {
-        return $value['sizes'][$size] ?? $value['url'] ?? null;
-    }
-
-    if (is_numeric($value)) {
-        $src = wp_get_attachment_image_src((int) $value, $size);
-
-        return $src ? $src[0] : null;
-    }
-
-    return (string) $value;
-}
-
-/**
- * Canonical post URL, used to build the share links on single posts.
- */
-function theme_share_url(): string {
-    return get_permalink();
-}
-
-/**
  * URL of the blog overview: the assigned posts page, or the front page
  * when the site shows posts there.
  */

@@ -16,7 +16,7 @@ A WordPress theme and Docker dev environment powering the website of author, edi
 
 ## Tech Stack
 
-- **Backend:** WordPress, PHP 8.4, [SCF](https://wordpress.org/plugins/secure-custom-fields/) (Secure Custom Fields)
+- **Backend:** WordPress, PHP 8.4
 - **Frontend:** TypeScript, [UnoCSS](https://unocss.dev), SCSS, [Vite](https://vitejs.dev) with HMR
 - **Infrastructure:** Docker Compose (nginx, PHP-FPM, MariaDB, phpMyAdmin, Node)
 - **Tooling:** [Biome](https://biomejs.dev) for JS/TS, php-cs-fixer for PHP
@@ -69,8 +69,7 @@ Run `make help` for the full list. Most used:
 ```
 theme/                 WordPress theme (ron-ulrich-theme)
   functions.php        Theme bootstrap, enqueues, shared helpers
-  inc/                 Theme setup, Vite loader, SCF options page, editor, template helpers
-  acf-json/            SCF field group JSON sync
+  inc/                 Theme setup, Vite loader, editor, template helpers
   template-parts/      Reusable template partials
   src/                 Frontend source (TypeScript, SCSS, images)
   public/              Static files copied verbatim into the build

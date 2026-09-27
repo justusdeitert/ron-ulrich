@@ -11,13 +11,13 @@
 ## Overview
 
 - WordPress theme for ron-ulrich.de (classic theme, not a block theme).
-- ACF (acf-json field group sync, options page) for content management.
+- No custom-field plugin: post teasers/leads are the native excerpt, the header portrait is the core `custom-logo`.
 - Vite + TypeScript for frontend assets with HMR in development.
 - Migrated 2026-09 from a Bedrock/Sage setup to this plain theme + Docker structure (mirrors the `una` project).
 
 ## Tech Stack
 
-- **Backend:** PHP, WordPress, ACF
+- **Backend:** PHP, WordPress
 - **Frontend:** TypeScript, UnoCSS, Vite
 - **Libraries:** none (vanilla JS, utility-first CSS)
 - **Infrastructure:** Docker Compose (nginx, PHP-FPM, MariaDB, phpMyAdmin, Node)
@@ -28,8 +28,7 @@
 
 - `theme/` - WordPress theme (`ron-ulrich-theme`)
   - `functions.php` - Theme bootstrap, enqueues assets via `inc/vite.php`
-  - `inc/` - PHP modules (Vite loader, theme setup, ACF options page, template helpers)
-  - `acf-json/` - ACF field group JSON sync
+  - `inc/` - PHP modules (Vite loader, theme setup, template helpers)
   - `template-parts/` - Template partials (content-*, page-header)
   - `src/` - Frontend source (`ts/main.ts` + `ts/modules/`, `css/main.scss`, images)
   - `public/` - Static files copied verbatim into the Vite build (`publicDir`)
@@ -73,7 +72,6 @@
 - Styling is UnoCSS (`presetWind3`) with utilities written directly in the PHP templates; `theme/uno.config.ts` holds Bootstrap-4-matching breakpoints and shortcuts (`container`, `tag`, `alert-warning`). Layouts use plain flex/grid utilities.
 - `theme/src/css/main.scss` is SCSS reserved for markup templates cannot touch: base typography, WP-generated classes/blocks, `paginate_links()` output, Contact Form 7. The wp-admin bar offset is utilities on `<html>` in `header.php`.
 - Plugin slugs, versions, and activation flags are defined once in `devops/plugins.txt` (`slug:version[:activate]`). The dev setup script, prod Dockerfile, and prod entrypoint all read from this file.
-- Legacy ACF quirk: the migrated database stores some image fields as plain URL strings instead of arrays. Templates must handle both (see `theme/header.php`).
 
 ## Don'ts
 
