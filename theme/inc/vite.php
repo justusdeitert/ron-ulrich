@@ -68,15 +68,14 @@ function theme_enqueue_assets(): void {
         return;
     }
 
-    $base = get_template_directory_uri() . '/assets/';
-
-    if (! empty($entry['css'])) {
-        foreach ($entry['css'] as $i => $css) {
-            wp_enqueue_style('theme-main-' . $i, $base . $css, [], null);
-        }
+    // The stylesheet is small, so it is inlined to save a render-blocking request.
+    foreach ($entry['css'] ?? [] as $i => $css) {
+        wp_register_style('theme-main-' . $i, false);
+        wp_enqueue_style('theme-main-' . $i);
+        wp_add_inline_style('theme-main-' . $i, file_get_contents(get_template_directory() . '/assets/' . $css));
     }
 
-    wp_enqueue_script_module('theme-main', $base . $entry['file'], [], null);
+    wp_enqueue_script_module('theme-main', get_template_directory_uri() . '/assets/' . $entry['file'], [], null);
 }
 
 // Preload the UI font (header tagline, category chips, meta lines) so it is ready for first paint.
