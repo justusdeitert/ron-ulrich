@@ -24,10 +24,10 @@ foreach (get_tags() as $tag) {
 }
 ?>
 <hr>
-<?php // Row gap comes from the chips' mb-2 so archive-filter.ts can insert zero-height spacers to even out the rows. ?>
-<nav class="-mb-2 flex flex-wrap gap-x-2 py-4" aria-label="<?php esc_attr_e('Kategorien', 'ron-ulrich'); ?>" data-chip-row>
+<?php // Inline chips instead of flex, so text-wrap: balance can spread them evenly across rows. ?>
+<nav class="-mb-2 py-4 text-balance" aria-label="<?php esc_attr_e('Kategorien', 'ron-ulrich'); ?>">
     <?php foreach ($filters as $filter) { ?>
-        <a class="<?php echo $filter['active'] ? 'chip-active' : 'chip'; ?> mb-2" href="<?php echo esc_url($filter['url']); ?>"<?php echo $filter['active'] ? ' aria-current="page"' : ''; ?>>
+        <a class="<?php echo $filter['active'] ? 'chip-active' : 'chip'; ?> mb-2 mr-1 align-top" href="<?php echo esc_url($filter['url']); ?>"<?php echo $filter['active'] ? ' aria-current="page"' : ''; ?>>
             <?php echo esc_html($filter['label']); ?>
         </a>
     <?php } ?>
