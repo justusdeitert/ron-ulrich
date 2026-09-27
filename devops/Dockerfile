@@ -37,10 +37,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         libjpeg-dev \
         libfreetype6-dev \
         libwebp-dev \
+        libavif-dev \
         libzip-dev \
         libicu-dev \
         unzip \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp --with-avif \
     && docker-php-ext-install -j"$(nproc)" mysqli gd zip intl opcache \
     && rm -rf /var/lib/apt/lists/*
 

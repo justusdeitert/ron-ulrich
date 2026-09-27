@@ -6,16 +6,24 @@
  */
 
 $has_thumbnail = has_post_thumbnail();
+// The first teaser image is the LCP candidate; everything below it can wait.
+$is_first = $GLOBALS['wp_query']->current_post === 0;
 ?>
 <article <?php post_class('mt-10 md:mt-14'); ?>>
     <div class="grid gap-6 pb-10 sm:grid-cols-3 md:gap-8 md:pb-14">
         <?php if ($has_thumbnail) { ?>
-            <?php $feature_image_url = theme_image_url(get_post_thumbnail_id(), 'large'); ?>
-            <div>
-                <a href="<?php the_permalink(); ?>">
-                    <div class="h-full bg-paper-sunken bg-cover bg-center bg-no-repeat max-sm:h-56" style="background-image: url(<?php echo esc_url($feature_image_url ?? ''); ?>)"></div>
-                </a>
-            </div>
+            <a class="relative block overflow-hidden bg-paper-sunken max-sm:h-56" href="<?php the_permalink(); ?>" aria-label="<?php the_title_attribute(); ?>">
+                <?php
+                    // Absolutely positioned: the text column sizes the box, so the image never shifts layout.
+                    the_post_thumbnail('large', [
+                        'class' => 'absolute inset-0 size-full object-cover',
+                        'alt' => '',
+                        'sizes' => '(min-width: 992px) 283px, (min-width: 768px) 203px, (min-width: 576px) 30vw, calc(100vw - 40px)',
+                        'loading' => $is_first ? 'eager' : 'lazy',
+                        'fetchpriority' => $is_first ? 'high' : 'auto',
+                    ]);
+                ?>
+            </a>
         <?php } ?>
 
         <div class="sm:col-span-2">

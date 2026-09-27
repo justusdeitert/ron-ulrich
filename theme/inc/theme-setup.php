@@ -49,3 +49,13 @@ add_filter('robots_txt', function (string $output): string {
 
     return rtrim($output) . "\n\nSitemap: " . esc_url_raw($sitemap) . "\n";
 }, 11);
+
+// WordPress' default of 82 is tuned for JPEG; at that level GD's AVIF output is barely smaller than the JPEG.
+add_filter('wp_editor_set_quality', function (int $quality, string $mime_type): int {
+    return $mime_type === 'image/avif' ? 60 : $quality;
+}, 10, 2);
+
+// WordPress assumes content images can be as wide as the file; the content column is the `container` width.
+add_filter('wp_calculate_image_sizes', function (string $sizes, array $size): string {
+    return $size[0] >= 912 ? '(min-width: 992px) 912px, (min-width: 768px) 672px, calc(100vw - 40px)' : $sizes;
+}, 10, 2);

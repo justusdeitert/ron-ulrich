@@ -10,4 +10,4 @@ clean-image-filenames:1.5:activate
 enable-media-replace:4.2.2:activate
 imsanity:2.9.4:activate
 phoenix-media-rename:3.13.5:activate
-webp-converter-for-media:6.6.5:activate
+webp-uploads:2.7.1:activate

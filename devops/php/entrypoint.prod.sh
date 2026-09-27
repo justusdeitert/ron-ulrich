@@ -3,8 +3,8 @@
 cd /var/www/html
 
 # Volume mounts can reset ownership on first boot
-mkdir -p wp-content/uploads wp-content/uploads-webpc
-chown -R www-data:www-data wp-content/uploads wp-content/uploads-webpc
+mkdir -p wp-content/uploads
+chown -R www-data:www-data wp-content/uploads
 
 # Subshell so a failed setup doesn't keep php-fpm from starting
 (
