@@ -38,6 +38,9 @@ add_action('admin_menu', function (): void {
     remove_menu_page('plugins.php');
 });
 
+// Keep staging out of search engines, whatever blog_public the synced DB carries
+add_filter('pre_option_blog_public', fn ($value) => wp_get_environment_type() === 'staging' ? '0' : $value);
+
 // The SEO Framework rewrites robots.txt wholesale at priority 10, which drops the
 // Sitemap line core adds at priority 0. Sitemaps are core's here, so put it back.
 add_filter('robots_txt', function (string $output): string {

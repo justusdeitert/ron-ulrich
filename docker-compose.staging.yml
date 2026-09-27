@@ -30,6 +30,7 @@ services:
             WORDPRESS_ADMIN_PASSWORD: ${WORDPRESS_ADMIN_PASSWORD}
             WORDPRESS_ADMIN_EMAIL: ${WORDPRESS_ADMIN_EMAIL}
             WORDPRESS_THEME: ${WORDPRESS_THEME:-ron-ulrich-theme}
+            WP_ENVIRONMENT_TYPE: staging
             WP_DEBUG: ${WP_DEBUG:-0}
             WP_DISALLOW_FILE_MODS: ${WP_DISALLOW_FILE_MODS:-1}
             AUTH_KEY: ${AUTH_KEY}
