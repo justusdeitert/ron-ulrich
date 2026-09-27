@@ -50,6 +50,29 @@ add_filter('robots_txt', function (string $output): string {
     return rtrim($output) . "\n\nSitemap: " . esc_url_raw($sitemap) . "\n";
 }, 11);
 
+// /llms.txt (llmstxt.org): a Markdown index of the site for language models, built live like robots.txt.
+add_action('parse_request', function (WP $wp): void {
+    if ($wp->request !== 'llms.txt') {
+        return;
+    }
+
+    $plain = fn (string $text): string => trim(preg_replace('/\s+/', ' ', html_entity_decode(wp_strip_all_tags($text), ENT_QUOTES)));
+    $lines = ['# ' . $plain(get_bloginfo('name')), '', '> ' . $plain(get_bloginfo('description'))];
+
+    foreach (['post' => __('Artikel', 'ron-ulrich'), 'page' => __('Seiten', 'ron-ulrich')] as $post_type => $heading) {
+        array_push($lines, '', '## ' . $heading);
+
+        foreach (get_posts(['post_type' => $post_type, 'numberposts' => -1, 'has_password' => false]) as $post) {
+            $summary = $plain(wp_trim_words(get_field('description', $post) ?: get_the_excerpt($post), 30));
+            $lines[] = sprintf('- [%s](%s)%s', $plain(get_the_title($post)), get_permalink($post), $summary ? ': ' . $summary : '');
+        }
+    }
+
+    header('Content-Type: text/plain; charset=utf-8');
+    echo implode("\n", $lines) . "\n";
+    exit;
+});
+
 // WordPress' default of 82 is tuned for JPEG; at that level GD's AVIF output is barely smaller than the JPEG.
 add_filter('wp_editor_set_quality', function (int $quality, string $mime_type): int {
     return $mime_type === 'image/avif' ? 60 : $quality;
