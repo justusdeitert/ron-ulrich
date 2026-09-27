@@ -13,6 +13,7 @@
     },
     "devDependencies": {
         "@biomejs/biome": "^2.5.14",
+        "@iconify-json/lucide": "^1.2.137",
         "@types/node": "^26.6.3",
         "@unocss/reset": "^66.10.5",
         "sass": "^1.105.0",

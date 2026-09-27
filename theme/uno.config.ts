@@ -1,8 +1,12 @@
-import { defineConfig, presetWind3, transformerDirectives } from 'unocss';
+import { defineConfig, presetIcons, presetWind3, transformerDirectives } from 'unocss';
 import { boxShadow, breakpoints, colors, fontFamily } from './tokens.ts';
 
 export default defineConfig({
-    presets: [presetWind3()],
+    presets: [
+        presetWind3(),
+        // Lucide icons from @iconify-json/lucide, e.g. `i-lucide-menu`
+        presetIcons({ extraProperties: { display: 'inline-block', 'vertical-align': 'middle', 'flex-shrink': '0' } }),
+    ],
     transformers: [transformerDirectives()],
     theme: {
         breakpoints,

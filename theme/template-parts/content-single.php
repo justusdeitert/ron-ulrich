@@ -31,7 +31,7 @@ $share_icons = array_filter(
 
     <?php if (! empty($published_in['activate'])) { ?>
         <a class="kicker ml-auto flex items-center gap-1 transition-colors hover:text-accent" href="<?php echo esc_url($published_in['url']); ?>">
-            <i class="material-icons !text-lg">link</i>
+            <span class="i-lucide-link size-4.5" aria-hidden="true"></span>
             <span><?php echo esc_html($published_in['name']); ?></span>
         </a>
     <?php } ?>

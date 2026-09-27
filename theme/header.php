@@ -16,8 +16,6 @@
     <link href="<?php echo esc_url(theme_public_url('images/favicon.ico')); ?>" rel="shortcut icon">
     <link href="<?php echo esc_url(theme_public_url('images/touch-icon.png')); ?>" rel="apple-touch-icon-precomposed">
 
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons&display=swap" rel="stylesheet">
-
     <meta name="google-site-verification" content="EBS4XKei4WioxC3QXiRKkBuV8cAOzt0TgetW2twkO4w" />
 
     <meta name="application-name" content="ron-ulrich" />
@@ -50,15 +48,15 @@
                 ]);
             ?>
         </nav>
-        <button id="toggle-sidebar" type="button" class="ml-auto cursor-pointer border-0 bg-transparent p-0 leading-none text-ink-900 sm:hidden" aria-controls="sidebar" aria-expanded="false" aria-label="<?php esc_attr_e('Menü öffnen', 'ron-ulrich'); ?>">
-            <i class="material-icons !text-4xl" aria-hidden="true">menu</i>
+        <button id="toggle-sidebar" type="button" class="ml-auto cursor-pointer border-0 bg-transparent p-0 text-ink-900 sm:hidden" aria-controls="sidebar" aria-expanded="false" aria-label="<?php esc_attr_e('Menü öffnen', 'ron-ulrich'); ?>">
+            <span class="i-lucide-menu block size-9" aria-hidden="true"></span>
         </button>
         <div id="sidebar" class="fixed top-0 -left-72 z-[3000] flex h-full w-72 flex-col bg-paper-raised transition-[left] duration-300 sm:hidden [.sidebar-open_&]:left-0 [.sidebar-open_&]:shadow-sidebar">
             <!-- py-8 matches the header's pt-8, so the close icon lines up with the burger it replaces -->
             <div class="flex items-center justify-between border-0 border-b border-solid border-line px-6 py-8">
                 <span class="kicker text-base text-ink-900"><?php bloginfo('name'); ?></span>
-                <button id="close-sidebar" type="button" class="cursor-pointer border-0 bg-transparent p-0 leading-none text-ink-900" aria-label="<?php esc_attr_e('Menü schließen', 'ron-ulrich'); ?>">
-                    <i class="material-icons !text-4xl" aria-hidden="true">close</i>
+                <button id="close-sidebar" type="button" class="cursor-pointer border-0 bg-transparent p-0 text-ink-900" aria-label="<?php esc_attr_e('Menü schließen', 'ron-ulrich'); ?>">
+                    <span class="i-lucide-x block size-9" aria-hidden="true"></span>
                 </button>
             </div>
             <nav class="flex-1 overflow-y-auto">

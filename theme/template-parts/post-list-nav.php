@@ -9,8 +9,8 @@ $show_archive = theme_is_archive_list();
 
 $links = paginate_links([
     'echo' => false,
-    'prev_text' => '<i class="material-icons">arrow_back</i>',
-    'next_text' => '<i class="material-icons">arrow_forward</i>',
+    'prev_text' => '<span class="i-lucide-arrow-left size-5" aria-hidden="true"></span><span class="sr-only">' . esc_html__('Vorherige Seite', 'ron-ulrich') . '</span>',
+    'next_text' => '<span class="i-lucide-arrow-right size-5" aria-hidden="true"></span><span class="sr-only">' . esc_html__('Nächste Seite', 'ron-ulrich') . '</span>',
 ]);
 
 if (! $links && ! $show_archive) {

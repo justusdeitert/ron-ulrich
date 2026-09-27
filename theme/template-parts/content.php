@@ -33,7 +33,7 @@ $has_thumbnail = has_post_thumbnail();
 
             <a class="chip inline-flex items-center gap-1" href="<?php the_permalink(); ?>">
                 <span><?php esc_html_e('weiterlesen', 'ron-ulrich'); ?></span>
-                <i class="material-icons !text-xl">arrow_right_alt</i>
+                <span class="i-lucide-arrow-right size-5" aria-hidden="true"></span>
             </a>
         </div>
     </div>
