@@ -27,6 +27,8 @@
 <body <?php body_class('flex h-full flex-col bg-paper font-sans text-base leading-normal text-ink antialiased'); ?>>
 <?php wp_body_open(); ?>
 
+<a class="chip fixed -top-20 left-4 z-[4000] bg-paper-raised focus:top-4" href="#main"><?php esc_html_e('Zum Inhalt springen', 'ron-ulrich'); ?></a>
+
 <header class="mb-8 pt-8 md:mb-12 md:pt-12">
     <div class="container flex items-start">
         <a class="flex items-center gap-4" href="<?php echo esc_url(home_url('/')); ?>">
@@ -36,8 +38,12 @@
                 <div class="brand-image hidden size-[76px] shrink-0 bg-cover bg-center sm:block md:size-[96px]" style="background-image: url(<?php echo esc_url($brand_image_url); ?>)"></div>
             <?php } ?>
             <div class="flex flex-col justify-center">
-                <h1 class="mb-2 text-[2.25rem] leading-none tracking-[-0.02em] md:text-[3rem]"><?php bloginfo('name'); ?></h1>
-                <h2 class="mb-0 font-sans text-sm font-semibold uppercase tracking-[0.12em] text-ink-600 md:text-base"><?php bloginfo('description'); ?></h2>
+                <?php
+                    // Pages that render their own title as h1 demote the site name.
+                    $site_title_tag = is_singular() || is_search() || is_404() ? 'p' : 'h1';
+                ?>
+                <<?php echo $site_title_tag; ?> class="mb-2 font-serif text-[2.25rem] font-medium leading-none tracking-[-0.02em] md:text-[3rem]"><?php bloginfo('name'); ?></<?php echo $site_title_tag; ?>>
+                <p class="mb-0 font-sans text-sm font-semibold uppercase tracking-[0.12em] text-ink-600 md:text-base"><?php bloginfo('description'); ?></p>
             </div>
         </a>
         <nav class="ml-auto hidden sm:block">
@@ -51,7 +57,7 @@
         <button id="toggle-sidebar" type="button" class="ml-auto cursor-pointer border-0 bg-transparent p-0 text-ink-900 sm:hidden" aria-controls="sidebar" aria-expanded="false" aria-label="<?php esc_attr_e('Menü öffnen', 'ron-ulrich'); ?>">
             <span class="i-lucide-menu block size-9" aria-hidden="true"></span>
         </button>
-        <div id="sidebar" class="fixed top-0 -left-72 z-[3000] flex h-full w-72 flex-col bg-paper-raised transition-[left] duration-300 sm:hidden [.sidebar-open_&]:left-0 [.sidebar-open_&]:shadow-sidebar">
+        <div id="sidebar" class="fixed top-0 -left-72 z-[3000] flex h-full w-72 flex-col bg-paper-raised transition-[left,visibility] duration-300 invisible sm:hidden [.sidebar-open_&]:visible [.sidebar-open_&]:left-0 [.sidebar-open_&]:shadow-sidebar">
             <!-- py-8 matches the header's pt-8, so the close icon lines up with the burger it replaces -->
             <div class="flex items-center justify-between border-0 border-b border-solid border-line px-6 py-8">
                 <span class="kicker text-base text-ink-900"><?php bloginfo('name'); ?></span>
@@ -71,5 +77,5 @@
     </div>
 </header>
 
-<main class="container flex-[1_0_auto]" role="document">
+<main id="main" class="container flex-[1_0_auto]">
     <div class="content">

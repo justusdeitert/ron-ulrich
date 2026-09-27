@@ -12,8 +12,9 @@ $is_first = $GLOBALS['wp_query']->current_post === 0;
 <article <?php post_class('mt-10 md:mt-14'); ?>>
     <div class="grid gap-6 pb-10 sm:grid-cols-3 md:gap-8 md:pb-14">
         <?php if ($has_thumbnail) { ?>
-            <a class="relative block overflow-hidden bg-paper-sunken max-sm:h-56" href="<?php the_permalink(); ?>" aria-label="<?php the_title_attribute(); ?>">
+            <a class="relative block overflow-hidden bg-paper-sunken max-sm:h-56" href="<?php the_permalink(); ?>" tabindex="-1" aria-hidden="true">
                 <?php
+                    // Duplicates the title link, hence hidden from keyboard and screen readers.
                     // Absolutely positioned: the text column sizes the box, so the image never shifts layout.
                     the_post_thumbnail('large', [
                         'class' => 'absolute inset-0 size-full object-cover',
@@ -40,7 +41,7 @@ $is_first = $GLOBALS['wp_query']->current_post === 0;
             </div>
 
             <a class="chip inline-flex items-center gap-1" href="<?php the_permalink(); ?>">
-                <span><?php esc_html_e('weiterlesen', 'ron-ulrich'); ?></span>
+                <span><?php esc_html_e('weiterlesen', 'ron-ulrich'); ?><span class="sr-only">: <?php the_title(); ?></span></span>
                 <span class="i-lucide-arrow-right size-5" aria-hidden="true"></span>
             </a>
         </div>

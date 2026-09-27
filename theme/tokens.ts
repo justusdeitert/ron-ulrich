@@ -33,7 +33,7 @@ export const colors = {
         800: '#312f2c',
         700: '#4a4744',
         600: '#6b6762',
-        500: '#8a8681',
+        500: '#75716c',
         400: '#a8a49e',
     },
     // Restrained editorial red, used sparingly for links and active states

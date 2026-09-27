@@ -7,17 +7,22 @@
  *    sidebar's transition; clicking it (or anything outside the sidebar,
  *    which it covers) closes it
  *  - scrolling the page past a short threshold closes it too
+ *  - Escape closes it and focus returns to the burger button
  */
 const toggle = document.getElementById('toggle-sidebar');
 
 if (toggle) {
     const body = document.body;
+    const sidebar = document.getElementById('sidebar');
     /** Page offset when the sidebar was opened, so a stray pixel does not close it */
     let openedAt = 0;
 
     const setOpen = (open: boolean) => {
         if (open) {
             openedAt = window.scrollY;
+        } else if (sidebar?.contains(document.activeElement)) {
+            // The sidebar turns invisible, so focus would otherwise drop to <body>
+            toggle.focus();
         }
 
         body.classList.toggle('sidebar-open', open);
@@ -36,6 +41,12 @@ if (toggle) {
     });
 
     document.getElementById('close-sidebar')?.addEventListener('click', () => setOpen(false));
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && body.classList.contains('sidebar-open')) {
+            setOpen(false);
+        }
+    });
 
     window.addEventListener(
         'scroll',

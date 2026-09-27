@@ -45,10 +45,10 @@ $share_icons = array_filter(
             <?php get_template_part('template-parts/post-meta', null, ['published_in' => $published_in]); ?>
         </div>
 
-        <h2 class="mb-4 lg:w-[85%]"><?php the_title(); ?></h2>
+        <h1 class="mb-4 lg:w-[85%]"><?php the_title(); ?></h1>
 
         <?php if ($description = get_field('description')) { ?>
-            <h3 class="mb-0 lg:w-[85%]"><?php echo wp_kses_post($description); ?></h3>
+            <p class="lead mb-0 lg:w-[85%]"><?php echo wp_kses_post($description); ?></p>
         <?php } ?>
 
         <hr class="mt-4">

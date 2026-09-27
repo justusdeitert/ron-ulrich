@@ -7,6 +7,6 @@
 
 ?>
 <div class="mb-10 md:mb-14">
-    <h2 class="mb-0"><?php echo wp_kses_post(theme_page_title()); ?></h2>
+    <h1 class="mb-0"><?php echo wp_kses_post(theme_page_title()); ?></h1>
     <hr class="mt-4">
 </div>
