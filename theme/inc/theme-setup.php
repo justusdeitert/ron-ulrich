@@ -73,9 +73,9 @@ add_action('parse_request', function (WP $wp): void {
     exit;
 });
 
-// WordPress' default of 82 is tuned for JPEG; at that level GD's AVIF output is barely smaller than the JPEG.
+// WordPress' default of 82 is tuned for JPEG; 50 is the AVIF default of sharp and Squoosh.
 add_filter('wp_editor_set_quality', function (int $quality, string $mime_type): int {
-    return $mime_type === 'image/avif' ? 60 : $quality;
+    return $mime_type === 'image/avif' ? 50 : $quality;
 }, 10, 2);
 
 // WordPress assumes content images can be as wide as the file; the content column is the `container` width.
