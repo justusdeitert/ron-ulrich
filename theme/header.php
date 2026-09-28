@@ -49,7 +49,7 @@
             <?php
                 wp_nav_menu([
                     'theme_location' => 'header_navigation',
-                    'menu_class' => 'm-0 flex min-w-24 list-none flex-col items-end gap-2 p-0 lg:min-w-0 lg:flex-row lg:items-baseline lg:gap-8 [&_a]:text-sm [&_a]:font-semibold [&_a]:uppercase [&_a]:tracking-[0.08em] [&_a]:text-ink-600 [&_a:hover]:text-accent [&_.current-menu-item>a]:text-ink-900',
+                    'menu_class' => 'm-0 flex min-w-24 list-none flex-col items-end gap-2 p-0 lg:min-w-0 lg:flex-row lg:items-baseline lg:gap-8 [&_a]:text-sm [&_a]:font-semibold [&_a]:uppercase [&_a]:tracking-[0.08em] [&_a]:text-ink-600 [&_a:hover]:text-accent [&_.current-menu-item>a]:text-ink-900 [&_.current-menu-item>a]:underline [&_.current-menu-item>a]:decoration-accent [&_.current-menu-item>a]:decoration-2 [&_.current-menu-item>a]:underline-offset-[0.5em]',
                 ]);
             ?>
         </nav>
