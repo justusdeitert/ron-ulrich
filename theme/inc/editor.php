@@ -28,7 +28,7 @@ const THEME_ALLOWED_BLOCKS = [
     'core/column',
     'core/embed',
     'core/html',
-    // Contact Form 7 forms are embedded as shortcodes
+    // Fluent Forms forms are embedded as shortcodes
     'core/shortcode',
     // Placeholder the editor shows for unrecognised blocks in existing content
     'core/missing',

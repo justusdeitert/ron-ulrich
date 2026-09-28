@@ -42,6 +42,9 @@ add_action('admin_menu', function (): void {
 // Keep staging out of search engines, whatever blog_public the synced DB carries
 add_filter('pre_option_blog_public', fn ($value) => wp_get_environment_type() === 'staging' ? '0' : $value);
 
+// Fluent Forms stamps its spam token with current_time() on first interaction; submitting within 5 s is a bot.
+add_filter('fluentform/token_based_validation_result', fn ($valid, $timestamp) => $valid && current_time('timestamp') - (int) $timestamp >= 5, 10, 2);
+
 // The SEO Framework rewrites robots.txt wholesale at priority 10, which drops the
 // Sitemap line core adds at priority 0. Sitemaps are core's here, so put it back.
 add_filter('robots_txt', function (string $output): string {

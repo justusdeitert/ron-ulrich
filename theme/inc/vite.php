@@ -128,13 +128,5 @@ add_action('enqueue_block_assets', function (): void {
     }
 });
 
-// CF7 ships its CSS/JS on every page; only load them where a form exists.
-add_filter('wpcf7_load_js', '__return_false');
-add_filter('wpcf7_load_css', '__return_false');
-
-add_action('wp_enqueue_scripts', function (): void {
-    if (function_exists('wpcf7_enqueue_scripts') && is_singular() && has_shortcode(get_post()->post_content ?? '', 'contact-form-7')) {
-        wpcf7_enqueue_scripts();
-        wpcf7_enqueue_styles();
-    }
-}, 200);
+// Keep Fluent Forms' layout CSS but drop its default skin; main.scss styles the fields.
+add_filter('fluentform/load_default_public', '__return_false');

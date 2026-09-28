@@ -70,7 +70,7 @@
 - `node_modules` lives inside Docker volumes. Run installs inside the node container (`make enter_node`).
 - TypeScript entry is `theme/src/ts/main.ts`, feature modules live in `theme/src/ts/modules/`.
 - Styling is UnoCSS (`presetWind3`) with utilities written directly in the PHP templates; `theme/uno.config.ts` holds Bootstrap-4-matching breakpoints and shortcuts (`container`, `tag`, `alert-warning`). Layouts use plain flex/grid utilities.
-- `theme/src/css/main.scss` is SCSS reserved for markup templates cannot touch: base typography, WP-generated classes/blocks, `paginate_links()` output, Contact Form 7. The wp-admin bar offset is utilities on `<html>` in `header.php`.
+- `theme/src/css/main.scss` is SCSS reserved for markup templates cannot touch: base typography, WP-generated classes/blocks, `paginate_links()` output, Fluent Forms (its default skin is disabled in `inc/vite.php`). The wp-admin bar offset is utilities on `<html>` in `header.php`.
 - Plugin slugs, versions, and activation flags are defined once in `devops/plugins.txt` (`slug:version[:activate]`). The dev setup script, prod Dockerfile, and prod entrypoint all read from this file.
 
 ## Don'ts

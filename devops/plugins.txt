@@ -1,6 +1,4 @@
-contact-form-7:6.1.7:activate
-contact-form-7-honeypot:3.8.0:activate
-contact-form-cfdb7:1.4.0:activate
+fluentform:6.2.15:activate
 disable-comments:2.9.0:activate
 autodescription:5.1.4:activate
 svg-support:2.6.1:activate
