@@ -1,27 +1,28 @@
 /**
- * Share button on single posts: the native share sheet where the browser has one,
+ * Share buttons on single posts: the native share sheet where the browser has one,
  * otherwise copy the link to the clipboard.
  */
-const button = document.querySelector<HTMLButtonElement>('.share-button');
-const label = button?.lastElementChild;
-const labelText = label?.textContent ?? '';
-let resetTimer: number | undefined;
+for (const button of document.querySelectorAll<HTMLButtonElement>('.share-button')) {
+    const label = button.lastElementChild;
+    const labelText = label?.textContent ?? '';
+    let resetTimer: number | undefined;
 
-button?.addEventListener('click', async () => {
-    const { url = '', title = '', copied = '' } = button.dataset;
+    button.addEventListener('click', async () => {
+        const { url = '', title = '', copied = '' } = button.dataset;
 
-    if (navigator.share) {
-        await navigator.share({ title, url }).catch(() => {});
-        return;
-    }
+        if (navigator.share) {
+            await navigator.share({ title, url }).catch(() => {});
+            return;
+        }
 
-    await navigator.clipboard.writeText(url);
+        await navigator.clipboard.writeText(url);
 
-    if (label) {
-        label.textContent = copied;
-        clearTimeout(resetTimer);
-        resetTimer = window.setTimeout(() => {
-            label.textContent = labelText;
-        }, 2000);
-    }
-});
+        if (label) {
+            label.textContent = copied;
+            clearTimeout(resetTimer);
+            resetTimer = window.setTimeout(() => {
+                label.textContent = labelText;
+            }, 2000);
+        }
+    });
+}

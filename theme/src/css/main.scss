@@ -16,6 +16,32 @@ article,
     @include content.reading-copy;
 }
 
+/* Reading progress through the article: empty when its top reaches the top of the viewport, full when its end reaches the bottom */
+@supports (animation-timeline: view()) {
+    .single-post article {
+        view-timeline-name: --article;
+    }
+
+    .reading-progress {
+        transform-origin: left;
+        animation: reading-progress linear both;
+        animation-timeline: --article;
+        animation-range: contain;
+    }
+}
+
+@supports not (animation-timeline: view()) {
+    .reading-progress {
+        display: none;
+    }
+}
+
+@keyframes reading-progress {
+    from {
+        scale: 0 1;
+    }
+}
+
 @media (prefers-reduced-motion: no-preference) {
     /* Page content fades out upwards and the next page rises in; the header stays put */
     @view-transition {

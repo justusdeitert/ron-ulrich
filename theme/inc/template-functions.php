@@ -27,6 +27,15 @@ function theme_is_archive_list(): bool {
 }
 
 /**
+ * Estimated reading time of the current post in minutes, at 200 words per minute.
+ */
+function theme_reading_time(): int {
+    $words = preg_split('/\s+/u', wp_strip_all_tags(strip_shortcodes(get_the_content())), -1, PREG_SPLIT_NO_EMPTY);
+
+    return max(1, (int) round(count($words) / 200));
+}
+
+/**
  * Context-aware page title (ported from the Sage App controller).
  */
 function theme_page_title(): string {

@@ -1,11 +1,11 @@
 <?php
 /**
- * Post meta: tags and date.
+ * Post meta: tags and date, plus the reading time on single posts.
  *
  * @package ron-ulrich
  *
  * @param array $args {
- *     @type bool $inline Render a single "Tag · Tag · Datum" line (teaser) instead of tag pills above the date.
+ *     @type bool $inline Render a single "Tag · Tag · Datum" line (teaser) instead of tag pills above the date and reading time.
  * }
  */
 
@@ -29,5 +29,9 @@ $tags = get_the_tags() ?: [];
         </div>
     <?php } ?>
 
-    <time datetime="<?php echo esc_attr(get_the_date('c')); ?>"><?php echo esc_html(get_the_date('j. F Y')); ?></time>
+    <div class="flex flex-wrap items-center gap-x-2">
+        <time datetime="<?php echo esc_attr(get_the_date('c')); ?>"><?php echo esc_html(get_the_date('j. F Y')); ?></time>
+        <span class="text-ink-400" aria-hidden="true">&middot;</span>
+        <span><?php echo esc_html(sprintf(__('%d Min. Lesezeit', 'ron-ulrich'), theme_reading_time())); ?></span>
+    </div>
 <?php } ?>

@@ -7,16 +7,12 @@
 
 ?>
 
-<div class="py-4">
-    <button class="share-button kicker flex cursor-pointer items-center gap-1 border-0 bg-transparent p-0 transition-colors hover:text-accent" type="button" data-url="<?php the_permalink(); ?>" data-title="<?php the_title_attribute(); ?>" data-copied="<?php esc_attr_e('Link kopiert', 'ron-ulrich'); ?>">
-        <span class="i-lucide-share-2 size-4.5" aria-hidden="true"></span>
-        <span aria-live="polite"><?php esc_html_e('Teilen', 'ron-ulrich'); ?></span>
-    </button>
-</div>
+<?php get_template_part('template-parts/post-actions'); ?>
 
 <hr>
 
 <article <?php post_class('mt-10 md:mt-14'); ?>>
+    <div class="reading-progress fixed inset-x-0 top-[var(--wp-admin--admin-bar--height,0px)] z-[2000] h-[3px] bg-accent" aria-hidden="true"></div>
     <div class="mb-8 md:mb-10">
         <div class="kicker mb-4">
             <?php get_template_part('template-parts/post-meta'); ?>
@@ -34,4 +30,7 @@
     <?php the_content(); ?>
 </article>
 
-<?php get_template_part('template-parts/back-link'); ?>
+<div class="mt-10 md:mt-14">
+    <?php get_template_part('template-parts/post-actions'); ?>
+</div>
+<hr>

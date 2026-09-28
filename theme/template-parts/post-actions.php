@@ -1,0 +1,19 @@
+<?php
+/**
+ * Back and share buttons, framing single posts above and below the article.
+ * back-link.ts and share.ts pick them up by class.
+ *
+ * @package ron-ulrich
+ */
+
+?>
+<div class="flex items-center justify-between gap-4 py-4">
+    <a class="back-link chip inline-flex items-center gap-1" href="<?php echo esc_url(theme_posts_page_url()); ?>">
+        <span class="i-lucide-arrow-left size-5" aria-hidden="true"></span>
+        <span><?php esc_html_e('zurück', 'ron-ulrich'); ?></span>
+    </a>
+    <button class="share-button chip inline-flex cursor-pointer items-center gap-2 bg-transparent" type="button" data-url="<?php the_permalink(); ?>" data-title="<?php the_title_attribute(); ?>" data-copied="<?php esc_attr_e('Link kopiert', 'ron-ulrich'); ?>">
+        <span class="i-lucide-share-2 size-4.5" aria-hidden="true"></span>
+        <span aria-live="polite"><?php esc_html_e('Teilen', 'ron-ulrich'); ?></span>
+    </button>
+</div>

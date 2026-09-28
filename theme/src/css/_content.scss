@@ -36,23 +36,31 @@
     }
 
     blockquote {
-        margin-left: 0;
-        margin-right: 0;
-        padding-left: 1.25rem;
-        border-left: 2px solid theme('colors.ink.900');
+        margin: 2.5rem 0;
+        padding-left: 1.5rem;
+        border-left: 3px solid theme('colors.accent.DEFAULT');
 
         p {
-            font-size: 1.25rem;
-            line-height: 1.5;
+            font-size: clamp(1.375rem, 1.1rem + 1vw, 1.75rem);
+            font-style: italic;
+            line-height: 1.4;
             color: theme('colors.ink.900');
-
-            @media (min-width: 768px) {
-                font-size: 1.5rem;
-            }
         }
 
         p:last-child {
             margin-bottom: 0;
+        }
+
+        cite {
+            display: block;
+            margin-top: 1rem;
+            font-family: theme('fontFamily.sans');
+            font-size: 0.8125rem;
+            font-style: normal;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: theme('colors.ink.600');
         }
     }
 }
