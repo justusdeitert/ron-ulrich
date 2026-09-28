@@ -12,7 +12,6 @@
 <hr>
 
 <article <?php post_class('mt-10 md:mt-14'); ?>>
-    <div class="reading-progress fixed inset-x-0 top-[var(--wp-admin--admin-bar--height,0px)] z-[2000] h-[3px] bg-accent" aria-hidden="true"></div>
     <div class="mb-8 md:mb-10">
         <div class="kicker mb-4">
             <?php get_template_part('template-parts/post-meta'); ?>
