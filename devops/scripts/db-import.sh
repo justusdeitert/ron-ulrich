@@ -11,5 +11,5 @@ esac
 wp db reset --yes --allow-root
 wp db import "$DB_IMPORT_FILE" --allow-root
 # Remote sites run on https, the local one on http
-wp search-replace "https://$REMOTE_DOMAIN" "http://$LOCAL_DOMAIN" --allow-root
-wp search-replace "$REMOTE_DOMAIN" "$LOCAL_DOMAIN" --allow-root
+wp search-replace "https://$REMOTE_DOMAIN" "http://$LOCAL_DOMAIN" --all-tables-with-prefix --allow-root
+wp search-replace "$REMOTE_DOMAIN" "$LOCAL_DOMAIN" --all-tables-with-prefix --allow-root

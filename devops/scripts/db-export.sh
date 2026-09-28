@@ -8,4 +8,5 @@ case "${TARGET:=production}" in
 esac
 : "${REMOTE_DOMAIN:?domain for $TARGET is not set in .env}"
 
-wp search-replace "$LOCAL_DOMAIN" "$REMOTE_DOMAIN" --export="$DB_EXPORT_FILE" --allow-root
+# --all-tables-with-prefix: without it only core-registered tables are exported, dropping plugin tables like wp_fluentform_*
+wp search-replace "$LOCAL_DOMAIN" "$REMOTE_DOMAIN" --all-tables-with-prefix --export="$DB_EXPORT_FILE" --allow-root
