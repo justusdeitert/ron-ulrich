@@ -8,3 +8,4 @@ import './modules/sidebar';
 import './modules/archive-filter';
 import './modules/back-link';
 import './modules/share';
+import './modules/reveal';

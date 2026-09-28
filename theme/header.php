@@ -29,7 +29,7 @@
 
 <a class="chip fixed -top-20 left-4 z-[4000] bg-paper-raised focus:top-4" href="#main"><?php esc_html_e('Zum Inhalt springen', 'ron-ulrich'); ?></a>
 
-<header class="mb-8 pt-8 md:mb-12 md:pt-12">
+<header class="mb-8 pt-8 md:mb-12 md:pt-12 view-transition-site-header">
     <div class="container flex items-start">
         <a class="flex items-center gap-4" href="<?php echo esc_url(home_url('/')); ?>">
             <?php $brand_image_url = wp_get_attachment_image_url((int) get_theme_mod('custom_logo'), 'medium_large'); ?>
@@ -56,25 +56,27 @@
         <button id="toggle-sidebar" type="button" class="ml-auto cursor-pointer border-0 bg-transparent p-0 text-ink-900 sm:hidden" aria-controls="sidebar" aria-expanded="false" aria-label="<?php esc_attr_e('Menü öffnen', 'ron-ulrich'); ?>">
             <span class="i-lucide-menu block size-9" aria-hidden="true"></span>
         </button>
-        <div id="sidebar" class="fixed top-0 -left-72 z-[3000] flex h-full w-72 flex-col bg-paper-raised transition-[left,visibility] duration-300 invisible sm:hidden [.sidebar-open_&]:visible [.sidebar-open_&]:left-0 [.sidebar-open_&]:shadow-sidebar">
-            <!-- py-8 matches the header's pt-8, so the close icon lines up with the burger it replaces -->
-            <div class="flex items-center justify-between border-0 border-b border-solid border-line px-6 py-8">
-                <span class="kicker text-base text-ink-900"><?php bloginfo('name'); ?></span>
-                <button id="close-sidebar" type="button" class="cursor-pointer border-0 bg-transparent p-0 text-ink-900" aria-label="<?php esc_attr_e('Menü schließen', 'ron-ulrich'); ?>">
-                    <span class="i-lucide-x block size-9" aria-hidden="true"></span>
-                </button>
-            </div>
-            <nav class="flex-1 overflow-y-auto">
-                <?php
-                    wp_nav_menu([
-                        'theme_location' => 'header_navigation',
-                        'menu_class' => 'm-0 flex list-none flex-col p-0 [&_li]:border-0 [&_li]:border-b [&_li]:border-solid [&_li]:border-line [&_li:last-child]:border-b-0 [&_a]:block [&_a]:px-6 [&_a]:py-4 [&_a]:font-serif [&_a]:text-xl [&_a]:text-ink-900 [&_.current-menu-item>a]:bg-accent-soft [&_.current-menu-item>a]:text-accent',
-                    ]);
-                ?>
-            </nav>
-        </div>
     </div>
 </header>
+
+<?php // Outside the header: its transition name makes it a stacking context, which would trap the sidebar below the overlay. ?>
+<div id="sidebar" class="fixed top-0 -left-72 z-[3000] flex h-full w-72 flex-col bg-paper-raised transition-[left,visibility] duration-300 invisible sm:hidden [.sidebar-open_&]:visible [.sidebar-open_&]:left-0 [.sidebar-open_&]:shadow-sidebar">
+    <!-- py-8 matches the header's pt-8, so the close icon lines up with the burger it replaces -->
+    <div class="flex items-center justify-between border-0 border-b border-solid border-line px-6 py-8">
+        <span class="kicker text-base text-ink-900"><?php bloginfo('name'); ?></span>
+        <button id="close-sidebar" type="button" class="cursor-pointer border-0 bg-transparent p-0 text-ink-900" aria-label="<?php esc_attr_e('Menü schließen', 'ron-ulrich'); ?>">
+            <span class="i-lucide-x block size-9" aria-hidden="true"></span>
+        </button>
+    </div>
+    <nav class="flex-1 overflow-y-auto">
+        <?php
+            wp_nav_menu([
+                'theme_location' => 'header_navigation',
+                'menu_class' => 'm-0 flex list-none flex-col p-0 [&_li]:border-0 [&_li]:border-b [&_li]:border-solid [&_li]:border-line [&_li:last-child]:border-b-0 [&_a]:block [&_a]:px-6 [&_a]:py-4 [&_a]:font-serif [&_a]:text-xl [&_a]:text-ink-900 [&_.current-menu-item>a]:bg-accent-soft [&_.current-menu-item>a]:text-accent',
+            ]);
+        ?>
+    </nav>
+</div>
 
 <main id="main" class="container flex-[1_0_auto]">
     <div class="content">

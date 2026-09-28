@@ -23,12 +23,14 @@ foreach (get_tags() as $tag) {
     ];
 }
 ?>
-<hr>
-<?php // Inline chips instead of flex, so text-wrap: balance can spread them evenly across rows. ?>
-<nav class="-mb-2 py-4 text-balance" aria-label="<?php esc_attr_e('Kategorien', 'ron-ulrich'); ?>">
-    <?php foreach ($filters as $filter) { ?>
-        <a class="<?php echo $filter['active'] ? 'chip-active' : 'chip'; ?> mb-2 mr-1 align-top" href="<?php echo esc_url($filter['url']); ?>"<?php echo $filter['active'] ? ' aria-current="page"' : ''; ?>>
-            <?php echo esc_html($filter['label']); ?>
-        </a>
-    <?php } ?>
-</nav>
+<div class="view-transition-archive-filter">
+    <hr>
+    <?php // Inline chips instead of flex, so text-wrap: balance can spread them evenly across rows. ?>
+    <nav class="-mb-2 py-4 text-balance" aria-label="<?php esc_attr_e('Kategorien', 'ron-ulrich'); ?>">
+        <?php foreach ($filters as $filter) { ?>
+            <a class="<?php echo $filter['active'] ? 'chip-active' : 'chip'; ?> mb-2 mr-1 align-top" href="<?php echo esc_url($filter['url']); ?>"<?php echo $filter['active'] ? ' aria-current="page"' : ''; ?>>
+                <?php echo esc_html($filter['label']); ?>
+            </a>
+        <?php } ?>
+    </nav>
+</div>
