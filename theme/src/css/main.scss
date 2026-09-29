@@ -25,16 +25,23 @@ article,
     /* Teaser images settle from a slight zoom while scrolling into view */
     @supports (animation-timeline: view()) {
         .scroll-zoom {
+            // Full-width images on phones make the same zoom far more noticeable
+            --scroll-zoom: 1.05;
+
             animation: scroll-zoom linear both;
             animation-timeline: view();
             animation-range: cover 0% cover 50%;
+
+            @media (min-width: 576px) {
+                --scroll-zoom: 1.15;
+            }
         }
     }
 }
 
 @keyframes scroll-zoom {
     from {
-        scale: 1.15;
+        scale: var(--scroll-zoom);
     }
 }
 
