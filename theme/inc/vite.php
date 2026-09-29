@@ -55,9 +55,13 @@ function theme_vite_manifest(): array {
 
 function theme_enqueue_assets(): void {
     if (theme_is_dev()) {
-        // Dev mode: load from Vite dev server
-        wp_enqueue_script_module('vite-client', theme_vite_dev_origin() . '/@vite/client', [], null);
-        wp_enqueue_script_module('theme-main', theme_vite_dev_origin() . '/ts/main.ts', [], null);
+        // Vite injects the CSS from main.ts at runtime. Blocking rendering on the entry keeps
+        // the first paint styled (no flash, view transitions see their CSS); `blocking` only
+        // works in <head>, and classic themes print script modules in the footer.
+        add_action('wp_head', function (): void {
+            wp_print_script_tag(['type' => 'module', 'src' => theme_vite_dev_origin() . '/@vite/client']);
+            wp_print_script_tag(['type' => 'module', 'src' => theme_vite_dev_origin() . '/ts/main.ts', 'blocking' => 'render']);
+        });
 
         return;
     }
