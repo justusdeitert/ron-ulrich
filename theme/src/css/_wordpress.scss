@@ -124,3 +124,84 @@ figcaption {
         margin-block: $separator-gap-md;
     }
 }
+
+.wp-block-gallery {
+    margin-bottom: 2rem;
+
+    /* Captions sit under each image like on single images, instead of core's white overlay */
+    &.has-nested-images figure.wp-block-image {
+        &:has(figcaption)::before {
+            content: none;
+        }
+
+        figcaption {
+            position: static;
+            max-height: none;
+            padding: 0;
+            overflow: visible;
+            color: theme('colors.ink.600');
+            text-shadow: none;
+            background: none;
+        }
+    }
+}
+
+.wp-block-buttons {
+    margin-block: 2rem;
+}
+
+/* Same look as the `chip` shortcut in uno.config.ts (back and category buttons) */
+.wp-block-button .wp-block-button__link {
+    padding: 0.375rem 0.875rem;
+    font-family: theme('fontFamily.sans');
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: theme('colors.ink.600');
+    background-color: transparent;
+    border: 1px solid theme('colors.line.strong');
+    border-radius: 0;
+    transition:
+        background-color 0.15s ease,
+        border-color 0.15s ease,
+        color 0.15s ease;
+
+    &:hover {
+        color: theme('colors.ink.900');
+        background-color: theme('colors.highlight');
+        border-color: theme('colors.ink.900');
+    }
+}
+
+.wp-block-footnotes {
+    margin-top: 2.5rem;
+    padding-top: 1.25rem;
+    padding-left: 1.25rem;
+    font-family: theme('fontFamily.sans');
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: theme('colors.ink.600');
+    border-top: 1px solid theme('colors.line.DEFAULT');
+
+    li {
+        margin-bottom: 0.375rem;
+    }
+
+    /* The ↩ back link */
+    li > a {
+        margin-left: 0.25rem;
+        text-decoration: none;
+    }
+}
+
+/* Footnote markers in the running text */
+sup.fn a {
+    padding-inline: 0.1em;
+    font-family: theme('fontFamily.sans');
+    font-weight: 600;
+    color: theme('colors.accent.DEFAULT');
+    text-decoration: none;
+}

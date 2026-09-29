@@ -12,9 +12,10 @@ if (! defined('ABSPATH')) {
 }
 
 /**
- * The blocks this theme actually styles, derived from what the existing
- * content uses. Anything else is hidden from the inserter; content that
- * already contains another block still renders on the frontend.
+ * The blocks this theme actually styles: what the existing content uses,
+ * plus gallery, buttons and footnotes for new articles. Anything else is
+ * hidden from the inserter; content that already contains another block
+ * still renders on the frontend.
  */
 const THEME_ALLOWED_BLOCKS = [
     'core/paragraph',
@@ -22,12 +23,16 @@ const THEME_ALLOWED_BLOCKS = [
     'core/list',
     'core/list-item',
     'core/image',
+    'core/gallery',
     'core/quote',
     'core/separator',
     'core/columns',
     'core/column',
+    'core/buttons',
+    'core/button',
     'core/embed',
-    'core/html',
+    // Also enables the "Footnote" button in the paragraph toolbar
+    'core/footnotes',
     // Fluent Forms forms are embedded as shortcodes
     'core/shortcode',
     // Placeholder the editor shows for unrecognised blocks in existing content
@@ -54,9 +59,9 @@ add_action('enqueue_block_editor_assets', function (): void {
     wp_enqueue_script('theme-editor', false, ['wp-blocks', 'wp-hooks'], null, true);
     wp_add_inline_script('theme-editor', <<<'JS'
         wp.hooks.addFilter('blocks.registerBlockType', 'ron-ulrich/block-styles', function (settings, name) {
-            // The theme styles one separator, so the "wide" and "dots" variations only
-            // offer editors a look the frontend does not have.
-            if (name === 'core/separator') {
+            // The theme styles one look per block, so variations such as the separator's
+            // "wide"/"dots" or the button's "fill"/"outline" would offer looks the frontend lacks.
+            if (name === 'core/separator' || name === 'core/button') {
                 settings.styles = (settings.styles || []).filter(function (style) {
                     return style.name === 'default';
                 });
