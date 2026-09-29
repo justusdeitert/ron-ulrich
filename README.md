@@ -61,6 +61,7 @@ Run `make help` for the full list. Most used:
 - `make import_db` / `make export_db`: DB import/export against the production domain. Dumps live in `db/` (`db/db-import.sql`, `db/db-export.sql`).
 - `make import_db_staging` / `make export_db_staging`: same, but against the staging domain.
 - `make sync_to_staging` / `make sync_to_production`: push local DB + uploads to a Coolify deployment.
+- `make sync_from_staging` / `make sync_from_production`: pull DB + uploads from a Coolify deployment into the local stack (local DB is backed up to `db/` first).
 - `make enter_php` / `make enter_node` / `make enter_phpmyadmin`: shell into the given container.
 - `make lint_php` / `make fix_php`: run php-cs-fixer against the theme.
 

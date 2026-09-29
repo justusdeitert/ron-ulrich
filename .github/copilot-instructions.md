@@ -42,7 +42,7 @@
   - `php/mariadb-wrapper.sh` - Forces `--skip-ssl` so WP-CLI DB commands work against MariaDB
   - `scripts/setup-wordpress.sh` - Dev WordPress setup, run by the dev entrypoint (reads `plugins.txt`)
   - `scripts/db-export.sh` / `scripts/db-import.sh` - DB export/import with domain search-replace (run inside the php container)
-  - `scripts/sync-to-env.sh` - Push local DB and uploads to staging or production (runs on the host)
+  - `scripts/sync-to-env.sh` / `scripts/sync-from-env.sh` - Push local DB and uploads to, or pull them from, staging or production (run on the host, share `scripts/sync-common.sh`)
 - `db/` - Local DB dumps (`db-import.sql`, `db-export.sql`), mounted at `/db` in the php container
 - `uploads/` - WordPress uploads directory
 - `wordpress/` - WordPress core (git-ignored, installed via setup script)
@@ -59,6 +59,7 @@
 - `make setup_wordpress` - Install WordPress core and activate the theme
 - `make import_db` / `make export_db` - DB import/export with domain search-replace (plus `_staging` variants)
 - `make sync_to_staging` / `make sync_to_production` - Sync DB + uploads to a Coolify server
+- `make sync_from_staging` / `make sync_from_production` - Pull DB + uploads from a Coolify server into the local stack
 - `make enter_php` / `make enter_node` / `make enter_phpmyadmin` - Shell into the given container
 - WordPress: http://localhost:8090 | Vite HMR: http://localhost:5174 | phpMyAdmin: http://localhost:8091
 
