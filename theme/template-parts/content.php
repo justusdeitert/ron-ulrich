@@ -28,7 +28,7 @@ $is_first = $GLOBALS['wp_query']->current_post === 0;
 
         <div class="sm:col-span-2">
             <div class="kicker mb-3">
-                <?php get_template_part('template-parts/post-meta', null, ['inline' => true]); ?>
+                <?php get_template_part('template-parts/post-meta'); ?>
             </div>
 
             <a href="<?php the_permalink(); ?>">

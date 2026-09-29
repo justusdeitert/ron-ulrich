@@ -8,10 +8,10 @@
 
 $back_url = theme_posts_page_url();
 ?>
-<div class="mt-10 py-4 md:mt-14">
+<hr class="mt-10 md:mt-14">
+<div class="py-4">
     <a class="back-link chip inline-flex items-center gap-1" href="<?php echo esc_url($back_url); ?>">
         <span class="i-lucide-arrow-left size-5" aria-hidden="true"></span>
         <span><?php esc_html_e('zurück', 'ron-ulrich'); ?></span>
     </a>
 </div>
-<hr>

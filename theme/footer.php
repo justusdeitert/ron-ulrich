@@ -9,7 +9,7 @@
     </div>
 </main>
 
-<footer class="pt-16 pb-12 md:pt-24">
+<footer class="pt-12 pb-12 md:pt-16">
     <div class="container">
         <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between md:gap-8">
             <a class="flex flex-col" href="<?php echo esc_url(home_url('/')); ?>">

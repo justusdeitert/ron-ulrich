@@ -19,9 +19,11 @@ for (const button of document.querySelectorAll<HTMLButtonElement>('.share-button
 
         if (label) {
             label.textContent = copied;
+            button.classList.add('copied');
             clearTimeout(resetTimer);
             resetTimer = window.setTimeout(() => {
                 label.textContent = labelText;
+                button.classList.remove('copied');
             }, 2000);
         }
     });

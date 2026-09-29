@@ -19,6 +19,7 @@ if (! $links && ! $show_archive) {
 
 $posts_page_url = theme_posts_page_url();
 ?>
+<hr>
 <div class="flex flex-col gap-3 py-4 sm:flex-row sm:items-center">
     <?php if ($links) { ?>
         <div class="pagination flex items-center">
@@ -45,4 +46,3 @@ $posts_page_url = theme_posts_page_url();
         </label>
     <?php } ?>
 </div>
-<hr>

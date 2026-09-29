@@ -1,6 +1,6 @@
 <?php
 /**
- * Back and share buttons, framing single posts above and below the article.
+ * Back button and share icon, above and below single posts.
  * back-link.ts and share.ts pick them up by class.
  *
  * @package ron-ulrich
@@ -12,8 +12,9 @@
         <span class="i-lucide-arrow-left size-5" aria-hidden="true"></span>
         <span><?php esc_html_e('zurück', 'ron-ulrich'); ?></span>
     </a>
-    <button class="share-button chip inline-flex cursor-pointer items-center gap-2 bg-transparent" type="button" data-url="<?php the_permalink(); ?>" data-title="<?php the_title_attribute(); ?>" data-copied="<?php esc_attr_e('Link kopiert', 'ron-ulrich'); ?>">
-        <span class="i-lucide-share-2 size-4.5" aria-hidden="true"></span>
-        <span aria-live="polite"><?php esc_html_e('Teilen', 'ron-ulrich'); ?></span>
+    <button class="share-button group inline-flex size-[34px] shrink-0 cursor-pointer items-center justify-center border border-solid border-line-strong bg-transparent text-ink-600 transition-colors hover:border-ink-900 hover:bg-highlight hover:text-ink-900" type="button" title="<?php esc_attr_e('Teilen', 'ron-ulrich'); ?>" data-url="<?php the_permalink(); ?>" data-title="<?php the_title_attribute(); ?>" data-copied="<?php esc_attr_e('Link kopiert', 'ron-ulrich'); ?>">
+        <span class="i-lucide-share-2 size-4.5 group-[.copied]:hidden" aria-hidden="true"></span>
+        <span class="i-lucide-check hidden size-4.5 group-[.copied]:inline-block" aria-hidden="true"></span>
+        <span class="sr-only" aria-live="polite"><?php esc_html_e('Teilen', 'ron-ulrich'); ?></span>
     </button>
 </div>
