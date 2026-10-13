@@ -19,7 +19,7 @@ add_action('after_setup_theme', function (): void {
 
     add_theme_support('post-thumbnails');
     add_theme_support('custom-logo');
-    add_theme_support('html5', ['caption', 'comment-form', 'comment-list', 'gallery', 'search-form', 'script', 'style']);
+    add_theme_support('html5', ['caption', 'gallery', 'search-form', 'script', 'style']);
     add_theme_support('customize-selective-refresh-widgets');
     add_theme_support('editor-styles');
     add_theme_support('responsive-embeds');
@@ -33,11 +33,48 @@ add_action('admin_menu', function (): void {
         return;
     }
 
-    remove_menu_page('edit-comments.php');
     remove_menu_page('tools.php');
     remove_menu_page('users.php');
     remove_menu_page('plugins.php');
 });
+
+// The site has no comments: close them everywhere and remove every trace from the admin and the HTTP layer.
+add_action('init', function (): void {
+    foreach (get_post_types() as $post_type) {
+        remove_post_type_support($post_type, 'comments');
+        remove_post_type_support($post_type, 'trackbacks');
+    }
+}, 100);
+
+add_filter('comments_open', '__return_false', 20);
+add_filter('pings_open', '__return_false', 20);
+add_filter('comments_array', '__return_empty_array', 20);
+add_filter('get_comments_number', '__return_zero', 20);
+add_filter('feed_links_show_comments_feed', '__return_false');
+add_filter('xmlrpc_methods', fn (array $methods): array => array_diff_key($methods, ['pingback.ping' => true, 'pingback.extensions.getPingbacks' => true]));
+add_filter('wp_headers', function (array $headers): array {
+    unset($headers['X-Pingback']);
+
+    return $headers;
+});
+add_filter('rest_endpoints', fn (array $endpoints): array => array_diff_key($endpoints, ['/wp/v2/comments' => true, '/wp/v2/comments/(?P<id>[\d]+)' => true]));
+
+add_action('admin_menu', function (): void {
+    remove_menu_page('edit-comments.php');
+    remove_submenu_page('options-general.php', 'options-discussion.php');
+});
+
+add_action('admin_init', function (): void {
+    global $pagenow;
+
+    if (in_array($pagenow, ['edit-comments.php', 'comment.php', 'options-discussion.php'], true)) {
+        wp_safe_redirect(admin_url());
+        exit;
+    }
+});
+
+add_action('wp_dashboard_setup', fn () => remove_meta_box('dashboard_recent_comments', 'dashboard', 'normal'));
+add_action('admin_bar_menu', fn (WP_Admin_Bar $bar) => $bar->remove_node('comments'), 100);
 
 // Keep staging out of search engines, whatever blog_public the synced DB carries
 add_filter('pre_option_blog_public', fn ($value) => wp_get_environment_type() === 'staging' ? '0' : $value);

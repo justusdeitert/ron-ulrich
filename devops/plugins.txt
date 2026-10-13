@@ -1,5 +1,4 @@
 fluentform:6.2.15:activate
-disable-comments:2.9.0:activate
 autodescription:5.1.4:activate
 svg-support:2.6.1:activate
 user-switching:1.12.2:activate

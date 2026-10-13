@@ -98,13 +98,7 @@ add_filter('wp_preload_resources', function (array $resources): array {
     return $resources;
 });
 
-add_action('wp_enqueue_scripts', function (): void {
-    theme_enqueue_assets();
-
-    if (is_single() && comments_open() && get_option('thread_comments')) {
-        wp_enqueue_script('comment-reply');
-    }
-}, 100);
+add_action('wp_enqueue_scripts', 'theme_enqueue_assets', 100);
 
 /**
  * Theme-relative path of the built editor stylesheet, for add_editor_style().
