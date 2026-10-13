@@ -66,6 +66,7 @@ WordPress: http://localhost:8090, Vite: http://localhost:5174, phpMyAdmin: http:
 - Styling is UnoCSS utilities written directly in the PHP templates, with plain flex/grid layouts. Only use `main.scss` for markup templates cannot touch: base typography, WP-generated classes/blocks, `paginate_links()` output, Fluent Forms (its default skin is disabled in `inc/vite.php`). The wp-admin bar offset is utilities on `<html>` in `header.php`.
 - Images referenced from PHP templates (outside the Vite module graph) live in `theme/public/`, not `theme/src/`.
 - Plugins are defined once in `devops/plugins.txt`; the dev setup script, prod Dockerfile and prod entrypoint all read it.
+- UI-facing issues get "Verified on Safari desktop + iOS" as an acceptance criterion.
 
 ## Before you finish a task
 
@@ -75,17 +76,15 @@ Run the checks that cover your change (stack must be running, `make start`):
 - PHP: `make lint_php` (fix with `make fix_php`)
 - Build: `make build`
 
+## Releases
+
+- Bump `Version` in `theme/style.css` and `version` in `theme/package.json` and refresh the lockfile with `docker compose exec node yarn install`.
+- Patch for fixes and refinements, minor for new features. Propose the version and wait for confirmation.
+- Build with `make build`, then commit only the version files and lockfiles as `chore: release v<version>`, create a lightweight tag `v<version>` and push with `--tags` after confirmation, then publish a GitHub release (`GH_PAGER=cat gh release create v<version> --notes ...`) with Added/Fixed/Changed notes summarizing the commits since the last tag.
+
 ## Commits
 
 - [Conventional Commits](https://www.conventionalcommits.org/): `feat:`, `fix:`, `refactor:`, `style:`, `perf:`, `test:`, `docs:`, `chore:`
 - Title: short imperative summary, lowercase after the prefix (`feat: add image lazy loading`). Don't repeat the prefix as a verb (`fix: broken scroll`, not `fix: fix broken scroll`).
 - Body only when needed: flat bullet list starting with capital letters, no category headers, max 10 items. Use `->` for version transitions (`vite 7.1->8.0`).
 - No `Co-authored-by` trailer for Copilot or any other AI.
-
-## Workflows (skills)
-
-Step-by-step procedures live in [.agents/skills/](.agents/skills/). Agents that support [Agent Skills](https://agentskills.io) load them automatically; otherwise read the matching `SKILL.md` before starting.
-
-- [commit-changes](.agents/skills/commit-changes/SKILL.md): review, validate and commit changes
-- [create-issue](.agents/skills/create-issue/SKILL.md): write a GitHub issue with the standard template
-- [release-theme](.agents/skills/release-theme/SKILL.md): bump version, build, tag and publish a GitHub release
