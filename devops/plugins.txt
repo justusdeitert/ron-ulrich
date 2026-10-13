@@ -1,4 +1,5 @@
 fluentform:6.2.15:activate
+fluent-smtp:2.4.1:activate
 autodescription:5.1.4:activate
 svg-support:2.6.1:activate
 user-switching:1.12.2:activate

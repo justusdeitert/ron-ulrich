@@ -92,6 +92,11 @@ wordpress/             WordPress core (git-ignored, installed via make)
 
 Deployment is handled by [Coolify](https://coolify.io): it pulls this repo and
 builds the `php` and `nginx` targets of `devops/Dockerfile` (see
-`docker-compose.staging.yml`). No CI pipeline is needed: the image contains
+`docker-compose.prod.yml`). No CI pipeline is needed: the image contains
 WordPress core, all plugins (pinned in `devops/plugins.txt`), the theme, and
 the compiled assets.
+
+Staging and production share `docker-compose.prod.yml` and differ only in
+their Coolify environment variables. `WP_ENVIRONMENT_TYPE` (`staging` or
+`production`) and `WORDPRESS_URL` are required; `staging` keeps the site out
+of search engines.

@@ -40,7 +40,7 @@ devops/
   scripts/                  setup-wordpress, db-export/import, sync-to-env/sync-from-env (+ sync-common)
 db/                         Local DB dumps, mounted at /db in the php container
 uploads/                    WordPress uploads (git-ignored)
-docker-compose.yml          Local stack (docker-compose.staging.yml for Coolify staging)
+docker-compose.yml          Local stack (docker-compose.prod.yml for Coolify staging and production)
 ```
 
 ## Development
